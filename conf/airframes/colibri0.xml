@@ -1,0 +1,152 @@
+<airframe>
+	<firmware name="custom_firmware">
+		<target name="ap" board="lisa_s_0.1"/>
+
+		<subsystem name="radio_control" type="spektrum" />
+		<subsystem name="telemetry" type="transparent"/> <!-->A laisser par defaut pour port uart1 et baud 9600 <-->
+		<subsystem name="actuators" type="pwm"> <!--> Specific to lisa boards <-->
+			<define name="SERVO_HZ" value="400"/> <!--> PWM frequency to set<-->
+			<define name="ACTUATORS_NB" value="4"/>
+		</subsystem>
+		<subsystem name="ahrs" type="int_cmpl_quat" />
+    		<subsystem name="stabilization" type="int_quat"/>
+		<subsystem name="imu" type="aspirin_v2.1" />
+		<subsystem name="ins"/>
+		<subsystem name="gps" type="ublox"/>
+		 <subsystem name="motor_mixing"/> <!-->A renommer "supervision si version inférieure à 4.9<-->
+	</firmware>
+	
+	<!--> Déclaration des servos pour subsystem actuators type pwm_supervisor<-->
+	<servos min="0" neutral="0" max="0xff"> <!--> To check !!! <-->
+   		<servo name="MAIN" no="0" min="500" neutral="1000" max="2000"/> <!--> To check !!! <-->
+    		<servo name="LEFT" no="1" min="-2000" neutral="0" max="2000"/> <!--> To check !!! <-->
+    		<servo name="RIGHT" no="2" min="-2000" neutral="0" max="2000"/> <!--> To check !!! <-->
+    		<servo name="TRANS" no="3" min="-2000" neutral="0" max="2000"/> <!--> To check !!! <-->
+  	</servos>
+	
+	<!-->NEEDED : MOTOR_MIXING section to manage depedencies between servos to realise commands <-->
+	<section name="MIXING" prefix="MOTOR_MIXING_">
+    		<define name="TRIM_ROLL" value="0"/>
+    		<define name="TRIM_PITCH" value="0"/>
+    		<define name="TRIM_YAW" value="0"/>
+    		<define name="NB_MOTOR" value="4"/>
+    		<define name="SCALE" value="256"/>
+    		<define name="ROLL_COEF"   value="{  0  ,    0,  256, -256 }"/>
+    		<define name="PITCH_COEF"  value="{  256, -256,    0,    0 }"/>
+    		<define name="YAW_COEF"    value="{ -256, -256,  256,  256 }"/>
+    		<define name="THRUST_COEF" value="{  256,  256,  256,  256 }"/>
+  	</section>
+
+	<command_laws>
+    		<call fun="motor_mixing_run(autopilot_motors_on, FALSE, values)"/>
+    		<set servo="MAIN" value="motor_mixing.commands[SERVO_MAIN]"/>
+    		<set servo="LEFT"  value="motor_mixing.commands[SERVO_LEFT]"/>
+    		<set servo="RIGHT" value="motor_mixing.commands[SERVO_RIGHT]"/>
+    		<set servo="TRANS"  value="motor_mixing.commands[SERVO_TRANS]"/>
+  	</command_laws>
+
+	<commands>
+		<axis name="PITCH" failsafe_value="0"/>
+		<axis name="ROLL" failsafe_value="0"/>
+		<axis name="YAW" failsafe_value="0"/>
+		<axis name="THRUST" failsafe_value="0"/>
+	</commands>
+
+	<section name="STABILIZATION_ATTITUDE" prefix="STABILIZATION_ATTITUDE_">
+	    <!-- setpoints -->
+		<define name="SP_MAX_PHI"     value="45." unit="deg"/>
+	    	<define name="SP_MAX_THETA"   value="45." unit="deg"/>
+	    	<define name="SP_MAX_R"       value="90." unit="deg/s"/>
+	    	<define name="DEADBAND_A"     value="0"/>
+	    	<define name="DEADBAND_E"     value="0"/>
+	    	<define name="DEADBAND_R"     value="250"/>
+	 
+	    <!-- reference -->
+	    	<define name="REF_OMEGA_P"  value="800" unit="deg/s"/>
+	    	<define name="REF_ZETA_P"   value="0.85"/>
+	    	<define name="REF_MAX_P"    value="400." unit="deg/s"/>
+	    	<define name="REF_MAX_PDOT" value="RadOfDeg(8000.)"/>
+	 
+	    	<define name="REF_OMEGA_Q"  value="800" unit="deg/s"/>
+	    	<define name="REF_ZETA_Q"   value="0.85"/>
+	    	<define name="REF_MAX_Q"    value="400." unit="deg/s"/>
+	    	<define name="REF_MAX_QDOT" value="RadOfDeg(8000.)"/>
+	 
+	    	<define name="REF_OMEGA_R"  value="500" unit="deg/s"/>
+	    	<define name="REF_ZETA_R"   value="0.85"/>
+	    	<define name="REF_MAX_R"    value="180." unit="deg/s"/>
+	    	<define name="REF_MAX_RDOT" value="RadOfDeg(1800.)"/>
+	 
+	    <!-- feedback -->
+	    	<define name="PHI_PGAIN"  value="1000"/>
+	    	<define name="PHI_DGAIN"  value="400"/>
+	    	<define name="PHI_IGAIN"  value="200"/>
+	 
+	    	<define name="THETA_PGAIN"  value="1000"/>
+	    	<define name="THETA_DGAIN"  value="400"/>
+	    	<define name="THETA_IGAIN"  value="200"/>
+	 
+	    	<define name="PSI_PGAIN"  value="500"/>
+	    	<define name="PSI_DGAIN"  value="300"/>
+	    	<define name="PSI_IGAIN"  value="10"/>
+	 
+	    <!-- feedforward -->
+	    	<define name="PHI_DDGAIN"   value="300"/>
+	    	<define name="THETA_DDGAIN" value="300"/>
+	    	<define name="PSI_DDGAIN"   value="300"/>
+	 </section>
+
+	<section name="STABILIZATION_RATE" prefix="STABILIZATION_RATE_">
+		<!-- setpoints -->
+		<define name="SP_MAX_P" value="10000"/>
+		<define name="SP_MAX_Q" value="10000"/>
+		<define name="SP_MAX_R" value="10000"/>
+		<define name="DEADBAND_P" value="20"/>
+		<define name="DEADBAND_Q" value="20"/>
+		<define name="DEADBAND_R" value="200"/>
+		<define name="REF_TAU" value="4"/>
+		 
+		    <!-- feedback -->
+		<define name="GAIN_P" value="400"/>
+		<define name="GAIN_Q" value="400"/>
+		<define name="GAIN_R" value="350"/>
+		 
+		<define name="IGAIN_P" value="75"/>
+		<define name="IGAIN_Q" value="75"/>
+		<define name="IGAIN_R" value="50"/>
+		 
+		    <!-- feedforward -->
+		<define name="DDGAIN_P" value="300"/>
+		<define name="DDGAIN_Q" value="300"/>
+		<define name="DDGAIN_R" value="300"/>
+	</section>
+
+	<section name="GUIDANCE_H" prefix="GUIDANCE_H_">
+		<define name="PGAIN" value="10"/>
+		<define name="IGAIN" value="10"/>
+		<define name="DGAIN" value="10"/>
+	</section>
+
+	<section name="GUIDANCE_V" prefix="GUIDANCE_V_">
+		<define name="HOVER_KP" value="10"/>
+		<define name="HOVER_KI" value="10"/>
+		<define name="HOVER_KD" value="10"/>
+		<define name="MAX_ERR_Z" value="10"/>
+		<define name="MIN_ERR_Z" value="10"/>
+		<define name="MAX_ERR_ZD" value="10"/>
+		<define name="MIN_ERR_ZD" value="10"/>
+		<define name="MAX_SUM_ERR" value="10"/>
+	</section>
+	<section name="IMU" prefix="IMU_">
+		<define name="MAG_X_SENS" value="3.17378921476" integer="16"/>
+		<define name="MAG_Y_SENS" value="3.14663275967" integer="16"/>
+		<define name="MAG_Z_SENS" value="3.26531022727" integer="16"/>
+		 
+		<define name="MAG_X_NEUTRAL" value="2059"/>
+		<define name="MAG_Y_NEUTRAL" value="1944"/>
+		<define name="MAG_Z_NEUTRAL" value="2099"/>
+  	</section>
+	<section name="AHRS_H" prefix="AHRS_H_">
+		<define name="Z" value="0"/>
+	</section>
+</airframe>

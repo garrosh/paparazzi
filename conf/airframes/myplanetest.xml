@@ -1,0 +1,24 @@
+<airframe>
+	<firmware name="CUSTOM_FIRMWARE">
+		<target name="sim" board="pc"/>
+		<target name="ap" board="lisa_m_1.0"/>
+
+		<subsystem name="imu" type="aspirin_v1.5"/>
+		<subsystem name="ahrs" type="init_compl_euler"/>
+		<subsystem name="radio_control" type="ppm"/>
+		<subsystem name="telemetry" type="transparent"/>
+	</firmware>
+
+	<commands>
+		<axis name="PITCH" failsafe_value="0"/>
+		<axis name="ROLL" failsafe_value="0"/>
+		<axis name="YAW" failsafe_value="0"/>
+		<axis name="THRUST" failsafe_value="0"/>
+	</commands>
+
+	<module main_freq="60">
+		<load name="demo_module.xml">
+			<define name="VAR" value="1"/>
+		</load>
+	</module>
+</airframe>

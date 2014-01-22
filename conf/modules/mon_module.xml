@@ -1,0 +1,25 @@
+<!DOCTYPE module SYSTEM "module.dtd">
+ <module name="mon_module" dir="mon_module">
+  <doc>
+   <description>
+     Demo module.
+     Module de prise en main de paparazzi
+   </description>
+   <configure name="CONFIGURATION_MODULE" value="S1|S2|S3" description="The thing to use"/>
+   <define name="DEMO_MODULE_LED" value="LED_X" description="LED Selection"/>
+  </doc>
+  <header>
+   <file name="mon_module.h"/>
+  </header>
+  <init fun="init_demo()"/>
+  <periodic fun="periodic_1Hz_demo()" freq="1." start="start_demo()" stop="stop_demo()"/>
+  <periodic fun="periodic_10Hz_demo()" period="0.1" start="start_demo()" stop="stop_demo()"/>
+  <makefile>
+   <raw>
+    #Raw makefile section
+   </raw>
+   <define name="USE_SOMETHING" value="$(SOMETHING)"/>
+   <define name="DEMO_MODULE_LED" value="2"/>
+   <file name="demo_module.c"/>
+  </makefile>
+ </module>
