@@ -1,0 +1,25 @@
+<airframe>
+	<firmware name="custom_firmware">
+		<target name="sim" board="pc"/>
+		<target name="ap" board="lisa_l_1.0"/>
+
+		<subsystem name="imu" type="aspirin_v1.5"/>
+<!--Ajouter un subsystem ahrs-->
+		<subsystem name="radio_control" type="ppm"/>
+		<subsystem name="gps" type="ardrone2" />
+<!--telemetry-->
+	</firmware>
+
+	<commands>
+		<axis name="PITCH" failsafe_value="0"/>
+		<axis name="ROLL" failsafe_value="0"/>
+		<axis name="YAW" failsafe_value="0"/>
+		<axis name="THRUST" failsafe_value="0"/>
+	</commands>
+
+	<module main_freq="60">
+		<load name="demo_module.xml">
+			<define name="VAR" value="1"/>
+		</load>
+	</module>
+</airframe>
