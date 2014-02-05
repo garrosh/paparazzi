@@ -7,7 +7,7 @@
 		<subsystem name="actuators" type="pwm"> <!--> Specific to lisa boards <-->
 			<define name="SERVO_HZ" value="400"/> <!--> PWM frequency to set<-->
 		</subsystem>
-		<subsystem name="ahrs" type="ardrone2" />
+		<subsystem name="ahrs" type="int_cmpl_quat" />
     		<subsystem name="stabilization" type="passthrough"/>
 		<subsystem name="imu" type="ardrone2" />
 	</firmware>
