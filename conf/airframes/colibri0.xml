@@ -8,7 +8,7 @@
 			<define name="SERVO_HZ" value="400"/> <!--> PWM frequency to set<-->
 		</subsystem>
 		<subsystem name="ahrs" type="int_cmpl_quat" />
-    		<subsystem name="stabilization" type="passthrough"/>
+    		<subsystem name="stabilization" type="int_quat"/>
 		<subsystem name="imu" type="ardrone2" />
 	</firmware>
 	
@@ -28,6 +28,50 @@
 		<axis name="YAW" failsafe_value="0"/>
 		<axis name="THRUST" failsafe_value="0"/>
 	</commands>
+
+	<section name="STABILIZATION_ATTITUDE" prefix="STABILIZATION_ATTITUDE_">
+	    <!-- setpoints -->
+		<define name="SP_MAX_PHI"     value="45." unit="deg"/>
+	    	<define name="SP_MAX_THETA"   value="45." unit="deg"/>
+	    	<define name="SP_MAX_R"       value="90." unit="deg/s"/>
+	    	<define name="DEADBAND_A"     value="0"/>
+	    	<define name="DEADBAND_E"     value="0"/>
+	    	<define name="DEADBAND_R"     value="250"/>
+	 
+	    <!-- reference -->
+	    	<define name="REF_OMEGA_P"  value="800" unit="deg/s"/>
+	    	<define name="REF_ZETA_P"   value="0.85"/>
+	    	<define name="REF_MAX_P"    value="400." unit="deg/s"/>
+	    	<define name="REF_MAX_PDOT" value="RadOfDeg(8000.)"/>
+	 
+	    	<define name="REF_OMEGA_Q"  value="800" unit="deg/s"/>
+	    	<define name="REF_ZETA_Q"   value="0.85"/>
+	    	<define name="REF_MAX_Q"    value="400." unit="deg/s"/>
+	    	<define name="REF_MAX_QDOT" value="RadOfDeg(8000.)"/>
+	 
+	    	<define name="REF_OMEGA_R"  value="500" unit="deg/s"/>
+	    	<define name="REF_ZETA_R"   value="0.85"/>
+	    	<define name="REF_MAX_R"    value="180." unit="deg/s"/>
+	    	<define name="REF_MAX_RDOT" value="RadOfDeg(1800.)"/>
+	 
+	    <!-- feedback -->
+	    	<define name="PHI_PGAIN"  value="1000"/>
+	    	<define name="PHI_DGAIN"  value="400"/>
+	    	<define name="PHI_IGAIN"  value="200"/>
+	 
+	    	<define name="THETA_PGAIN"  value="1000"/>
+	    	<define name="THETA_DGAIN"  value="400"/>
+	    	<define name="THETA_IGAIN"  value="200"/>
+	 
+	    	<define name="PSI_PGAIN"  value="500"/>
+	    	<define name="PSI_DGAIN"  value="300"/>
+	    	<define name="PSI_IGAIN"  value="10"/>
+	 
+	    <!-- feedforward -->
+	    	<define name="PHI_DDGAIN"   value="300"/>
+	    	<define name="THETA_DDGAIN" value="300"/>
+	    	<define name="PSI_DDGAIN"   value="300"/>
+	  </section>
 
 	<module main_freq="60">
 		<load name="demo_module.xml">
