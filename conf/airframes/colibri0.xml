@@ -2,7 +2,7 @@
 	<firmware name="custom_firmware">
 		<target name="ap" board="lisa_s_0.1"/>
 
-		<subsystem name="radio_control" type="datalink" />
+		<subsystem name="radio_control" type="spektrum" />
 		<subsystem name="telemetry" type="udp" />
 		<subsystem name="actuators" type="ardrone2" />
 		<subsystem name="ahrs" type="ardrone2" />
