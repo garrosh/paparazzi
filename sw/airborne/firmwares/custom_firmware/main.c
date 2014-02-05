@@ -21,7 +21,7 @@
  */
 
 /**
- * @file firmwares/rotorcraft/main.c
+ * @file firmwares/custom_firmware/main.c
  *
  * Rotorcraft main loop.
  */
@@ -61,12 +61,12 @@ PRINT_CONFIG_MSG("USE_BARO_BOARD is TRUE: Reading onboard baro.")
 
 #include "subsystems/electrical.h"
 
-#include "firmwares/rotorcraft/autopilot.h"
+#include "firmwares/custom_firmware/autopilot.h"
 
 #include "subsystems/radio_control.h"
 
-#include "firmwares/rotorcraft/stabilization.h"
-#include "firmwares/rotorcraft/guidance.h"
+#include "firmwares/custom_firmware/stabilization.h"
+#include "firmwares/custom_firmware/guidance.h"
 
 #include "subsystems/ahrs.h"
 #include "subsystems/ahrs/ahrs_aligner.h"
@@ -74,7 +74,7 @@ PRINT_CONFIG_MSG("USE_BARO_BOARD is TRUE: Reading onboard baro.")
 
 #include "state.h"
 
-#include "firmwares/rotorcraft/main.h"
+#include "firmwares/custom_firmware/main.h"
 
 #ifdef SITL
 #include "nps_autopilot.h"
