@@ -1,0 +1,13 @@
+<!DOCTYPE layout SYSTEM "layout.dtd">
+
+<layout width="1024" height="768">
+	<columns>
+		<rows>
+			<widget size="200" name="strips"/>
+		</rows>
+	</columns>
+  	<columns>
+   		<widget size="400" name="aircraft"/>
+   		<widget name="alarms"/>
+  	</columns>
+</layout>
