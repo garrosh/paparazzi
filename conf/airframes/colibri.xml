@@ -1,6 +1,10 @@
 <airframe>
 	<firmware name="flapping_wings">
 		<target name="ap" board="lisa_s_0.1"/>
+		<!-- for simulation -->
+		<target name="nps" board="pc">
+      			<subsystem name="fdm"   type="jsbsim"/>
+    		</target>
 
 		<subsystem name="radio_control" type="spektrum" />
 		<subsystem name="telemetry" type="transparent"/> <!-->A laisser par defaut pour port uart1 et baud 9600 <-->
@@ -149,4 +153,11 @@
 	<section name="AHRS_H" prefix="AHRS_H_">
 		<define name="Z" value="0"/>
 	</section>
+
+	<!-- For simulation -->
+	<section name="SIMULATOR" prefix="NPS_">
+    		<define name="ACTUATOR_NAMES" value="{&quot;front_motor&quot;, &quot;back_motor&quot;, &quot;right_motor&quot;, &quot;left_motor&quot;}" />
+    		<define name="SENSORS_PARAMS" value="&quot;nps_sensors_params_default.h&quot;" />
+   		<define name="INITIAL_CONDITITONS" value="&quot;reset00&quot;" />
+  	</section>
 </airframe>
