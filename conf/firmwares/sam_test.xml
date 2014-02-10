@@ -1,4 +1,4 @@
-<firmware name="sam_test" boards="|lisa_l_1.0|lisa_l_1.1|booz_1.0|"
+<firmware name="sam_test" boards="lisa_s_0.1"
   description="autopilot and simulator for rotorcrafts">
 
  <!-- a parameter that belongs to BOARD -->
