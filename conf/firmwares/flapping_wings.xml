@@ -1,4 +1,4 @@
-<firmware name="flapping_wings" boards="|lisa_l_1.0|lisa_l_1.1|booz_1.0|lisa_s_1.0"
+<firmware name="flapping_wings" boards="pc|lisa_l_1.0|lisa_l_1.1|booz_1.0|lisa_s_1.0"
   description="autopilot and simulator for colibri uav">
 
  <!-- a parameter that belongs to BOARD -->
