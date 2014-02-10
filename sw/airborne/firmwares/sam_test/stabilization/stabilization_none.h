@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 The Paparazzi Team
+ * Copyright (C) 2011-2012 The Paparazzi Team
  *
  * This file is part of paparazzi.
  *
@@ -19,28 +19,24 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * @file firmwares/sam_test/main.h
+/** @file stabilization_none.h
+ *  Dummy stabilization for rotorcrafts.
  *
- * Sam_Test main loop.
+ *  Doesn't actually do any stabilization,
+ *  just directly passes the RC commands along.
  */
 
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef STABILIZATION_NONE
+#define STABILIZATION_NONE
 
-#ifdef SITL
-#define STATIC_INLINE extern
-#else
-#define STATIC_INLINE static inline
-#endif
+#include "math/pprz_algebra_int.h"
 
-STATIC_INLINE void main_init( void );
-STATIC_INLINE void main_event( void );
-STATIC_INLINE void handle_periodic_tasks( void );
+extern void stabilization_none_init(void);
+extern void stabilization_none_read_rc(void);
+extern void stabilization_none_run(bool_t in_flight);
+extern void stabilization_none_enter(void);
 
-STATIC_INLINE void main_periodic( void );
-STATIC_INLINE void telemetry_periodic(void);
-STATIC_INLINE void failsafe_check( void );
+extern struct Int32Rates stabilization_none_rc_cmd;
 
 
-#endif /* MAIN_H */
+#endif /* STABILIZATION_NONE */

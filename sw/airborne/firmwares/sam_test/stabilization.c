@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 The Paparazzi Team
+ * Copyright (C) 2008-2009 Antoine Drouin <poinix@gmail.com>
  *
  * This file is part of paparazzi.
  *
@@ -19,28 +19,19 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * @file firmwares/sam_test/main.h
- *
- * Sam_Test main loop.
+/** @file firmwares/sam_test/stabilization.c
+ *  General stabilization interface for sam_tests.
  */
 
-#ifndef MAIN_H
-#define MAIN_H
+#include "firmwares/sam_test/stabilization.h"
 
-#ifdef SITL
-#define STATIC_INLINE extern
-#else
-#define STATIC_INLINE static inline
+int32_t stabilization_cmd[COMMANDS_NB];
+
+void stabilization_init(void) {
+#ifndef STABILIZATION_SKIP_RATE
+  stabilization_none_init();
+  stabilization_rate_init();
 #endif
+  stabilization_attitude_init();
+}
 
-STATIC_INLINE void main_init( void );
-STATIC_INLINE void main_event( void );
-STATIC_INLINE void handle_periodic_tasks( void );
-
-STATIC_INLINE void main_periodic( void );
-STATIC_INLINE void telemetry_periodic(void);
-STATIC_INLINE void failsafe_check( void );
-
-
-#endif /* MAIN_H */

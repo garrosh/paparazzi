@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 The Paparazzi Team
+ * Copyright (C) 2008-2009 Antoine Drouin <poinix@gmail.com>
  *
  * This file is part of paparazzi.
  *
@@ -19,28 +19,12 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * @file firmwares/sam_test/main.h
- *
- * Sam_Test main loop.
- */
+#ifndef STABILIZATION_ATTITUDE_FLOAT_REF_EULER_FLOAT_H
+#define STABILIZATION_ATTITUDE_FLOAT_REF_EULER_FLOAT_H
 
-#ifndef MAIN_H
-#define MAIN_H
+#include "stabilization_attitude_ref_float.h"
 
-#ifdef SITL
-#define STATIC_INLINE extern
-#else
-#define STATIC_INLINE static inline
-#endif
-
-STATIC_INLINE void main_init( void );
-STATIC_INLINE void main_event( void );
-STATIC_INLINE void handle_periodic_tasks( void );
-
-STATIC_INLINE void main_periodic( void );
-STATIC_INLINE void telemetry_periodic(void);
-STATIC_INLINE void failsafe_check( void );
+void stabilization_attitude_ref_enter(void);
 
 
-#endif /* MAIN_H */
+#endif /* STABILIZATION_ATTITUDE_FLOAT_REF_EULER_FLOAT_H */

@@ -21,9 +21,9 @@
  */
 
 /**
- * @file firmwares/rotorcraft/main.c
+ * @file firmwares/sam_test/main.c
  *
- * Rotorcraft main loop.
+ * Sam_Test main loop.
  */
 
 #define MODULES_C
@@ -61,12 +61,12 @@ PRINT_CONFIG_MSG("USE_BARO_BOARD is TRUE: Reading onboard baro.")
 
 #include "subsystems/electrical.h"
 
-#include "firmwares/rotorcraft/autopilot.h"
+#include "firmwares/sam_test/autopilot.h"
 
 #include "subsystems/radio_control.h"
 
-#include "firmwares/rotorcraft/stabilization.h"
-#include "firmwares/rotorcraft/guidance.h"
+#include "firmwares/sam_test/stabilization.h"
+#include "firmwares/sam_test/guidance.h"
 
 #include "subsystems/ahrs.h"
 #include "subsystems/ahrs/ahrs_aligner.h"
@@ -74,7 +74,7 @@ PRINT_CONFIG_MSG("USE_BARO_BOARD is TRUE: Reading onboard baro.")
 
 #include "state.h"
 
-#include "firmwares/rotorcraft/main.h"
+#include "firmwares/sam_test/main.h"
 
 #ifdef SITL
 #include "nps_autopilot.h"

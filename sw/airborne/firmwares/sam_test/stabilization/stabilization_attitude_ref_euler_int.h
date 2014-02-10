@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 The Paparazzi Team
+ * Copyright (C) 2008-2009 Antoine Drouin <poinix@gmail.com>
  *
  * This file is part of paparazzi.
  *
@@ -19,28 +19,14 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * @file firmwares/sam_test/main.h
+/** @file stabilization_attitude_ref_euler_int.h
+ *  Rotorcraft attitude reference generation (euler int version)
  *
- * Sam_Test main loop.
  */
 
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef STABILIZATION_ATTITUDE_REF_EULER_INT_H
+#define STABILIZATION_ATTITUDE_REF_EULER_INT_H
 
-#ifdef SITL
-#define STATIC_INLINE extern
-#else
-#define STATIC_INLINE static inline
-#endif
+#include "stabilization_attitude_ref_int.h"
 
-STATIC_INLINE void main_init( void );
-STATIC_INLINE void main_event( void );
-STATIC_INLINE void handle_periodic_tasks( void );
-
-STATIC_INLINE void main_periodic( void );
-STATIC_INLINE void telemetry_periodic(void);
-STATIC_INLINE void failsafe_check( void );
-
-
-#endif /* MAIN_H */
+#endif /* STABILIZATION_ATTITUDE_REF_EULER_INT_H */
