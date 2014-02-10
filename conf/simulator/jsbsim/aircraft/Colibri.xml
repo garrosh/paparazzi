@@ -6,7 +6,7 @@
     <author>Felix Ruess</author>
     <filecreationdate>20-12-2013</filecreationdate>
     <version>Version 0.9 - beta</version>
-    <description>Simple Quadrotor 350 in X configuration without rotor dynamic (NE/SW turning CW, NW/SE CCW)</description>
+    <description>Simple ARDrone2 quad in X configuration without rotor dynamic (NE/SW turning CCW, NW/SE CW)</description>
   </fileheader>
 
   <metrics>
@@ -41,7 +41,7 @@
     <ixy unit="SLUG*FT2"> 0. </ixy>
     <ixz unit="SLUG*FT2"> 0. </ixz>
     <iyz unit="SLUG*FT2"> 0. </iyz>
-        <emptywt unit="LBS"> 0.84 </emptywt>
+    <emptywt unit="KG"> 0.4 </emptywt>
     <location name="CG" unit="M">
       <x> 0 </x>
       <y> 0 </y>
@@ -117,11 +117,6 @@
 
 
 
-
-
-
-
-
   <external_reactions>
 
     <property>fcs/ne_motor</property>
@@ -135,7 +130,7 @@
       <function>
         <product>
           <property>fcs/ne_motor</property>
-          <value> 0.84 </value>
+          <value> 0.35 </value>
         </product>
       </function>
       <location unit="IN">
@@ -154,7 +149,7 @@
       <function>
         <product>
           <property>fcs/sw_motor</property>
-          <value> 0.84 </value>
+          <value> 0.35 </value>
         </product>
       </function>
       <location unit="IN">
@@ -173,7 +168,7 @@
       <function>
         <product>
           <property>fcs/se_motor</property>
-          <value> 0.84 </value>
+          <value> 0.35 </value>
         </product>
       </function>
       <location unit="IN">
@@ -192,7 +187,7 @@
       <function>
         <product>
           <property>fcs/nw_motor</property>
-          <value> 0.84 </value>
+          <value> 0.35 </value>
         </product>
       </function>
       <location unit="IN">
@@ -214,7 +209,7 @@
       <function>
         <product>
           <property>fcs/ne_motor</property>
-          <value> 0.84 </value>
+          <value> 0.35 </value>
         </product>
       </function>
       <location unit="IN">
@@ -225,7 +220,7 @@
         <z>0</z>
       </location>
       <direction>
-        <x>1</x>
+        <x>-1</x>
         <y>0</y>
         <z>0</z>
       </direction>
@@ -235,7 +230,7 @@
       <function>
         <product>
           <property>fcs/ne_motor</property>
-          <value> 0.84 </value>
+          <value> 0.35 </value>
         </product>
       </function>
       <location unit="IN">
@@ -244,7 +239,7 @@
         <z>0</z>
       </location>
       <direction>
-        <x>-1</x>
+        <x>1</x>
         <y>0</y>
         <z>0</z>
       </direction>
@@ -256,7 +251,7 @@
       <function>
         <product>
           <property>fcs/se_motor</property>
-          <value> 0.84 </value>
+          <value> 0.35 </value>
         </product>
       </function>
       <location unit="IN">
@@ -265,7 +260,7 @@
         <z>0</z>
       </location>
       <direction>
-        <x>-1</x>
+        <x>1</x>
         <y>0</y>
         <z>0</z>
       </direction>
@@ -275,7 +270,7 @@
       <function>
         <product>
           <property>fcs/se_motor</property>
-          <value> 0.84 </value>
+          <value> 0.35 </value>
         </product>
       </function>
       <location unit="IN">
@@ -284,7 +279,7 @@
         <z>0</z>
       </location>
       <direction>
-        <x>1</x>
+        <x>-1</x>
         <y>0</y>
         <z>0</z>
       </direction>
@@ -296,7 +291,7 @@
       <function>
         <product>
           <property>fcs/sw_motor</property>
-          <value> 0.84 </value>
+          <value> 0.35 </value>
         </product>
       </function>
       <location unit="IN">
@@ -305,7 +300,7 @@
         <z>0</z>
       </location>
       <direction>
-        <x>1</x>
+        <x>-1</x>
         <y>0</y>
         <z>0</z>
       </direction>
@@ -315,7 +310,7 @@
       <function>
         <product>
           <property>fcs/sw_motor</property>
-          <value> 0.84 </value>
+          <value> 0.35 </value>
         </product>
       </function>
       <location unit="IN">
@@ -324,7 +319,7 @@
         <z>0</z>
       </location>
       <direction>
-        <x>-1</x>
+        <x>1</x>
         <y>0</y>
         <z>0</z>
       </direction>
@@ -336,7 +331,7 @@
       <function>
         <product>
           <property>fcs/nw_motor</property>
-          <value> 0.84 </value>
+          <value> 0.35 </value>
         </product>
       </function>
       <location unit="IN">
@@ -345,7 +340,7 @@
         <z>0</z>
       </location>
       <direction>
-        <x>-1</x>
+        <x>1</x>
         <y>0</y>
         <z>0</z>
       </direction>
@@ -355,7 +350,7 @@
       <function>
         <product>
           <property>fcs/nw_motor</property>
-          <value> 0.84 </value>
+          <value> 0.35 </value>
         </product>
       </function>
       <location unit="IN">
@@ -364,7 +359,7 @@
         <z>0</z>
       </location>
       <direction>
-        <x>1</x>
+        <x>-1</x>
         <y>0</y>
         <z>0</z>
       </direction>

@@ -153,9 +153,16 @@
 		<define name="MAG_Y_NEUTRAL" value="1944"/>
 		<define name="MAG_Z_NEUTRAL" value="2099"/>
   	</section>
+
 	<section name="AHRS_H" prefix="AHRS_H_">
 		<define name="Z" value="0"/>
 	</section>
+
+	<section name="MODE" prefix="MODE_">
+    		<define name="MANUAL" value="AP_MODE_ATTITUDE_DIRECT" />
+    		<define name="AUTO1" value="AP_MODE_ATTITUDE_Z_HOLD" />
+    		<define name="AUTO2" value="AP_MODE_NAV" />
+  	</section>
 
 	<!-- For simulation -->
 	<section name="SIMULATOR" prefix="NPS_">
