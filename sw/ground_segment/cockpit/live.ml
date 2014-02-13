@@ -384,7 +384,7 @@ let get_speech_name = fun af_xml def_name ->
   with _ -> default_speech_name
 
 let get_icon_and_track_size = fun af_xml ->
-  (* firmware name as default if fixedwing or rotorcraft *)
+  (* firmware name as default if fixedwing or samTest *)
   let firmware = ExtXml.child af_xml "firmware" in
   let firmware_name = ExtXml.attrib firmware "name" in
   try

@@ -98,7 +98,7 @@ extern struct GpsUbxRaw gps_ubx_raw;
 
 /* Gps callback is called when receiving a VELNED or a SOL message
  * All position/speed messages are sent in one shot and VELNED is the last one on fixedwing
- * For rotorcraft, only SOL message is needed for pos/speed data
+ * For samTest, only SOL message is needed for pos/speed data
  */
 #define GpsEvent(_sol_available_callback) {        \
     if (GpsBuffer()) {                             \

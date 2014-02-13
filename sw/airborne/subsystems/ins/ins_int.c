@@ -22,7 +22,7 @@
 /**
  * @file subsystems/ins/ins_int.c
  *
- * INS for rotorcrafts combining vertical and horizontal filters.
+ * INS for samTests combining vertical and horizontal filters.
  *
  */
 
@@ -64,7 +64,7 @@
 #endif
 
 #ifdef INS_SONAR_THROTTLE_THRESHOLD
-#include "firmwares/rotorcraft/stabilization.h"
+#include "firmwares/samTest/stabilization.h"
 #endif
 
 #ifndef INS_SONAR_OFFSET

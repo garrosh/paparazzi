@@ -64,7 +64,7 @@ Airborne
 - Gain scheduling module.
   [#335] (https://github.com/paparazzi/paparazzi/pull/335)
 
-Rotorcraft firmware specific
+samTest firmware specific
 ----------------------------
 
 - Quadshot transitioning vehicle support.
@@ -78,7 +78,7 @@ Maintenance release
 
 - fix elf PT_LOAD type in lpc21iap LPC USB download
 - fix electrical.current estimate in sim
-- fix LPC+xbee_api in rotorcraft
+- fix LPC+xbee_api in samTest
 - fix conversion of vsupply to decivolts if offset is used
 - more robust dfu flash script, only upload to Lisa/M
 
@@ -119,7 +119,7 @@ Second release candidate for next stable release.
 - Ahrs float_dcm uses magnetic heading while not inflight for better initial guess
   [#299] (https://github.com/paparazzi/paparazzi/pull/299)
 - Outback Challenge "Safety" Rules 1 and 2
-- Added WMM2010 Geo model used in ahrs int_cmpl_quat for rotorcrafts
+- Added WMM2010 Geo model used in ahrs int_cmpl_quat for samTests
   [#288] (https://github.com/paparazzi/paparazzi/pull/288)
 - Fix missing gain definitions from airframe file in total energy control
 - Added stm32loader to sw/tools
@@ -245,7 +245,7 @@ Airborne
 - GPS NMEA parser usable for basic position and fix
   [#120] (https://github.com/paparazzi/paparazzi/issues/120)
 
-Rotorcraft firmware specific
+samTest firmware specific
 ----------------------------
 
 - Stabilization/supervision commands with standard PPRZ range

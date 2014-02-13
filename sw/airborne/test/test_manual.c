@@ -85,7 +85,7 @@ static inline void main_init( void ) {
   main_periodic_tid = sys_time_register_timer((1./PERIODIC_FREQUENCY), NULL);
   radio_control_tid = sys_time_register_timer((1./60.), NULL);
 
-  // just to make it usable in a standard rotorcraft airframe file
+  // just to make it usable in a standard samTest airframe file
   // with <call fun="motor_mixing_run(autopilot_motors_on,FALSE,values)"/>
   // in the command_laws section
   autopilot_motors_on = TRUE;
@@ -175,7 +175,7 @@ static void on_rc_frame(void) {
 #ifdef SetCommandsFromRC
   SetCommandsFromRC(commands, radio_control.values);
 #else
-  // no rc_commands, assume we have rotorcraft with ROLL, PITCH, YAW, THRUST
+  // no rc_commands, assume we have samTest with ROLL, PITCH, YAW, THRUST
   commands[COMMAND_ROLL] = radio_control.values[RADIO_ROLL];
   commands[COMMAND_PITCH] = radio_control.values[RADIO_PITCH];
   commands[COMMAND_YAW] = radio_control.values[RADIO_YAW];

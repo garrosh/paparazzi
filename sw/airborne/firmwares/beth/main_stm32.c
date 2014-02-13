@@ -27,7 +27,7 @@
 #include "mcu_periph/sys_time.h"
 #include "subsystems/datalink/downlink.h"
 #include "subsystems/commands.h"
-#include "firmwares/rotorcraft/actuators.h"
+#include "firmwares/samTest/actuators.h"
 //#include "booz/booz_radio_control.h"
 #include "subsystems/imu.h"
 #include "lisa/lisa_overo_link.h"

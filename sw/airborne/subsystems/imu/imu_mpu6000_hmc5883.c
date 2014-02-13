@@ -95,7 +95,7 @@ void imu_periodic(void)
   mpu60x0_spi_periodic(&imu_mpu_hmc.mpu);
 
   /* Read HMC58XX every 10 times of main freq
-   * at ~50Hz (main loop for rotorcraft: 512Hz)
+   * at ~50Hz (main loop for samTest: 512Hz)
    */
   RunOnceEvery(10, hmc58xx_periodic(&imu_mpu_hmc.hmc));
 }
