@@ -1,4 +1,4 @@
-# Rotorcraft AHRS module for GX3
+# Sam_Test AHRS module for GX3
 # 2013, Utah State University, http://aggieair.usu.edu/
 
 GX3_PORT ?= UART3
