@@ -46,7 +46,7 @@
 
 /** Baro periodic prescaler
  *
- * different for fixedwing and rotorcraft...
+ * different for fixedwing and sam_test...
  */
 #ifdef BARO_PERIODIC_FREQUENCY
 #define MPL_PRESCALER ((BARO_PERIODIC_FREQUENCY)/BARO_BOARD_APOGEE_FREQ)

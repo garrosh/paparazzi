@@ -4,7 +4,7 @@
   <doc>
     <description>
       Gain set interpolation.
-      Interpolate between different gain sets for rotorcrafts.
+      Interpolate between different gain sets for sam_tests.
     </description>
   </doc>
   <header>

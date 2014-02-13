@@ -47,7 +47,7 @@ SRC_LISA=lisa
 SRC_LISA_ARCH=$(SRC_LISA)/arch/$(ARCH)
 SRC_BOARD=boards/$(BOARD)
 
-SRC_FIRMWARE=firmwares/rotorcraft
+SRC_FIRMWARE=firmwares/sam_test
 SRC_SUBSYSTEMS=subsystems
 SRC_AIRBORNE=.
 
@@ -84,7 +84,7 @@ COMMON_TELEMETRY_CFLAGS += -DDATALINK=PPRZ  -DPPRZ_UART=$(MODEM_PORT)
 COMMON_TELEMETRY_SRCS    = mcu_periph/uart.c
 COMMON_TELEMETRY_SRCS   += $(SRC_ARCH)/mcu_periph/uart_arch.c
 COMMON_TELEMETRY_SRCS   += subsystems/datalink/pprz_transport.c subsystems/datalink/telemetry.c
-COMMON_TELEMETRY_SRCS   += subsystems/datalink/downlink.c $(SRC_FIRMWARE)/rotorcraft_telemetry.c
+COMMON_TELEMETRY_SRCS   += subsystems/datalink/downlink.c $(SRC_FIRMWARE)/sam_test_telemetry.c
 
 #COMMON_TEST_SRCS   += math/pprz_trig_int.c
 

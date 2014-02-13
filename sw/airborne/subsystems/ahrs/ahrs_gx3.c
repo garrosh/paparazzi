@@ -279,7 +279,7 @@ void gx3_packet_read_message(void) {
 #endif
   stateSetNedToBodyEulers_f(&ltp_to_body_eulers);
 #else
-#ifdef IMU_MAG_OFFSET //rotorcraft
+#ifdef IMU_MAG_OFFSET //sam_test
   struct FloatEulers ltp_to_body_eulers;
   FLOAT_EULERS_OF_RMAT(ltp_to_body_eulers, ltp_to_body_rmat);
   ltp_to_body_eulers.psi -= ahrs_impl.mag_offset;

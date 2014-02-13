@@ -1,7 +1,7 @@
 (*
- * A Label with a contrasting outline
+ * Server part specific to sam_test vehicles
  *
- * Copyright (C) 2013 Piotr Esden-Tempski <piotr@esden.net>
+ * Copyright (C) ENAC
  *
  * This file is part of paparazzi.
  *
@@ -22,23 +22,7 @@
  *
  *)
 
-type icon = {
-  lines : float array list;
-  ellipse : float array list;
-  width: int
-}
-
-val icon_fixedwing_template : icon
-val icon_flyingwing_template : icon
-val icon_sam_test_template : icon
-val icon_home_template : icon
-
-class widget :
-  ?color : string ->
-  ?icon_template : icon ->
-  GnoCanvas.group ->
-object
-  method set_color : string -> unit
-  method set_bg_color : string -> unit
-end
+val log_and_parse :
+  string -> Aircraft.aircraft -> Pprz.message -> Pprz.values -> unit
+(** [log_and_parse ac_id ac msg vs] *)
 

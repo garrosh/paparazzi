@@ -14,7 +14,7 @@ void on_DL_MOVE_WP(IvyClientPtr app __attribute__ ((unused)),
                    int argc __attribute__ ((unused)), char *argv[]);
 
 void nps_ivy_init(char* ivy_bus) {
-  /* init ivy and bind some messages common to fw and rotorcraft */
+  /* init ivy and bind some messages common to fw and sam_test */
   nps_ivy_common_init(ivy_bus);
 
   IvyBindMsg(on_DL_MOVE_WP, NULL, "^(\\S*) MOVE_WP (\\S*) (\\S*) (\\S*) (\\S*) (\\S*)");

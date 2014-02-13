@@ -1,5 +1,5 @@
 <firmware name="sam_test" boards="lisa_s_0.1"
-  description="autopilot and simulator for rotorcrafts">
+  description="autopilot and simulator for sam_tests">
 
  <!-- a parameter that belongs to BOARD -->
  <configure name="FLASH_MODE" values="|IAP|JTAG|ISP|"/>

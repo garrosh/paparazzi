@@ -126,7 +126,7 @@ void imu_periodic(void)
   // Start reading the latest gyroscope data
   itg3200_periodic(&imu_aspirin.gyro_itg);
 
-  // Read HMC58XX at 50Hz (main loop for rotorcraft: 512Hz)
+  // Read HMC58XX at 50Hz (main loop for sam_test: 512Hz)
   RunOnceEvery(10, hmc58xx_periodic(&imu_aspirin.mag_hmc));
 }
 

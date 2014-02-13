@@ -60,7 +60,7 @@ type nav_ref =
 
 type vehicle_type =
     FixedWing
-  | Rotorcraft
+  | Sam_Test
   | UnknownVehicleType
 
 val add_pos_to_nav_ref : nav_ref -> ?z:float -> (float * float) -> Latlong.geographic

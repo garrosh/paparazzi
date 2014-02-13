@@ -2,7 +2,7 @@
 # Mikrokopter Actuators
 #
 # enable the subsystem for your firmware:
-# <firmware name="rotorcraft">
+# <firmware name="sam_test">
 #   ...
 #   <subsystem name="actuators"     type="mkk">
 #     <configure name="MKK_I2C_SCL_TIME" value="50"/> <!-- this is optional, 150 is default, use 50 for 8 motors-->

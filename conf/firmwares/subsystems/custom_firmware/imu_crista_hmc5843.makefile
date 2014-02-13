@@ -1,5 +1,5 @@
 #
-# Rotorcraft IMU crista
+# Sam_Test IMU crista
 #
 #
 # required xml:
