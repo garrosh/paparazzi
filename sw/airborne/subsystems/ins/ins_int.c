@@ -22,7 +22,7 @@
 /**
  * @file subsystems/ins/ins_int.c
  *
- * INS for sam_tests combining vertical and horizontal filters.
+ * INS for samTests combining vertical and horizontal filters.
  *
  */
 
@@ -64,7 +64,7 @@
 #endif
 
 #ifdef INS_SONAR_THROTTLE_THRESHOLD
-#include "firmwares/sam_test/stabilization.h"
+#include "firmwares/samTest/stabilization.h"
 #endif
 
 #ifndef INS_SONAR_OFFSET

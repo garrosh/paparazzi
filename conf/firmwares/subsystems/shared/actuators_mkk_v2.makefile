@@ -2,7 +2,7 @@
 # Mikrokopter v2 Actuators
 #
 # enable the subsystem for your firmware:
-# <firmware name="sam_test">
+# <firmware name="samTest">
 #   ...
 #   <subsystem name="actuators"     type="mkk_v2">
 #     <configure name="MKK_V2_I2C_SCL_TIME" value="50"/> <!-- this is optional and only for lpc, 150 is default, use 50 for 8 motors-->

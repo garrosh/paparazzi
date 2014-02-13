@@ -21,7 +21,7 @@
 
 /**
  * @file subsystems/navigation/common_flight_plan.c
- * Common flight_plan functions shared between fixedwing and sam_test.
+ * Common flight_plan functions shared between fixedwing and samTest.
  */
 
 #include "subsystems/navigation/common_flight_plan.h"

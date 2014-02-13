@@ -26,8 +26,8 @@
 #include "gain_scheduling.h"
 
 //Include for scheduling on transition_status
-#include "firmwares/sam_test/guidance/guidance_h.h"
-#include "firmwares/sam_test/stabilization.h"
+#include "firmwares/samTest/guidance/guidance_h.h"
+#include "firmwares/samTest/stabilization.h"
 
 // #include "state.h"
 #include "math/pprz_algebra_int.h"

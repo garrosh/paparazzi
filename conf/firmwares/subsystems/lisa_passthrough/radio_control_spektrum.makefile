@@ -1,5 +1,5 @@
 #
-# Makefile for radio_control susbsytem in sam_test firmware
+# Makefile for radio_control susbsytem in samTest firmware
 #
 
 RADIO_CONTROL_LED ?= none

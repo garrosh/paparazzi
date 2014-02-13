@@ -22,7 +22,7 @@
 /**
  * @file subsystems/ins/ins_int.h
  *
- * INS for sam_tests combining vertical and horizontal filters.
+ * INS for samTests combining vertical and horizontal filters.
  *
  */
 

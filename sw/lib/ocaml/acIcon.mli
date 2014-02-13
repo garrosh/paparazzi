@@ -30,7 +30,7 @@ type icon = {
 
 val icon_fixedwing_template : icon
 val icon_flyingwing_template : icon
-val icon_sam_test_template : icon
+val icon_samTest_template : icon
 val icon_home_template : icon
 
 class widget :

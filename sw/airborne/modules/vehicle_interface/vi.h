@@ -28,10 +28,10 @@
 
 #include "std.h"
 #include "math/pprz_algebra_int.h"
-#include "firmwares/sam_test/autopilot.h"
-#include "firmwares/sam_test/stabilization.h"
-#include "firmwares/sam_test/guidance.h"
-#include "firmwares/sam_test/navigation.h"
+#include "firmwares/samTest/autopilot.h"
+#include "firmwares/samTest/stabilization.h"
+#include "firmwares/samTest/guidance.h"
+#include "firmwares/samTest/navigation.h"
 
 struct Vi_imu_info {
   struct Int16Vect3 gyro;

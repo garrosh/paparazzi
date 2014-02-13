@@ -258,7 +258,7 @@ let update_ac = fun ac ->
         sprintf "http://%s:%d/var/%s/flight_plan.kml" !hostname !port ac.name
     in
     let ap_mode = match ac.vehicle_type with
-        sam_test -> sam_test_ap_modes.(ac.ap_mode)
+        samTest -> samTest_ap_modes.(ac.ap_mode)
       | FixedWing -> fixedwing_ap_modes.(ac.ap_mode)
       | UnknownVehicleType -> "UNK"
     in
