@@ -53,7 +53,7 @@ let get_indexed_value = fun t i ->
 let modes_of_type = fun vt ->
   match vt with
       FixedWing -> fixedwing_ap_modes
-    | Sam_Test -> sam_test_ap_modes
+    | sam_test -> sam_test_ap_modes
     | UnknownVehicleType -> [| |]
 
 (** The aircrafts store *)
@@ -142,7 +142,7 @@ let ac_msg = fun messages_xml logging ac_name ac ->
       let msg = Tele_Pprz.message_of_id msg_id in
       log ?timestamp logging ac_name msg.Pprz.name values;
       Fw_server.log_and_parse ac_name ac msg values;
-      Sam_Test_server.log_and_parse ac_name ac msg values
+      sam_test_server.log_and_parse ac_name ac msg values
     with
         Telemetry_error (ac_name, msg) ->
           Ground_Pprz.message_send my_id "TELEMETRY_ERROR" ["ac_id", Pprz.String ac_name;"message", Pprz.String msg];

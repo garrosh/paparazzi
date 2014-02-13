@@ -182,7 +182,7 @@ let log_and_parse = fun ac_name (a:Aircraft.aircraft) msg values ->
       a.itow <- Int32.of_float (fvalue "tow");
       a.gps_Pacc <- ivalue "pacc"
     | "SAM_TEST_STATUS" ->
-      a.vehicle_type  <- Sam_Test;
+      a.vehicle_type  <- sam_test;
       a.fbw.rc_status <- get_rc_status (ivalue "rc_status");
       a.fbw.rc_rate   <- ivalue "frame_rate";
       a.gps_mode      <- check_index (ivalue "gps_status") gps_modes "GPS_MODE";
