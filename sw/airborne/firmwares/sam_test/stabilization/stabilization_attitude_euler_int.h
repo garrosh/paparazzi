@@ -22,7 +22,7 @@
 #ifndef STABILIZATION_ATTITUDE_EULER_INT_H
 #define STABILIZATION_ATTITUDE_EULER_INT_H
 
-#include "firmwares/rotorcraft/stabilization/stabilization_attitude_common_int.h"
-#include "firmwares/rotorcraft/stabilization/stabilization_attitude_ref_euler_int.h"
+#include "firmwares/sam_test/stabilization/stabilization_attitude_common_int.h"
+#include "firmwares/sam_test/stabilization/stabilization_attitude_ref_euler_int.h"
 
 #endif /* STABILIZATION_ATTITUDE_EULER_INT_H */

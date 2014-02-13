@@ -20,7 +20,7 @@
  */
 
 /** @file stabilization_rate.h
- *  Rate stabilization for rotorcrafts.
+ *  Rate stabilization for sam_tests.
  *
  *  Control loops for angular velocity.
  */

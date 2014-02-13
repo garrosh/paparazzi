@@ -20,16 +20,16 @@
  */
 
 /**
- * @file firmwares/rotorcraft/stabilization/stabilization_attitude_ref_quat_int.c
+ * @file firmwares/sam_test/stabilization/stabilization_attitude_ref_quat_int.c
  *
- * Rotorcraft attitude reference generation.
+ * Sam_Test attitude reference generation.
  * (quaternion int version)
  *
  */
 
 #include "generated/airframe.h"
-#include "firmwares/rotorcraft/stabilization/stabilization_attitude_ref_quat_int.h"
-#include "firmwares/rotorcraft/stabilization/stabilization_attitude_ref_saturate.h"
+#include "firmwares/sam_test/stabilization/stabilization_attitude_ref_quat_int.h"
+#include "firmwares/sam_test/stabilization/stabilization_attitude_ref_saturate.h"
 
 #define REF_ACCEL_MAX_P BFP_OF_REAL(STABILIZATION_ATTITUDE_REF_MAX_PDOT, REF_ACCEL_FRAC)
 #define REF_ACCEL_MAX_Q BFP_OF_REAL(STABILIZATION_ATTITUDE_REF_MAX_QDOT, REF_ACCEL_FRAC)

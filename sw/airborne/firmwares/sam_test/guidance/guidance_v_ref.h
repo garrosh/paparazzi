@@ -20,7 +20,7 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/** @file firmwares/rotorcraft/guidance/guidance_v_ref.h
+/** @file firmwares/sam_test/guidance/guidance_v_ref.h
  *  Reference generation for vertical guidance.
  *
  */

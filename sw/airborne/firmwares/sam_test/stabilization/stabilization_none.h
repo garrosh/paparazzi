@@ -20,7 +20,7 @@
  */
 
 /** @file stabilization_none.h
- *  Dummy stabilization for rotorcrafts.
+ *  Dummy stabilization for sam_tests.
  *
  *  Doesn't actually do any stabilization,
  *  just directly passes the RC commands along.

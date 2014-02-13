@@ -22,14 +22,14 @@
 /**
  * @file stabilization_attitude_quat_float.h
  *
- * Rotorcraft attitude stabilization in quaternion float version.
+ * Sam_Test attitude stabilization in quaternion float version.
  */
 
 #ifndef STABILIZATION_ATTITUDE_QUAT_FLOAT_H
 #define STABILIZATION_ATTITUDE_QUAT_FLOAT_H
 
-#include "firmwares/rotorcraft/stabilization/stabilization_attitude_common_float.h"
-#include "firmwares/rotorcraft/stabilization/stabilization_attitude_ref_quat_float.h"
+#include "firmwares/sam_test/stabilization/stabilization_attitude_common_float.h"
+#include "firmwares/sam_test/stabilization/stabilization_attitude_ref_quat_float.h"
 
 
 extern struct FloatAttitudeGains stabilization_gains[];

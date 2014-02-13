@@ -19,8 +19,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include "firmwares/rotorcraft/stabilization.h"
-#include "firmwares/rotorcraft/stabilization/stabilization_attitude_rc_setpoint.h"
+#include "firmwares/sam_test/stabilization.h"
+#include "firmwares/sam_test/stabilization/stabilization_attitude_rc_setpoint.h"
 
 #include "math/pprz_algebra_float.h"
 #include "state.h"

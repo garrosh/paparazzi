@@ -19,8 +19,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/** @file firmwares/rotorcraft/stabilization/stabilization_attitude.h
- *  General attitude stabilization interface for rotorcrafts.
+/** @file firmwares/sam_test/stabilization/stabilization_attitude.h
+ *  General attitude stabilization interface for sam_tests.
  *  The actual implementation is automatically included.
  */
 

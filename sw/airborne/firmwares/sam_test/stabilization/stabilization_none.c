@@ -20,14 +20,14 @@
  */
 
 /** @file stabilization_none.c
- *  Dummy stabilization for rotorcrafts.
+ *  Dummy stabilization for sam_tests.
  *
  *  Doesn't actually do any stabilization,
  *  just directly passes the RC commands along.
  */
 
-#include "firmwares/rotorcraft/stabilization.h"
-#include "firmwares/rotorcraft/stabilization/stabilization_none.h"
+#include "firmwares/sam_test/stabilization.h"
+#include "firmwares/sam_test/stabilization/stabilization_none.h"
 
 #include "subsystems/radio_control.h"
 #include "generated/airframe.h"

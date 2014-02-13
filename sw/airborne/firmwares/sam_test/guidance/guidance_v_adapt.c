@@ -19,7 +19,7 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/** @file firmwares/rotorcraft/guidance/guidance_v_adapt.c
+/** @file firmwares/sam_test/guidance/guidance_v_adapt.c
  *  Adaptation block of the vertical guidance.
  *
  *  This is a dimension one kalman filter estimating
@@ -27,7 +27,7 @@
  *  needed by the invert dynamic model to produce a nominal command.
  */
 
-#include "firmwares/rotorcraft/guidance/guidance_v_adapt.h"
+#include "firmwares/sam_test/guidance/guidance_v_adapt.h"
 #include "paparazzi.h"
 #include "math/pprz_algebra_int.h"
 #include "generated/airframe.h"

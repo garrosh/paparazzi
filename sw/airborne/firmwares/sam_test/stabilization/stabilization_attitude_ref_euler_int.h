@@ -20,7 +20,7 @@
  */
 
 /** @file stabilization_attitude_ref_euler_int.h
- *  Rotorcraft attitude reference generation (euler int version)
+ *  Sam_Test attitude reference generation (euler int version)
  *
  */
 

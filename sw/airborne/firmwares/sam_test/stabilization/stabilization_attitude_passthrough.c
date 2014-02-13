@@ -29,8 +29,8 @@
  */
 
 #include "state.h"
-#include "firmwares/rotorcraft/stabilization.h"
-#include "firmwares/rotorcraft/stabilization/stabilization_attitude_rc_setpoint.h"
+#include "firmwares/sam_test/stabilization.h"
+#include "firmwares/sam_test/stabilization/stabilization_attitude_rc_setpoint.h"
 #include "paparazzi.h"
 
 #include "generated/airframe.h"

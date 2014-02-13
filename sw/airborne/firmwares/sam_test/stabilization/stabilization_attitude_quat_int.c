@@ -20,12 +20,12 @@
  */
 
 /** @file stabilization_attitude_quat_int.c
- * Rotorcraft quaternion attitude stabilization
+ * Sam_Test quaternion attitude stabilization
  */
 
-#include "firmwares/rotorcraft/stabilization.h"
-#include "firmwares/rotorcraft/stabilization/stabilization_attitude_rc_setpoint.h"
-#include "firmwares/rotorcraft/stabilization/stabilization_attitude_quat_transformations.h"
+#include "firmwares/sam_test/stabilization.h"
+#include "firmwares/sam_test/stabilization/stabilization_attitude_rc_setpoint.h"
+#include "firmwares/sam_test/stabilization/stabilization_attitude_quat_transformations.h"
 
 #include <stdio.h>
 #include "math/pprz_algebra_float.h"

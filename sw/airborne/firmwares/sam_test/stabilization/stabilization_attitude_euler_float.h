@@ -22,15 +22,15 @@
 /**
  * @file stabilization_attitude_euler_float.h
  *
- * Rotorcraft attitude stabilization in euler float version.
+ * Sam_Test attitude stabilization in euler float version.
  */
 
 #ifndef STABILIZATION_ATTITUDE_EULER_FLOAT_H
 #define STABILIZATION_ATTITUDE_EULER_FLOAT_H
 
 #include "math/pprz_algebra_float.h"
-#include "firmwares/rotorcraft/stabilization/stabilization_attitude_common_float.h"
-#include "firmwares/rotorcraft/stabilization/stabilization_attitude_ref_euler_float.h"
+#include "firmwares/sam_test/stabilization/stabilization_attitude_common_float.h"
+#include "firmwares/sam_test/stabilization/stabilization_attitude_ref_euler_float.h"
 
 extern struct FloatAttitudeGains stabilization_gains;
 

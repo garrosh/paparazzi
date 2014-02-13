@@ -19,8 +19,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/** @file firmwares/rotorcraft/guidance/guidance_v.h
- *  Vertical guidance for rotorcrafts.
+/** @file firmwares/sam_test/guidance/guidance_v.h
+ *  Vertical guidance for sam_tests.
  *
  */
 
@@ -29,8 +29,8 @@
 
 #include "std.h"
 
-#include "firmwares/rotorcraft/guidance/guidance_v_ref.h"
-#include "firmwares/rotorcraft/guidance/guidance_v_adapt.h"
+#include "firmwares/sam_test/guidance/guidance_v_ref.h"
+#include "firmwares/sam_test/guidance/guidance_v_adapt.h"
 
 #define GUIDANCE_V_MODE_KILL      0
 #define GUIDANCE_V_MODE_RC_DIRECT 1

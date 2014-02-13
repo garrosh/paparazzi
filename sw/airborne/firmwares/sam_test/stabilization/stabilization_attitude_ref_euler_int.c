@@ -20,12 +20,12 @@
  */
 
 /** @file stabilization_attitude_ref_euler_int.c
- *  Rotorcraft attitude reference generation (euler int version)
+ *  Sam_Test attitude reference generation (euler int version)
  *
  */
 
-#include "firmwares/rotorcraft/stabilization/stabilization_attitude_ref_euler_int.h"
-#include "firmwares/rotorcraft/stabilization/stabilization_attitude_ref_saturate.h"
+#include "firmwares/sam_test/stabilization/stabilization_attitude_ref_euler_int.h"
+#include "firmwares/sam_test/stabilization/stabilization_attitude_ref_saturate.h"
 #include "generated/airframe.h"
 
 struct Int32Eulers stab_att_sp_euler;

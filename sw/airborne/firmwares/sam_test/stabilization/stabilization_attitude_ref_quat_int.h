@@ -20,9 +20,9 @@
  */
 
 /**
- * @file firmwares/rotorcraft/stabilization/stabilization_attitude_ref_quat_int.h
+ * @file firmwares/sam_test/stabilization/stabilization_attitude_ref_quat_int.h
  *
- * Rotorcraft attitude reference generation.
+ * Sam_Test attitude reference generation.
  * (quaternion int version)
  *
  */

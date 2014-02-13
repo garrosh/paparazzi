@@ -20,7 +20,7 @@
  */
 
 /** @file stabilization_attitude_ref_int.h
- *  Rotorcraft attitude reference generation API.
+ *  Sam_Test attitude reference generation API.
  *  Common to all fixed-point reference generators (euler and quaternion)
  */
 

@@ -20,17 +20,17 @@
  */
 
 /**
- * @file firmwares/rotorcraft/stabilization/stabilization_attitude_ref_quat_float.c
+ * @file firmwares/sam_test/stabilization/stabilization_attitude_ref_quat_float.c
  *
- * Rotorcraft attitude reference generation.
+ * Sam_Test attitude reference generation.
  * (quaternion float version)
  *
  */
 
 #include "generated/airframe.h"
 
-#include "firmwares/rotorcraft/stabilization/stabilization_attitude_ref_quat_float.h"
-#include "firmwares/rotorcraft/stabilization/stabilization_attitude_ref_saturate.h"
+#include "firmwares/sam_test/stabilization/stabilization_attitude_ref_quat_float.h"
+#include "firmwares/sam_test/stabilization/stabilization_attitude_ref_saturate.h"
 
 #define REF_ACCEL_MAX_P STABILIZATION_ATTITUDE_REF_MAX_PDOT
 #define REF_ACCEL_MAX_Q STABILIZATION_ATTITUDE_REF_MAX_QDOT

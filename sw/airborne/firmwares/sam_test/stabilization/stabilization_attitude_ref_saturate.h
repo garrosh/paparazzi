@@ -19,8 +19,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/** @file firmwares/rotorcraft/stabilization/stabilization_attitude_ref_saturate.h
- *  Common rotorcraft attitude reference saturation include.
+/** @file firmwares/sam_test/stabilization/stabilization_attitude_ref_saturate.h
+ *  Common sam_test attitude reference saturation include.
  */
 
 #ifndef STABILIZATION_ATTITUDE_REF_SATURATE_H

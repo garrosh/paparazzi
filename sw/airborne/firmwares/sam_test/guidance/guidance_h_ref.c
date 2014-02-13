@@ -19,12 +19,12 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/** @file firmwares/rotorcraft/guidance/guidance_h_ref.c
+/** @file firmwares/sam_test/guidance/guidance_h_ref.c
  *  Reference generation for horizontal guidance.
  *
  */
 
-#include "firmwares/rotorcraft/guidance/guidance_h_ref.h"
+#include "firmwares/sam_test/guidance/guidance_h_ref.h"
 #include "generated/airframe.h"
 
 /** Reference model acceleration.
