@@ -2,14 +2,14 @@
 
 <!--
      Applicable configuration:
-     airframe="airframes/examples/quadrotor_lisa_s.xml"
+     airframe="airframes/examples/sam_test.xml"
      radio="radios/cockpitSX.xml"
      telemetry="telemetry/default_samtest.xml"
      flight_plan="flight_plans/samtest_basic.xml"
      settings="settings/samtest_basic.xml settings/control/samtest_guidance.xml settings/control/stabilization_att_int.xml settings/control/stabilization_rate.xml"
 -->
 
-<airframe name="samtest">
+<airframe name="sam_test">
 
   <servos driver="Pwm">
     <servo name="LEFT" no="4" min="1000" neutral="1100" max="1900"/>
