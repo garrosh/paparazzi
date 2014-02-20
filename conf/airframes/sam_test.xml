@@ -2,14 +2,14 @@
 
 <!--
      Applicable configuration:
-     airframe="airframes/examples/quadrotor_lisa_s.xml"
+     airframe="airframes/examples/sam_test.xml"
      radio="radios/cockpitSX.xml"
-     telemetry="telemetry/default_samTest.xml"
-     flight_plan="flight_plans/samTest_basic.xml"
-     settings="settings/samTest_basic.xml settings/control/samTest_guidance.xml settings/control/stabilization_att_int.xml settings/control/stabilization_rate.xml"
+     telemetry="telemetry/default_sam_test.xml"
+     flight_plan="flight_plans/sam_test_basic.xml"
+     settings="settings/sam_test_basic.xml settings/control/sam_test_guidance.xml settings/control/stabilization_att_int.xml settings/control/stabilization_rate.xml"
 -->
 
-<airframe name="samTest">
+<airframe name="sam_test">
 
   <servos driver="Pwm">
     <servo name="LEFT" no="4" min="1000" neutral="1100" max="1900"/>
@@ -189,7 +189,7 @@
    <load name="send_imu_mag_current.xml"/>
  </modules>
 
-  <firmware name="samTest">
+  <firmware name="samtest">
     <target name="ap" board="lisa_s_0.1">
       <subsystem name="radio_control" type="superbitrf_rc">
         <define name="RADIO_TRANSMITTER_ID" value="2008496626"/> <!-- TUDelft Dx6i: TX 4 -->
