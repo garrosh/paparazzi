@@ -2,13 +2,15 @@
 
 <settings>
   <dl_settings>
-    <dl_settings NAME="System">
-       <dl_setting var="autopilot_mode_auto2" min="0" step="1" max="14" module="autopilot" shortname="auto2" values="Fail|Kill|Rate|Att|Rate_rcC|Att_rcC|Att_C|Rate_Z|Att_Z|Hover|Hover_C|Hover_Z|Nav|RC_D|CareFree"/>
-      <dl_setting var="kill_throttle" min="0" step="1" max="1" module="autopilot" values="Resurrect|Kill" handler="KillThrottle"/>
-      <dl_setting var="autopilot_power_switch" min="0" step="1" max="1" module="autopilot" values="OFF|ON" handler="SetPowerSwitch">
-        <strip_button name="POWER ON" icon="on.png" value="1" group="power_switch"/>
-        <strip_button name="POWER OFF" icon="off.png" value="0" group="power_switch"/>
-      </dl_setting>
+
+    <dl_settings NAME="Sim">
+       <dl_setting var="nps_bypass_ahrs" min="0" step="1" max="1" module="nps/nps_autopilot" shortname="bypass_ahrs" values="No|Yes"/>
+       <dl_setting var="nps_bypass_ins" min="0" step="1" max="1" module="nps/nps_autopilot" shortname="bypass_ins" values="No|Yes"/>
+       <dl_setting var="gps_has_fix" min="0" step="1" max="1" module="subsystems/gps/gps_sim_nps" shortname="gps_fix" values="No|Yes"/>
+       <dl_setting var="nps_electrical.supply_voltage" min="0" step="0.1" max="24" module="nps/nps_electrical" shortname="bat_voltage" unit="V"/>
+       <dl_setting var="nps_atmosphere.wind_speed" min="0" step="0.1" max="25" module="nps/nps_atmosphere" shortname="wind_speed" unit="m/s"/>
+       <dl_setting var="nps_atmosphere.wind_dir" min="0" step="1" max="360" module="nps/nps_atmosphere" shortname="wind_dir" unit="rad" alt_unit="deg"/>
+       <dl_setting var="nps_atmosphere.turbulence_severity" min="0" step="1" max="7" module="nps/nps_atmosphere" shortname="turbulence"/>
     </dl_settings>
 
   </dl_settings>

@@ -23,7 +23,7 @@
 /**
  * @file firmwares/flapping_wings/main.c
  *
- * Rotorcraft main loop.
+ * Flapping wings main loop.
  */
 
 #define MODULES_C

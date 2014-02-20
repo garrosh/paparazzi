@@ -1,34 +1,35 @@
 <airframe>
 	<firmware name="flapping_wings">
 		<target name="ap" board="lisa_s_0.1">
-			<subsystem name="radio_control" type="spektrum" />
+			<subsystem name="radio_control" type="spektrum"/>
+			<subsystem name="telemetry" type="transparent"/> <!-->A laisser par defaut pour port uart1 et baud 9600 <-->
 		</target>
 		<!-- for simulation -->
 		<target name="nps" board="pc">
       			<subsystem name="fdm"   type="jsbsim"/>
 			<subsystem name="radio_control" type="ppm"/>
+			<subsystem name="telemetry" type="superbitrf"/> <!-->A laisser par defaut pour port uart1 et baud 9600 <-->
     		</target>
 
-		
-		<subsystem name="telemetry" type="transparent"/> <!-->A laisser par defaut pour port uart1 et baud 9600 <-->
 		<subsystem name="actuators" type="pwm"> <!--> Specific to lisa boards <-->
 			<define name="SERVO_HZ" value="400"/> <!--> PWM frequency to set<-->
 			<define name="ACTUATORS_NB" value="4"/>
 		</subsystem>
 		<subsystem name="ahrs" type="int_cmpl_quat" />
     		<subsystem name="stabilization" type="int_quat"/>
-		<subsystem name="imu" type="aspirin_v2.1" />
+		<subsystem name="imu" type="lisa_s_v0.1" />
 		<subsystem name="ins"/>
 		<subsystem name="gps" type="ublox"/>
-		 <subsystem name="motor_mixing"/> <!-->A renommer "supervision si version inférieure à 4.9<-->
+		<subsystem name="motor_mixing"/> <!-->A renommer "supervision si version inférieure à 4.9<-->
+		<define name="TELEMETRY_MODE_FBW" value="1"/>
 	</firmware>
 	
 	<!--> Déclaration des servos pour subsystem actuators type pwm_supervisor<-->
 	<servos min="0" neutral="0" max="0xff"> <!--> To check !!! <-->
    		<servo name="MAIN" no="0" min="500" neutral="1000" max="2000"/> <!--> To check !!! <-->
-    		<servo name="LEFT" no="1" min="-2000" neutral="0" max="2000"/> <!--> To check !!! <-->
-    		<servo name="RIGHT" no="2" min="-2000" neutral="0" max="2000"/> <!--> To check !!! <-->
-    		<servo name="TRANS" no="3" min="-2000" neutral="0" max="2000"/> <!--> To check !!! <-->
+    		<servo name="LEFT" no="1" min="1000" neutral="1000" max="2000"/> <!--> To check !!! <-->
+    		<servo name="RIGHT" no="2" min="1000" neutral="1000" max="2000"/> <!--> To check !!! <-->
+    		<servo name="TRANS" no="3" min="1000" neutral="1000" max="2000"/> <!--> To check !!! <-->
   	</servos>
 	
 	<!-->NEEDED : MOTOR_MIXING section to manage depedencies between servos to realise commands <-->
@@ -166,8 +167,23 @@
 
 	<!-- For simulation -->
 	<section name="SIMULATOR" prefix="NPS_">
-    		<define name="ACTUATOR_NAMES" value="{&quot;main_motor&quot;, &quot;left_motor&quot;, &quot;right_motor&quot;, &quot;trans_motor&quot;}" />
+    		<define name="ACTUATOR_NAMES" value="{&quot;main&quot;, &quot;left&quot;, &quot;right&quot;, &quot;trans&quot;}" />
     		<define name="SENSORS_PARAMS" value="&quot;nps_sensors_params_default.h&quot;" />
    		<define name="JSBSIM_INIT" value="&quot;reset00&quot;" />
+		<define name="JSBSIM_MODEL" value="&quot;Colibri&quot;"/>
   	</section>
+
+	<modules main_freq="512">
+  		<load name="gps_ubx_ucenter.xml"/>
+   		<load name="send_imu_mag_current.xml"/>
+ 	</modules>
+
+	<section name="GCS">
+    		<define name="ALT_SHIFT_PLUS_PLUS" value="30"/>
+    		<define name="ALT_SHIFT_PLUS" value="5"/>
+    		<define name="ALT_SHIFT_MINUS" value="-5"/>
+    		<define name="SPEECH_NAME" value="Quad"/>
+    		<define name="AC_ICON" value="flyingwing"/>
+  	</section>
+	
 </airframe>
