@@ -44,7 +44,7 @@
 -->
 
 <!DOCTYPE radio SYSTEM "radio.dtd">
-<radio name="colibri radio for nps" data_min="900" data_max="2100" sync_min ="5000" sync_max ="15000" pulse_type="POSITIVE">
+<radio name="pc" data_min="900" data_max="2100" sync_min ="5000" sync_max ="15000" pulse_type="POSITIVE">
  <channel ctl="D" function="ROLL"     min="2050" neutral="1500" max="950" average="0"/>
  <channel ctl="C" function="PITCH"    min="2050" neutral="1500" max="950" average="0"/>
  <channel ctl="B" function="YAW"      min="950" neutral="1500" max="2050" average="0"/>

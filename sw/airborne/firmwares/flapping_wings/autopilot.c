@@ -157,7 +157,7 @@ static void send_rc(void) {
   DOWNLINK_SEND_RC(DefaultChannel, DefaultDevice, RADIO_CONTROL_NB_CHANNEL, radio_control.values);
 }
 
-static void send_flapping_wings_rc(void) {
+static void send_rotorcraft_rc(void) {
 #ifdef RADIO_KILL_SWITCH
   int16_t _kill_switch = radio_control.values[RADIO_KILL_SWITCH];
 #else
@@ -184,7 +184,7 @@ static void send_dl_value(void) {
   PeriodicSendDlValue(DefaultChannel, DefaultDevice);
 }
 
-static void send_flapping_wings_cmd(void) {
+static void send_rotorcraft_cmd(void) {
   DOWNLINK_SEND_ROTORCRAFT_CMD(DefaultChannel, DefaultDevice,
       &stabilization_cmd[COMMAND_ROLL],
       &stabilization_cmd[COMMAND_PITCH],
@@ -223,14 +223,14 @@ void autopilot_init(void) {
   register_periodic_telemetry(DefaultPeriodic, "ALIVE", send_alive);
   register_periodic_telemetry(DefaultPeriodic, "ROTORCRAFT_STATUS", send_status);
   register_periodic_telemetry(DefaultPeriodic, "ROTORCRAFT_FP", send_fp);
-  register_periodic_telemetry(DefaultPeriodic, "ROTORCRAFT_CMD", send_flapping_wings_cmd);
+  register_periodic_telemetry(DefaultPeriodic, "ROTORCRAFT_CMD", send_rotorcraft_cmd);
   register_periodic_telemetry(DefaultPeriodic, "DL_VALUE", send_dl_value);
 #ifdef ACTUATORS
   register_periodic_telemetry(DefaultPeriodic, "ACTUATORS", send_actuators);
 #endif
 #ifdef RADIO_CONTROL
   register_periodic_telemetry(DefaultPeriodic, "RC", send_rc);
-  register_periodic_telemetry(DefaultPeriodic, "ROTORCRAFT_RADIO_CONTROL", send_flapping_wings_rc);
+  register_periodic_telemetry(DefaultPeriodic, "ROTORCRAFT_RADIO_CONTROL", send_rotorcraft_rc);
 #endif
 }
 
