@@ -53,7 +53,7 @@ let get_indexed_value = fun t i ->
 let modes_of_type = fun vt ->
   match vt with
       FixedWing -> fixedwing_ap_modes
-    | Rotorcraft -> Rotorcraft_ap_modes
+    | Rotorcraft -> rotorcraft_ap_modes
     | UnknownVehicleType -> [| |]
 
 (** The aircrafts store *)

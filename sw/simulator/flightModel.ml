@@ -144,11 +144,7 @@ module Make(A:Data.MISSION) = struct
     try float_value simu_section "WEIGHT" with _ -> 1.
 
   let max_bat_level =
-<<<<<<< HEAD
     try float_value (section "BAT") "MAX_BAT_LEVEL" with _ -> 12.5
-=======
-    try float_value (section "BAT") "MAX_BAT_LEVEL" with _ -> 26.0
->>>>>>> origin/master_auvsi2013
 
   let h_ctrl_section =
     try section "HORIZONTAL CONTROL" with _ -> Xml.Element("",[],[])

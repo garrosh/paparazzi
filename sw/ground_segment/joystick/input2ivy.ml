@@ -583,14 +583,11 @@ let () =
   let joystick_conf_dir = conf_dir ^ "/joystick/" in
   let xml_descr_full = joystick_conf_dir ^ !xml_descr in
   trim_file_name := String.concat "." [xml_descr_full ; !ac_name ; "trim"];
-<<<<<<< HEAD
+
   let actions = parse_descr xml_descr_full trim_file_name.contents in
 
   Printf.printf "Joystick ID: %u\n" !joystick_id;
-=======
 
-  let actions = parse_descr xml_descr_full trim_file_name.contents in
->>>>>>> origin/master_auvsi2013
 
   if stick_init !device_name <> 0 then
     failwith (sprintf "Error: cannot open device %s\n" !device_name);

@@ -52,13 +52,13 @@
 #define dbgprintf(x ...)
 #endif
 
-<<<<<<< HEAD
+
 #define MIN_BUTTON_CODE   KEY_RESERVED
 #define MAX_BUTTON_CODE   KEY_KPDOT+1
-=======
+/*
 #define MIN_BUTTON_CODE   BTN_JOYSTICK
 #define MAX_BUTTON_CODE   BTN_THUMBR+1
->>>>>>> origin/master_auvsi2013
+*/
 #define MIN_ABS_CODE      ABS_X
 #define MAX_ABS_CODE      ABS_MAX+1
 
@@ -202,13 +202,11 @@ int init_hid_device(char* device_name)
         if (TEST_BIT(cnt, key_bits)) {
           button_code[stick_button_count++] = cnt;
           dbgprintf(stderr,"Available button: %d (0x%x)\n",cnt,cnt);
-<<<<<<< HEAD
+
         } else {
 		dbgprintf(stderr,"Button not found: %d (0x%x)\n",cnt,cnt);
 	}
-=======
-        }
->>>>>>> origin/master_auvsi2013
+
         if (stick_button_count == BUTTON_COUNT) break;
       }
     } else {
@@ -241,11 +239,10 @@ int init_hid_device(char* device_name)
   }
 
   /* Store axis */
-<<<<<<< HEAD
+
 #define NO_USE_AXIS
 #ifndef NO_USE_AXIS
-=======
->>>>>>> origin/master_auvsi2013
+
   if (stick_init_param.axis_count > 0) {
     for (cnt = 0; cnt < MIN(stick_init_param.axis_count,AXIS_COUNT); cnt++) {
       if (!TEST_BIT(stick_init_param.axis_code[cnt], abs_bits)) {
@@ -306,11 +303,9 @@ int init_hid_device(char* device_name)
     dbgprintf(stderr,"Axis %d : parameters = [%d,%d]\n",
         cnt,axis_min[cnt],axis_max[cnt]);
   }
-<<<<<<< HEAD
-#endif
-=======
 
->>>>>>> origin/master_auvsi2013
+#endif
+
   //--------------------------------------------------
   // force feedback, TBD feature
   //--------------------------------------------------
