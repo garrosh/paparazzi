@@ -17,7 +17,7 @@
 		</subsystem>
 		<subsystem name="ahrs" type="int_cmpl_quat" />
     		<subsystem name="stabilization" type="int_quat"/>
-		<subsystem name="imu" type="lisa_s_v0.1" />
+		<subsystem name="imu"           type="aspirin_v2.1"/>
 		<subsystem name="ins"/>
 		<subsystem name="gps" type="ublox"/>
 		<subsystem name="motor_mixing"/> <!-->A renommer "supervision si version inférieure à 4.9<-->

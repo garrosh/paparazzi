@@ -1,4 +1,6 @@
 (*
+ *  $Id$
+ *
  * Basic flight model for simulation
  *
  * Copyright (C) 2004-2006 Pascal Brisset, Antoine Drouin
@@ -135,9 +137,6 @@ module Make(A:Data.MISSION) = struct
   let roll_response_factor =
     try float_value simu_section "ROLL_RESPONSE_FACTOR" with _ -> 15.
 
-  let pitch_response_factor =
-    try float_value simu_section "PITCH_RESPONSE_FACTOR" with _ -> 1.
-
   let yaw_response_factor =
     try float_value simu_section "YAW_RESPONSE_FACTOR" with _ -> 1.
 
@@ -145,7 +144,11 @@ module Make(A:Data.MISSION) = struct
     try float_value simu_section "WEIGHT" with _ -> 1.
 
   let max_bat_level =
+<<<<<<< HEAD
     try float_value (section "BAT") "MAX_BAT_LEVEL" with _ -> 12.5
+=======
+    try float_value (section "BAT") "MAX_BAT_LEVEL" with _ -> 26.0
+>>>>>>> origin/master_auvsi2013
 
   let h_ctrl_section =
     try section "HORIZONTAL CONTROL" with _ -> Xml.Element("",[],[])
@@ -246,7 +249,7 @@ module Make(A:Data.MISSION) = struct
       (* Aerodynamic pitching moment coeff, proportional to elevator;
         No Thrust moment, so null (0) for steady flight *)
       let c_m = 5e-7 *.state.delta_b in
-      let theta_dot_dot = pitch_response_factor *. c_m *. v2 -. state.theta_dot in
+      let theta_dot_dot = c_m *. v2 -. state.theta_dot in
       state.theta_dot <- state.theta_dot +. theta_dot_dot *. dt;
       state.theta <- state.theta +. state.theta_dot *. dt;
 
