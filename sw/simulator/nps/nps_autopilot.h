@@ -7,7 +7,7 @@
 
 /**
  * Number of commands sent to the FDM of NPS.
- * If MOTOR_MIXING_NB_MOTOR is defined (usually samTest firmware)
+ * If MOTOR_MIXING_NB_MOTOR is defined (usually Rotorcraft firmware)
  * we have that many commands (one per motor),
  * otherwise we default to the number of high level commands (COMMANDS_NB).
  */

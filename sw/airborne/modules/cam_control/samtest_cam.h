@@ -21,8 +21,8 @@
  */
 
 /**
- * @file modules/cam_control/samTest_cam.h
- * Camera control module for samTest.
+ * @file modules/cam_control/Rotorcraft_cam.h
+ * Camera control module for Rotorcraft.
  *
  * The camera is controled by the heading of the vehicle for pan
  * and can be controlled by a servo for tilt if defined.
@@ -30,15 +30,15 @@
  * Four modes:
  *  - NONE: no control
  *  - MANUAL: the servo position is set with PWM
- *  - HEADING: the servo position and the heading of the samTest are set with angles
+ *  - HEADING: the servo position and the heading of the Rotorcraft are set with angles
  *  - WP: the camera is tracking a waypoint (Default: CAM)
  *
  * The CAM_SWITCH can be used to power the camera in normal modes
  * and disable it when in NONE mode
  */
 
-#ifndef SAM_TEST_CAM_H
-#define SAM_TEST_CAM_H
+#ifndef ROTORCRAFT_CAM_H
+#define ROTORCRAFT_CAM_H
 
 #include "generated/airframe.h"
 #include "generated/flight_plan.h"
@@ -46,14 +46,14 @@
 #include "std.h"
 #include "led.h"
 
-#define SAM_TEST_CAM_MODE_NONE     0
-#define SAM_TEST_CAM_MODE_MANUAL   1
-#define SAM_TEST_CAM_MODE_HEADING  2
-#define SAM_TEST_CAM_MODE_WP       3
+#define ROTORCRAFT_CAM_MODE_NONE     0
+#define ROTORCRAFT_CAM_MODE_MANUAL   1
+#define ROTORCRAFT_CAM_MODE_HEADING  2
+#define ROTORCRAFT_CAM_MODE_WP       3
 
 /** Default mode is NONE. */
-#ifndef SAM_TEST_CAM_DEFAULT_MODE
-#define SAM_TEST_CAM_DEFAULT_MODE SAM_TEST_CAM_MODE_NONE
+#ifndef ROTORCRAFT_CAM_DEFAULT_MODE
+#define ROTORCRAFT_CAM_DEFAULT_MODE ROTORCRAFT_CAM_MODE_NONE
 #endif
 
 /** Cam power control.
@@ -62,88 +62,88 @@
  *  LED_ON set GPIO low on some boards (lpc)
  *  LED_OFF set GPIO high on some boards (lpc)
  */
-#ifndef SAM_TEST_CAM_ON
+#ifndef ROTORCRAFT_CAM_ON
 #ifdef CAM_SWITCH_LED
-#define SAM_TEST_CAM_ON LED_OFF(CAM_SWITCH_LED)
+#define ROTORCRAFT_CAM_ON LED_OFF(CAM_SWITCH_LED)
 #else
-#define SAM_TEST_CAM_ON {}
+#define ROTORCRAFT_CAM_ON {}
 #endif
 #endif
-#ifndef SAM_TEST_CAM_OFF
+#ifndef ROTORCRAFT_CAM_OFF
 #ifdef CAM_SWITCH_LED
-#define SAM_TEST_CAM_OFF LED_ON(CAM_SWITCH_LED)
+#define ROTORCRAFT_CAM_OFF LED_ON(CAM_SWITCH_LED)
 #else
-#define SAM_TEST_CAM_OFF {}
+#define ROTORCRAFT_CAM_OFF {}
 #endif
 #endif
 
 /** Cam tilt control.
  * By default use tilt control if a servo is assigned
  */
-#ifdef SAM_TEST_CAM_TILT_SERVO
-#define SAM_TEST_CAM_USE_TILT 1
+#ifdef ROTORCRAFT_CAM_TILT_SERVO
+#define ROTORCRAFT_CAM_USE_TILT 1
 #else
-#define SAM_TEST_CAM_USE_TILT 0
+#define ROTORCRAFT_CAM_USE_TILT 0
 #endif
 
 /** Use angles for tilt in HEADING and WP modes.
  */
-#if defined SAM_TEST_CAM_TILT_ANGLE_MIN && defined SAM_TEST_CAM_TILT_ANGLE_MAX && defined SAM_TEST_CAM_USE_TILT
-#define CAM_TA_MIN ANGLE_BFP_OF_REAL(SAM_TEST_CAM_TILT_ANGLE_MIN)
-#define CAM_TA_MAX ANGLE_BFP_OF_REAL(SAM_TEST_CAM_TILT_ANGLE_MAX)
-#define SAM_TEST_CAM_USE_TILT_ANGLES 1
+#if defined ROTORCRAFT_CAM_TILT_ANGLE_MIN && defined ROTORCRAFT_CAM_TILT_ANGLE_MAX && defined ROTORCRAFT_CAM_USE_TILT
+#define CAM_TA_MIN ANGLE_BFP_OF_REAL(ROTORCRAFT_CAM_TILT_ANGLE_MIN)
+#define CAM_TA_MAX ANGLE_BFP_OF_REAL(ROTORCRAFT_CAM_TILT_ANGLE_MAX)
+#define ROTORCRAFT_CAM_USE_TILT_ANGLES 1
 #endif
 
 /** Cam pan control.
  * By default use pan control (heading)
  */
-#ifndef SAM_TEST_CAM_USE_PAN
-#define SAM_TEST_CAM_USE_PAN 1
+#ifndef ROTORCRAFT_CAM_USE_PAN
+#define ROTORCRAFT_CAM_USE_PAN 1
 #endif
 
 /** WP control.
  * By default use WP_CAM waypoint if defined
  */
-#ifndef SAM_TEST_CAM_TRACK_WP
+#ifndef ROTORCRAFT_CAM_TRACK_WP
 #ifdef WP_CAM
-#define SAM_TEST_CAM_TRACK_WP WP_CAM
+#define ROTORCRAFT_CAM_TRACK_WP WP_CAM
 #endif
 #endif
 
-extern uint8_t samTest_cam_mode;
+extern uint8_t Rotorcraft_cam_mode;
 
-extern int16_t samTest_cam_tilt;
-extern int16_t samTest_cam_pan;
-extern int16_t samTest_cam_tilt_pwm;
+extern int16_t Rotorcraft_cam_tilt;
+extern int16_t Rotorcraft_cam_pan;
+extern int16_t Rotorcraft_cam_tilt_pwm;
 
-extern void samTest_cam_init(void);
-extern void samTest_cam_periodic(void);
+extern void Rotorcraft_cam_init(void);
+extern void Rotorcraft_cam_periodic(void);
 
 /** Set camera mode.
  * Camera is powered down in NONE mode if CAM_{ON|OFF} are defined
  */
-#define samTest_cam_SetCamMode(_v) { \
-  samTest_cam_mode = _v; \
-  if (samTest_cam_mode == SAM_TEST_CAM_MODE_NONE) { SAM_TEST_CAM_OFF; } \
-  else { SAM_TEST_CAM_ON; } \
+#define Rotorcraft_cam_SetCamMode(_v) { \
+  Rotorcraft_cam_mode = _v; \
+  if (Rotorcraft_cam_mode == ROTORCRAFT_CAM_MODE_NONE) { ROTORCRAFT_CAM_OFF; } \
+  else { ROTORCRAFT_CAM_ON; } \
 }
 
 /** Cam control from datalink message.
  * camera tilt and pan are incremented by STICK_TILT_INC and STICK_PAN_INC
  * when maximum command is received from the stick
  */
-#ifndef SAM_TEST_CAM_STICK_TILT_INC
-#define SAM_TEST_CAM_STICK_TILT_INC RadOfDeg(10.)
+#ifndef ROTORCRAFT_CAM_STICK_TILT_INC
+#define ROTORCRAFT_CAM_STICK_TILT_INC RadOfDeg(10.)
 #endif
-#ifndef SAM_TEST_CAM_STICK_PAN_INC
-#define SAM_TEST_CAM_STICK_PAN_INC RadOfDeg(20.)
+#ifndef ROTORCRAFT_CAM_STICK_PAN_INC
+#define ROTORCRAFT_CAM_STICK_PAN_INC RadOfDeg(20.)
 #endif
 
-#define SAM_TEST_CAM_STICK_PARSE(_dl_buffer) { \
-  samTest_cam_tilt += (int16_t)((ANGLE_BFP_OF_REAL(SAM_TEST_CAM_STICK_TILT_INC)/127.)*(float)DL_SAM_TEST_CAM_STICK_tilt(_dl_buffer)); \
-  samTest_cam_pan += (int16_t)((ANGLE_BFP_OF_REAL(SAM_TEST_CAM_STICK_PAN_INC)/127.)*(float)DL_SAM_TEST_CAM_STICK_pan(dl_buffer)); \
-  INT32_COURSE_NORMALIZE(samTest_cam_pan); \
+#define ROTORCRAFT_CAM_STICK_PARSE(_dl_buffer) { \
+  Rotorcraft_cam_tilt += (int16_t)((ANGLE_BFP_OF_REAL(ROTORCRAFT_CAM_STICK_TILT_INC)/127.)*(float)DL_ROTORCRAFT_CAM_STICK_tilt(_dl_buffer)); \
+  Rotorcraft_cam_pan += (int16_t)((ANGLE_BFP_OF_REAL(ROTORCRAFT_CAM_STICK_PAN_INC)/127.)*(float)DL_ROTORCRAFT_CAM_STICK_pan(dl_buffer)); \
+  INT32_COURSE_NORMALIZE(Rotorcraft_cam_pan); \
 }
 
-#endif /* SAM_TEST_CAM_H */
+#endif /* ROTORCRAFT_CAM_H */
 

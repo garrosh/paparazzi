@@ -21,8 +21,8 @@
  */
 
 /**
- * @file modules/cam_control/samTest_cam.c
- * Camera control module for samTest.
+ * @file modules/cam_control/Rotorcraft_cam.c
+ * Camera control module for Rotorcraft.
  *
  * The camera is controled by the heading of the vehicle for pan
  * and can be controlled by a servo for tilt if defined.
@@ -30,102 +30,102 @@
  * Four modes:
  *  - NONE: no control
  *  - MANUAL: the servo position is set with PWM
- *  - HEADING: the servo position and the heading of the samTest are set with angles
+ *  - HEADING: the servo position and the heading of the Rotorcraft are set with angles
  *  - WP: the camera is tracking a waypoint (Default: CAM)
  *
  * The CAM_SWITCH can be used to power the camera in normal modes
  * and disable it when in NONE mode
  */
 
-#include "modules/cam_control/samTest_cam.h"
+#include "modules/cam_control/Rotorcraft_cam.h"
 
 #include "subsystems/actuators.h"
 #include "state.h"
-#include "firmwares/samTest/navigation.h"
+#include "firmwares/Rotorcraft/navigation.h"
 #include "std.h"
 
 #include "subsystems/datalink/telemetry.h"
 
-uint8_t samTest_cam_mode;
+uint8_t Rotorcraft_cam_mode;
 
 #define _SERVO_PARAM(_s,_p) SERVO_ ## _s ## _ ## _p
 #define SERVO_PARAM(_s,_p) _SERVO_PARAM(_s,_p)
 
 // Tilt definition
-int16_t samTest_cam_tilt;
-int16_t samTest_cam_tilt_pwm;
-#if SAM_TEST_CAM_USE_TILT
-#define SAM_TEST_CAM_TILT_NEUTRAL SERVO_PARAM(SAM_TEST_CAM_TILT_SERVO, NEUTRAL)
-#define SAM_TEST_CAM_TILT_MIN SERVO_PARAM(SAM_TEST_CAM_TILT_SERVO, MIN)
-#define SAM_TEST_CAM_TILT_MAX SERVO_PARAM(SAM_TEST_CAM_TILT_SERVO, MAX)
-#define D_TILT (SAM_TEST_CAM_TILT_MAX - SAM_TEST_CAM_TILT_MIN)
+int16_t Rotorcraft_cam_tilt;
+int16_t Rotorcraft_cam_tilt_pwm;
+#if ROTORCRAFT_CAM_USE_TILT
+#define ROTORCRAFT_CAM_TILT_NEUTRAL SERVO_PARAM(ROTORCRAFT_CAM_TILT_SERVO, NEUTRAL)
+#define ROTORCRAFT_CAM_TILT_MIN SERVO_PARAM(ROTORCRAFT_CAM_TILT_SERVO, MIN)
+#define ROTORCRAFT_CAM_TILT_MAX SERVO_PARAM(ROTORCRAFT_CAM_TILT_SERVO, MAX)
+#define D_TILT (ROTORCRAFT_CAM_TILT_MAX - ROTORCRAFT_CAM_TILT_MIN)
 #define CT_MIN Min(CAM_TA_MIN, CAM_TA_MAX)
 #define CT_MAX Max(CAM_TA_MIN, CAM_TA_MAX)
 #endif
 
 // Pan definition
-int16_t samTest_cam_pan;
-#define SAM_TEST_CAM_PAN_MIN 0
-#define SAM_TEST_CAM_PAN_MAX INT32_ANGLE_2_PI
+int16_t Rotorcraft_cam_pan;
+#define ROTORCRAFT_CAM_PAN_MIN 0
+#define ROTORCRAFT_CAM_PAN_MAX INT32_ANGLE_2_PI
 
 static void send_cam(void) {
-  DOWNLINK_SEND_SAM_TEST_CAM(DefaultChannel, DefaultDevice,
-      &samTest_cam_tilt,&samTest_cam_pan);
+  DOWNLINK_SEND_ROTORCRAFT_CAM(DefaultChannel, DefaultDevice,
+      &Rotorcraft_cam_tilt,&Rotorcraft_cam_pan);
 }
 
-void samTest_cam_init(void) {
-  samTest_cam_SetCamMode(SAM_TEST_CAM_DEFAULT_MODE);
-#if SAM_TEST_CAM_USE_TILT
-  samTest_cam_tilt_pwm = SAM_TEST_CAM_TILT_NEUTRAL;
-  ActuatorSet(SAM_TEST_CAM_TILT_SERVO, samTest_cam_tilt_pwm);
+void Rotorcraft_cam_init(void) {
+  Rotorcraft_cam_SetCamMode(ROTORCRAFT_CAM_DEFAULT_MODE);
+#if ROTORCRAFT_CAM_USE_TILT
+  Rotorcraft_cam_tilt_pwm = ROTORCRAFT_CAM_TILT_NEUTRAL;
+  ActuatorSet(ROTORCRAFT_CAM_TILT_SERVO, Rotorcraft_cam_tilt_pwm);
 #else
-  samTest_cam_tilt_pwm = 1500;
+  Rotorcraft_cam_tilt_pwm = 1500;
 #endif
-  samTest_cam_tilt = 0;
-  samTest_cam_pan = 0;
+  Rotorcraft_cam_tilt = 0;
+  Rotorcraft_cam_pan = 0;
 
-  register_periodic_telemetry(DefaultPeriodic, "SAM_TEST_CAM", send_cam);
+  register_periodic_telemetry(DefaultPeriodic, "ROTORCRAFT_CAM", send_cam);
 }
 
-void samTest_cam_periodic(void) {
+void Rotorcraft_cam_periodic(void) {
 
-  switch (samTest_cam_mode) {
-    case SAM_TEST_CAM_MODE_NONE:
-#if SAM_TEST_CAM_USE_TILT
-      samTest_cam_tilt_pwm = SAM_TEST_CAM_TILT_NEUTRAL;
+  switch (Rotorcraft_cam_mode) {
+    case ROTORCRAFT_CAM_MODE_NONE:
+#if ROTORCRAFT_CAM_USE_TILT
+      Rotorcraft_cam_tilt_pwm = ROTORCRAFT_CAM_TILT_NEUTRAL;
 #endif
-#if SAM_TEST_CAM_USE_PAN
-      samTest_cam_pan = stateGetNedToBodyEulers_i()->psi;
+#if ROTORCRAFT_CAM_USE_PAN
+      Rotorcraft_cam_pan = stateGetNedToBodyEulers_i()->psi;
 #endif
       break;
-    case SAM_TEST_CAM_MODE_MANUAL:
+    case ROTORCRAFT_CAM_MODE_MANUAL:
       // nothing to do here, just apply tilt pwm at the end
       break;
-    case SAM_TEST_CAM_MODE_HEADING:
-#if SAM_TEST_CAM_USE_TILT_ANGLES
-      Bound(samTest_cam_tilt,CT_MIN,CT_MAX);
-      samTest_cam_tilt_pwm = SAM_TEST_CAM_TILT_MIN + D_TILT * (samTest_cam_tilt - CAM_TA_MIN) / (CAM_TA_MAX - CAM_TA_MIN);
+    case ROTORCRAFT_CAM_MODE_HEADING:
+#if ROTORCRAFT_CAM_USE_TILT_ANGLES
+      Bound(Rotorcraft_cam_tilt,CT_MIN,CT_MAX);
+      Rotorcraft_cam_tilt_pwm = ROTORCRAFT_CAM_TILT_MIN + D_TILT * (Rotorcraft_cam_tilt - CAM_TA_MIN) / (CAM_TA_MAX - CAM_TA_MIN);
 #endif
-#if SAM_TEST_CAM_USE_PAN
-      INT32_COURSE_NORMALIZE(samTest_cam_pan);
-      nav_heading = samTest_cam_pan;
+#if ROTORCRAFT_CAM_USE_PAN
+      INT32_COURSE_NORMALIZE(Rotorcraft_cam_pan);
+      nav_heading = Rotorcraft_cam_pan;
 #endif
       break;
-    case SAM_TEST_CAM_MODE_WP:
-#ifdef SAM_TEST_CAM_TRACK_WP
+    case ROTORCRAFT_CAM_MODE_WP:
+#ifdef ROTORCRAFT_CAM_TRACK_WP
       {
         struct Int32Vect2 diff;
-        VECT2_DIFF(diff, waypoints[SAM_TEST_CAM_TRACK_WP], *stateGetPositionEnu_i());
+        VECT2_DIFF(diff, waypoints[ROTORCRAFT_CAM_TRACK_WP], *stateGetPositionEnu_i());
         INT32_VECT2_RSHIFT(diff,diff,INT32_POS_FRAC);
-        INT32_ATAN2(samTest_cam_pan,diff.x,diff.y);
-        nav_heading = samTest_cam_pan;
-#if SAM_TEST_CAM_USE_TILT_ANGLES
+        INT32_ATAN2(Rotorcraft_cam_pan,diff.x,diff.y);
+        nav_heading = Rotorcraft_cam_pan;
+#if ROTORCRAFT_CAM_USE_TILT_ANGLES
         int32_t dist, height;
         INT32_VECT2_NORM(dist, diff);
-        height = (waypoints[SAM_TEST_CAM_TRACK_WP].z - stateGetPositionEnu_i()->z) >> INT32_POS_FRAC;
-        INT32_ATAN2(samTest_cam_tilt, height, dist);
-        Bound(samTest_cam_tilt, CAM_TA_MIN, CAM_TA_MAX);
-        samTest_cam_tilt_pwm = SAM_TEST_CAM_TILT_MIN + D_TILT * (samTest_cam_tilt - CAM_TA_MIN) / (CAM_TA_MAX - CAM_TA_MIN);
+        height = (waypoints[ROTORCRAFT_CAM_TRACK_WP].z - stateGetPositionEnu_i()->z) >> INT32_POS_FRAC;
+        INT32_ATAN2(Rotorcraft_cam_tilt, height, dist);
+        Bound(Rotorcraft_cam_tilt, CAM_TA_MIN, CAM_TA_MAX);
+        Rotorcraft_cam_tilt_pwm = ROTORCRAFT_CAM_TILT_MIN + D_TILT * (Rotorcraft_cam_tilt - CAM_TA_MIN) / (CAM_TA_MAX - CAM_TA_MIN);
 #endif
       }
 #endif
@@ -133,8 +133,8 @@ void samTest_cam_periodic(void) {
     default:
       break;
   }
-#if SAM_TEST_CAM_USE_TILT
-  ActuatorSet(SAM_TEST_CAM_TILT_SERVO, samTest_cam_tilt_pwm);
+#if ROTORCRAFT_CAM_USE_TILT
+  ActuatorSet(ROTORCRAFT_CAM_TILT_SERVO, Rotorcraft_cam_tilt_pwm);
 #endif
 }
 

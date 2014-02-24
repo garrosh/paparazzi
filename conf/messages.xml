@@ -733,10 +733,9 @@
     <field name="mode" type="uint8" values="MANUAL|AUTO|FAILSAFE"/>
     <field name="vsupply" type="uint16" unit="decivolt"/>
     <field name="current" type="int32" unit="mA"/>
-<<<<<<< HEAD
-=======
+
     <field name="waza" type="uint16"/>
->>>>>>> origin/master_auvsi2013
+
   </message>
 
   <message name="ADC" id="104">
@@ -1218,9 +1217,11 @@
   </message>
 
   <message name="ROTORCRAFT_TUNE_HOVER" id="150">
+
     <field name="rc_roll"    type="int16" alt_unit="-100/100" alt_unit_coef="0.01041670"/>
     <field name="rc_pitch"   type="int16" alt_unit="-100/100" alt_unit_coef="0.01041670"/>
     <field name="rc_yaw"     type="int16" alt_unit="-100/100" alt_unit_coef="0.01041670"/>
+
     <field name="cmd_roll"   type="int32"/>
     <field name="cmd_pitch"  type="int32"/>
     <field name="cmd_yaw"    type="int32"/>
@@ -1393,8 +1394,10 @@
     <field name="left" type="uint16" unit="adc"/>
   </message>
 
+
   <message name="BOOZ2_CAM" id="168">
     <field name="tilt" type="int16" unit="us"/>
+
     <field name="pan" type="int16" unit="2^12rad" alt_unit="deg" alt_unit_coef="0.0139882"/>
   </message>
 
@@ -1791,6 +1794,22 @@
  <!--229 is free -->
  <!--230 is free -->
 
+  <message name="AHRS_ARDRONE2" id="230">
+    <field name="state" type="uint32" />
+    <field name="control_state" type="uint32" values="DEFAULT|INIT|LANDING|FLYING|HOVERING|TEST|TRANS_TAKEOFF|TRANS_GOTOFIX|TRANS_LANDING|TRANS_LOOPING"/>
+    <field name="phi" type="float" unit="mdeg"/>
+    <field name="theta" type="float" unit="mdeg"/>
+    <field name="psi" type="float" unit="mdeg"/>
+    <field name="speed_x" type="float" unit="m/s"/>
+    <field name="speed_y" type="float" unit="m/s"/>
+    <field name="speed_z" type="float" unit="m/s"/>
+    <field name="accel_x" type="float" unit="m/s^2"/>
+    <field name="accel_y" type="float" unit="m/s^2"/>
+    <field name="accel_z" type="float" unit="m/s^2"/>
+    <field name="altitude" type="int32" unit="cm"/>
+    <field name="battery" type="uint32" unit="%"/>
+  </message>
+
   <message name="ROTORCRAFT_STATUS" id="231">
     <field name="link_imu_nb_err" type="uint32"/>
     <field name="blmc_nb_err"  type="uint8"/>
@@ -2176,7 +2195,9 @@
    <field name="yd"     type="float" unit="m"/>
  </message>
 
+
  <message name="BOOZ_CAM_STICK" id="152" link="forwarded">
+
    <field name="ac_id" type="uint8"/>
    <field name="tilt" type="int8"/>
    <field name="pan" type="int8"/>

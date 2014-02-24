@@ -108,7 +108,7 @@ void imu_periodic(void)
   // Start reading the latest gyroscope data
   itg3200_periodic(&imu_ppzuav.gyro_itg);
 
-  // Read HMC58XX at 50Hz (main loop for samTest: 512Hz)
+  // Read HMC58XX at 50Hz (main loop for Rotorcraft: 512Hz)
   RunOnceEvery(10, hmc58xx_periodic(&imu_ppzuav.mag_hmc));
 }
 

@@ -8,7 +8,7 @@
 #include "nps_autopilot.h"
 #include "nps_fdm.h"
 #include "nps_sensors.h"
-#include "firmwares/samTest/navigation.h"
+#include "firmwares/Rotorcraft/navigation.h"
 #include "state.h"
 
 #ifdef RADIO_CONTROL_TYPE_DATALINK
@@ -18,13 +18,13 @@
 #include NPS_SENSORS_PARAMS
 
 
-/* samTest specificDatalink Ivy functions */
+/* Rotorcraft specificDatalink Ivy functions */
 static void on_DL_MOVE_WP(IvyClientPtr app __attribute__ ((unused)),
                           void *user_data __attribute__ ((unused)),
                           int argc __attribute__ ((unused)), char *argv[]);
 
 void nps_ivy_init(char* ivy_bus) {
-  /* init ivy and bind some messages common to fw and samTest */
+  /* init ivy and bind some messages common to fw and Rotorcraft */
   nps_ivy_common_init(ivy_bus);
 
   IvyBindMsg(on_DL_MOVE_WP, NULL, "^(\\S*) MOVE_WP (\\S*) (\\S*) (\\S*) (\\S*) (\\S*)");

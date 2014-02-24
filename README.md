@@ -2,7 +2,7 @@ Paparazzi UAS
 =============
 
 Paparazzi is an attempt to develop a free software Unmanned (Air) Vehicle System.
- As of today the system is being used successfuly by a number of hobyists, universities and companies all over the world, on vehicle of various size ( 100g to 25Kg ) and of various nature ( fixed wing, samTests, boats and surface vehicles).
+ As of today the system is being used successfuly by a number of hobyists, universities and companies all over the world, on vehicle of various size ( 100g to 25Kg ) and of various nature ( fixed wing, Rotorcrafts, boats and surface vehicles).
 
 Up to date information is available in the wiki http://paparazzi.enac.fr
 

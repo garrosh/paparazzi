@@ -21,7 +21,7 @@
 
 #include "nps_autopilot.h"
 
-#include "firmwares/samTest/main.h"
+#include "firmwares/Rotorcraft/main.h"
 #include "nps_sensors.h"
 #include "nps_radio_control.h"
 #include "nps_electrical.h"
