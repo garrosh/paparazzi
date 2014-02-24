@@ -8,7 +8,7 @@ JSBSIM_ROOT ?= /opt/jsbsim
 JSBSIM_INC = $(JSBSIM_ROOT)/include/JSBSim
 JSBSIM_LIB = $(JSBSIM_ROOT)/lib
 
-SRC_FIRMWARE=firmwares/samTest
+SRC_FIRMWARE=firmwares/Rotorcraft
 
 SRC_BOARD=boards/$(BOARD)
 
@@ -53,16 +53,16 @@ nps.srcs += $(NPSDIR)/nps_main.c                 \
        $(NPSDIR)/nps_radio_control.c             \
        $(NPSDIR)/nps_radio_control_joystick.c    \
        $(NPSDIR)/nps_radio_control_spektrum.c    \
-       $(NPSDIR)/nps_autopilot_samTest.c      \
+       $(NPSDIR)/nps_autopilot_Rotorcraft.c      \
        $(NPSDIR)/nps_ivy_common.c                \
-       $(NPSDIR)/nps_ivy_samTest.c            \
+       $(NPSDIR)/nps_ivy_Rotorcraft.c            \
        $(NPSDIR)/nps_flightgear.c                \
 
 
 
 nps.CFLAGS += -DBOARD_CONFIG=$(BOARD_CFG) -DPERIPHERALS_AUTO_INIT
 
-nps.srcs += firmwares/samTest/main.c
+nps.srcs += firmwares/Rotorcraft/main.c
 nps.srcs += mcu.c
 nps.srcs += $(SRC_ARCH)/mcu_arch.c
 
@@ -81,7 +81,7 @@ nps.srcs += $(SRC_ARCH)/subsystems/settings_arch.c
 nps.CFLAGS += -DDOWNLINK -DPERIODIC_TELEMETRY -DDOWNLINK_TRANSPORT=IvyTransport -DDefaultPeriodic='&telemetry_Main'
 nps.srcs += $(SRC_ARCH)/ivy_transport.c
 nps.srcs += subsystems/datalink/downlink.c subsystems/datalink/telemetry.c
-nps.srcs += $(SRC_FIRMWARE)/samTest_telemetry.c
+nps.srcs += $(SRC_FIRMWARE)/Rotorcraft_telemetry.c
 nps.srcs += $(SRC_FIRMWARE)/datalink.c
 
 nps.srcs   += subsystems/actuators.c

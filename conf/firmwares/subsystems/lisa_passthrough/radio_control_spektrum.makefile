@@ -1,5 +1,5 @@
 #
-# Makefile for radio_control susbsytem in samTest firmware
+# Makefile for radio_control susbsytem in Rotorcraft firmware
 #
 
 RADIO_CONTROL_LED ?= none

@@ -112,7 +112,7 @@ void imu_periodic(void)
   // Start reading the latest gyroscope data
   mpu60x0_i2c_periodic(&imu_drotek2.mpu);
 
-  // Read HMC58XX at ~50Hz (main loop for samTest: 512Hz)
+  // Read HMC58XX at ~50Hz (main loop for Rotorcraft: 512Hz)
   if (imu_drotek2.mpu.config.initialized) {
     RunOnceEvery(10, hmc58xx_read(&imu_drotek2.hmc));
   }

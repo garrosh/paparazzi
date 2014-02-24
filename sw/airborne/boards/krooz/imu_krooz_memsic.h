@@ -22,7 +22,7 @@
 /**
  * @file boards/krooz/imu_krooz_memsic.h
  *
- * Driver for the IMU on the KroozSD Big samTest Edition board.
+ * Driver for the IMU on the KroozSD Big Rotorcraft Edition board.
  *
  * Invensense MPU-6050
  * Memsic MXR9500 with AD7689

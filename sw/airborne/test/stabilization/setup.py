@@ -18,16 +18,16 @@ algebra_float = Extension("algebra_float", sources=['algebra_float.pyx'],
 algebra_int = Extension("algebra_int", sources=['algebra_int.pyx', path.join(pprz_airborne, 'math/pprz_trig_int.c')],
                         include_dirs=common_inc_dirs)
 
-includedirs = common_inc_dirs + [path.join(pprz_airborne, "firmwares/samTest")]
+includedirs = common_inc_dirs + [path.join(pprz_airborne, "firmwares/Rotorcraft")]
 ext_quat_float = Extension("ref_quat_float",
                            sources=['ref_quat_float.pyx',
-                                    path.join(pprz_airborne, "firmwares/samTest/stabilization/stabilization_attitude_ref_quat_float.c")],
+                                    path.join(pprz_airborne, "firmwares/Rotorcraft/stabilization/stabilization_attitude_ref_quat_float.c")],
                            include_dirs=includedirs,
                            extra_compile_args=["-std=c99", "-DSTABILIZATION_ATTITUDE_TYPE_FLOAT"])
 ext_quat_int = Extension("ref_quat_int",
                          sources=['ref_quat_int.pyx',
                                   path.join(pprz_airborne, 'math/pprz_trig_int.c'),
-                                  path.join(pprz_airborne, "firmwares/samTest/stabilization/stabilization_attitude_ref_quat_int.c")],
+                                  path.join(pprz_airborne, "firmwares/Rotorcraft/stabilization/stabilization_attitude_ref_quat_int.c")],
                          include_dirs=includedirs,
                          extra_compile_args=["-std=c99", "-DSTABILIZATION_ATTITUDE_TYPE_INT"])
 

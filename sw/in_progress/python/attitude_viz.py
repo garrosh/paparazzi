@@ -336,7 +336,7 @@ def init():
 def run():
     global VEHICLE_QUATS, BAR_VALUES
     VEHICLE_QUATS = [["AHRS_REF_QUAT", 6, "Estimate", True], ["AHRS_REF_QUAT", 2, "Reference", True]]
-    BAR_VALUES = [["SAM_TEST_RADIO_CONTROL", 5, "Throttle (%%) %i", 0, 100, 100]]
+    BAR_VALUES = [["ROTORCRAFT_RADIO_CONTROL", 5, "Throttle (%%) %i", 0, 100, 100]]
     window_title = "Attitude_Viz"
     rotate_theta = -90
     try:

@@ -1,1 +1,1 @@
-$(error The stabilization quaternion subsystem has been changed, for normal samTests please use <subsystem name="stabilization" type="int_quat"/>, for transitioning samTests (quadshot) use <subsystem name="stabilization" type="int_quat_transition"/>)
+$(error The stabilization quaternion subsystem has been changed, for normal Rotorcrafts please use <subsystem name="stabilization" type="int_quat"/>, for transitioning Rotorcrafts (quadshot) use <subsystem name="stabilization" type="int_quat_transition"/>)

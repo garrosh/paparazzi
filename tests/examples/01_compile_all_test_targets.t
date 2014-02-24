@@ -21,7 +21,7 @@ foreach my $example (sort keys%{$examples->{'aircraft'}})
 	my $airframe_config = $xmlSimple->XMLin("$ENV{'PAPARAZZI_SRC'}/conf/$airframe");
 	foreach my $process (sort keys %{$airframe_config->{'firmware'}})
 	{
-		if ($process =~ m#setup|fixedwing|samTest|lisa_test_progs#)
+		if ($process =~ m#setup|fixedwing|Rotorcraft|lisa_test_progs#)
 		{
 			#warn "EX: [$example] ". Dumper($airframe_config->{'firmware'}->{$process}->{'target'});
 			foreach my $target (sort keys %{$airframe_config->{'firmware'}->{$process}->{'target'}})

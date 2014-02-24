@@ -1,4 +1,4 @@
-# Attitude estimation for fixedwings and samTests via CHR-UM6
+# Attitude estimation for fixedwings and Rotorcrafts via CHR-UM6
 # 2012, Utah State University, http://aggieair.usu.edu/
 
 ifndef UM6_PORT

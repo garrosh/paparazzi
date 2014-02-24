@@ -1,20 +1,20 @@
 <!DOCTYPE module SYSTEM "module.dtd">
 
-<module name="samTest_cam" dir="cam_control">
+<module name="Rotorcraft_cam" dir="cam_control">
   <doc>
     <description>
-Camera control for samTest.
+Camera control for Rotorcraft.
 The camera is controled by the heading of the vehicle for pan and can be controlled by a servo for tilt if defined.
 
 Four modes:
   - NONE: no control
   - MANUAL: the servo position is set with PWM
-  - HEADING: the servo position and the heading of the samTest are set with angles
+  - HEADING: the servo position and the heading of the Rotorcraft are set with angles
   - WP: the camera is tracking a waypoint (Default: CAM)
 
 The CAM_SWITCH can be used to power the camera in normal modes and disable it when in NONE mode.
     </description>
-    <section name="CAM" prefix="SAM_TEST_CAM_">
+    <section name="CAM" prefix="ROTORCRAFT_CAM_">
       <define name="DEFAULT_MODE" value="MODE_NONE|MODE_MANUAL|MODE_HEADING|MODE_WP" description="Select default mode (default: MODE_NONE)"/>
       <define name="CAM_ON" value="handler" description="Handler to power on the camera ({} to disable)"/>
       <define name="CAM_OFF" value="handler" description="Handler to power off the camera ({} to disable)"/>
@@ -28,13 +28,13 @@ The CAM_SWITCH can be used to power the camera in normal modes and disable it wh
     </section>
   </doc>
   <header>
-    <file name="samTest_cam.h"/>
+    <file name="Rotorcraft_cam.h"/>
   </header>
-  <init fun="samTest_cam_init()"/>
-  <periodic fun="samTest_cam_periodic()" freq="10."/>
-  <datalink message="SAM_TEST_CAM_STICK" fun="SAM_TEST_CAM_STICK_PARSE(dl_buffer)"/>
+  <init fun="Rotorcraft_cam_init()"/>
+  <periodic fun="Rotorcraft_cam_periodic()" freq="10."/>
+  <datalink message="ROTORCRAFT_CAM_STICK" fun="ROTORCRAFT_CAM_STICK_PARSE(dl_buffer)"/>
   <makefile>
-    <file name="samTest_cam.c"/>
+    <file name="Rotorcraft_cam.c"/>
   </makefile>
 </module>
 
