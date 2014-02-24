@@ -78,7 +78,7 @@
      <field name="mcu1_status" type="uint8" values="LOST|OK|REALLY_LOST"/>
    </message>
 
-   <message name="BAT" id="12">
+  <!--> <message name="BAT" id="12">
      <field name="throttle" type="int16" unit="pprz"/>
      <field name="voltage" type="uint16" unit="1e-1V" alt_unit="V" alt_unit_coef="0.1"/>
      <field name="adc"  type="uint16"/>
@@ -89,6 +89,7 @@
      <field name="stage_time" type="uint16" unit="s"/>
      <field name="energy" type="int16" unit="mAh"/>
    </message>
+<-->
 
    <message name="DEBUG_MCU_LINK" id="13">
      <field name="i2c_nb_err" type="uint8"></field>
@@ -251,12 +252,13 @@
 
   <!-- 36 is free -->
 
-  <message name="ENERGY" id="37">
+<!-->  <message name="ENERGY" id="37">
     <field name="bat"      type="float" unit="V"/>
     <field name="amp"      type="float" unit="A"/>
     <field name="energy"   type="uint16" unit="mAh"/>
     <field name="power"   type="float" unit="W"/>
   </message>
+<-->
 
   <message name="BARO_BMP85_CALIB" id="38">
     <field name="a1"  type="int16"/>
@@ -1807,7 +1809,7 @@
     <field name="accel_y" type="float" unit="m/s^2"/>
     <field name="accel_z" type="float" unit="m/s^2"/>
     <field name="altitude" type="int32" unit="cm"/>
-    <field name="battery" type="uint32" unit="%"/>
+ <!-->   <field name="battery" type="uint32" unit="%"/> <-->
   </message>
 
   <message name="ROTORCRAFT_STATUS" id="231">

@@ -3,11 +3,9 @@
 
 #include "std.h"
 
-<<<<<<< HEAD
 #ifndef LOW_BAT_LEVEL
-=======
 #ifdef BATTERY_CELL
->>>>>>> origin/master_auvsi2013
+
   #define CELL_MAXIMUM      4.2
   #define CELL_NOMINAL      3.7
   #define CELL_LOW          3.4
@@ -34,6 +32,7 @@
  #define ADC_COEFF_M         0.0323745054
  #define ADC_COEFF_B         0.2191709665
  #define VoltageOfAdc(adc)   (ADC_COEFF_M*adc + ADC_COEFF_B)
+#endif
 #endif
 
 struct Electrical {

@@ -80,10 +80,9 @@
   </section>
 
   <section name="BAT">
-<<<<<<< HEAD
+
     <define name="BATTERY_CELL" value="4"/>
-=======
->>>>>>> origin/master_auvsi2013
+
     <define name="MILLIAMP_AT_FULL_THROTTLE" value="2000"/>
 
     <define name="CATASTROPHIC_BAT_LEVEL" value="9.3" unit="V"/>

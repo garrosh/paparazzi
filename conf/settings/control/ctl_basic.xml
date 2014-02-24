@@ -44,18 +44,15 @@
         <dl_setting MAX="10" MIN="-10" STEP="0.1" VAR="v_ctl_auto_throttle_pitch_of_vz_dgain" shortname="pitch_of_vz (d)"/>
       </dl_settings>
       
-<<<<<<< HEAD
+
       <dl_settings NAME="Moteur">
 	
-        <dl_setting MAX="5" MIN="0" STEP="0.1"  VAR="h_ctl_pitch_pgain" shortname="Servo Droit" param="H_CTL_PITCH_PGAIN"/>
-          
-         
+        <dl_setting MAX="5" MIN="0" STEP="0.1"  VAR="h_ctl_pitch_pgain" shortname="Servo Droit" param="H_CTL_PITCH_PGAIN"/>  
         <dl_setting MAX="5" MIN="0" STEP="0.1"  VAR="h_ctl_pitch_dgain" shortname="Servo Gauche" param="H_CTL_PITCH_DGAIN"/>
         <dl_setting MAX="5" MIN="0" STEP="0.1"  VAR="h_ctl_elevator_of_roll" shortname="Servo Centre" param="H_CTL_ELEVATOR_OF_ROLL"/>
         <dl_setting MAX="10" MIN="0" STEP="0.2"  VAR="h_ctl_elevator_of_roll" shortname="Brushless" param="H_CTL_ELEVATOR_OF_ROLL"/>
       </dl_settings>
-=======
->>>>>>> origin/master_auvsi2013
+
 
     </dl_settings>
   </dl_settings>

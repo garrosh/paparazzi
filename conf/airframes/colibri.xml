@@ -185,5 +185,9 @@
     		<define name="SPEECH_NAME" value="Quad"/>
     		<define name="AC_ICON" value="flyingwing"/>
   	</section>
+
+	<section name="BAT">
+		<define name="BATTERY_CELL" value="1"/>
+	</section>
 	
 </airframe>
