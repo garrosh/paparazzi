@@ -20,12 +20,12 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/** @file firmwares/flapping_wings/guidance/guidance_v_ref.c
+/** @file firmwares/rotorcraft/guidance/guidance_v_ref.c
  *  Reference generation for vertical guidance.
  *
  */
 
-#include "firmwares/flapping_wings/guidance/guidance_v_ref.h"
+#include "firmwares/rotorcraft/guidance/guidance_v_ref.h"
 #include "generated/airframe.h"
 
 /** reference model vertical accel in meters/s^2 (output)

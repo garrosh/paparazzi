@@ -20,7 +20,7 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/** @file firmwares/flapping_wings/guidance/guidance_v_ref.h
+/** @file firmwares/rotorcraft/guidance/guidance_v_ref.h
  *  Reference generation for vertical guidance.
  *
  */

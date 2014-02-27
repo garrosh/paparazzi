@@ -22,8 +22,8 @@
 #ifndef STABILIZATION_ATTITUDE_QUAT_INT_H
 #define STABILIZATION_ATTITUDE_QUAT_INT_H
 
-#include "firmwares/flapping_wings/stabilization/stabilization_attitude_common_int.h"
-#include "firmwares/flapping_wings/stabilization/stabilization_attitude_ref_quat_int.h"
+#include "firmwares/rotorcraft/stabilization/stabilization_attitude_common_int.h"
+#include "firmwares/rotorcraft/stabilization/stabilization_attitude_ref_quat_int.h"
 
 #include "math/pprz_algebra_int.h"
 

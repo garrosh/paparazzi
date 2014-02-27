@@ -1,5 +1,5 @@
 <airframe>
-	<firmware name="flapping_wings">
+	<firmware name="rotorcraft">
 		<target name="ap" board="lisa_s_0.1">
 			<subsystem name="radio_control" type="spektrum"/>
 			<subsystem name="telemetry" type="transparent"/> <!-->A laisser par defaut pour port uart1 et baud 9600 <-->

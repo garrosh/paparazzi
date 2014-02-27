@@ -20,7 +20,7 @@
  */
 
 /** @file stabilization_rate.h
- *  Rate stabilization for flapping_wingss.
+ *  Rate stabilization for rotorcrafts.
  *
  *  Control loops for angular velocity.
  */

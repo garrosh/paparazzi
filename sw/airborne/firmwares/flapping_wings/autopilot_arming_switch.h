@@ -20,7 +20,7 @@
  */
 
 /**
- * @file firmwares/flapping_wings/autopilot_arming_switch.h
+ * @file firmwares/rotorcraft/autopilot_arming_switch.h
  *
  * Arm the motors using a switch.
  *

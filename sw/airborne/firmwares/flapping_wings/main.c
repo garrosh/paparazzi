@@ -21,7 +21,7 @@
  */
 
 /**
- * @file firmwares/flapping_wings/main.c
+ * @file firmwares/rotorcraft/main.c
  *
  * Flapping wings main loop.
  */
@@ -61,12 +61,12 @@ PRINT_CONFIG_MSG("USE_BARO_BOARD is TRUE: Reading onboard baro.")
 
 #include "subsystems/electrical.h"
 
-#include "firmwares/flapping_wings/autopilot.h"
+#include "firmwares/rotorcraft/autopilot.h"
 
 #include "subsystems/radio_control.h"
 
-#include "firmwares/flapping_wings/stabilization.h"
-#include "firmwares/flapping_wings/guidance.h"
+#include "firmwares/rotorcraft/stabilization.h"
+#include "firmwares/rotorcraft/guidance.h"
 
 #include "subsystems/ahrs.h"
 #include "subsystems/ahrs/ahrs_aligner.h"
@@ -74,7 +74,7 @@ PRINT_CONFIG_MSG("USE_BARO_BOARD is TRUE: Reading onboard baro.")
 
 #include "state.h"
 
-#include "firmwares/flapping_wings/main.h"
+#include "firmwares/rotorcraft/main.h"
 
 #ifdef SITL
 #include "nps_autopilot.h"

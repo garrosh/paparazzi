@@ -23,13 +23,13 @@
  *  Read an attitude setpoint from the RC.
  */
 
-#include "firmwares/flapping_wings/stabilization/stabilization_attitude_rc_setpoint.h"
+#include "firmwares/rotorcraft/stabilization/stabilization_attitude_rc_setpoint.h"
 
 #include "subsystems/radio_control.h"
 #include "state.h"
-#include "firmwares/flapping_wings/guidance/guidance_h.h"
-#include "firmwares/flapping_wings/stabilization/stabilization_attitude.h"
-#include "firmwares/flapping_wings/autopilot.h"
+#include "firmwares/rotorcraft/guidance/guidance_h.h"
+#include "firmwares/rotorcraft/stabilization/stabilization_attitude.h"
+#include "firmwares/rotorcraft/autopilot.h"
 
 #ifndef RC_UPDATE_FREQ
 #define RC_UPDATE_FREQ 40

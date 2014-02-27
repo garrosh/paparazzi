@@ -20,13 +20,13 @@
  */
 
 /**
- * @file firmwares/flapping_wings/autopilot.c
+ * @file firmwares/rotorcraft/autopilot.c
  *
  * Autopilot.
  *
  */
 
-#include "firmwares/flapping_wings/autopilot.h"
+#include "firmwares/rotorcraft/autopilot.h"
 
 #include "mcu_periph/uart.h"
 #include "subsystems/radio_control.h"
@@ -36,9 +36,9 @@
 #include "subsystems/electrical.h"
 #include "subsystems/settings.h"
 #include "subsystems/datalink/telemetry.h"
-#include "firmwares/flapping_wings/navigation.h"
-#include "firmwares/flapping_wings/guidance.h"
-#include "firmwares/flapping_wings/stabilization.h"
+#include "firmwares/rotorcraft/navigation.h"
+#include "firmwares/rotorcraft/guidance.h"
+#include "firmwares/rotorcraft/stabilization.h"
 #include "led.h"
 
 uint8_t  autopilot_mode;

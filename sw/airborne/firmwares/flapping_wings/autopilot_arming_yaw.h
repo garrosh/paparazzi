@@ -20,7 +20,7 @@
  */
 
 /**
- * @file firmwares/flapping_wings/autopilot_arming_yaw.h
+ * @file firmwares/rotorcraft/autopilot_arming_yaw.h
  *
  * Arm the motors by with max yaw stick.
  *

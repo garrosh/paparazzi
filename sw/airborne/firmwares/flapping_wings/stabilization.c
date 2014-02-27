@@ -19,11 +19,11 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/** @file firmwares/flapping_wings/stabilization.c
- *  General stabilization interface for flapping_wingss.
+/** @file firmwares/rotorcraft/stabilization.c
+ *  General stabilization interface for rotorcrafts.
  */
 
-#include "firmwares/flapping_wings/stabilization.h"
+#include "firmwares/rotorcraft/stabilization.h"
 
 int32_t stabilization_cmd[COMMANDS_NB];
 

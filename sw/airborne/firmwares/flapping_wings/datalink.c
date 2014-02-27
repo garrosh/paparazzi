@@ -20,7 +20,7 @@
  */
 
 /**
- * @file firmwares/flapping_wings/datalink.c
+ * @file firmwares/rotorcraft/datalink.c
  * Handling of messages coming from ground and other A/Cs.
  *
  */
@@ -46,7 +46,7 @@
 #include "subsystems/radio_control.h"
 #endif
 
-#include "firmwares/flapping_wings/navigation.h"
+#include "firmwares/rotorcraft/navigation.h"
 
 #include "math/pprz_geodetic_int.h"
 #include "state.h"

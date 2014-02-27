@@ -21,7 +21,7 @@
 
 #include "nps_autopilot.h"
 
-#include "firmwares/flapping_wings/main.h"
+#include "firmwares/rotorcraft/main.h"
 #include "nps_sensors.h"
 #include "nps_radio_control.h"
 #include "nps_electrical.h"

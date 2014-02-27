@@ -20,7 +20,7 @@
  */
 
 /**
- * @file firmwares/flapping_wings/autopilot.h
+ * @file firmwares/rotorcraft/autopilot.h
  *
  * Autopilot modes.
  *

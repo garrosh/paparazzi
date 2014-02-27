@@ -19,8 +19,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/** @file firmwares/flapping_wings/stabilization/stabilization_attitude.h
- *  General attitude stabilization interface for flapping_wingss.
+/** @file firmwares/rotorcraft/stabilization/stabilization_attitude.h
+ *  General attitude stabilization interface for rotorcrafts.
  *  The actual implementation is automatically included.
  */
 

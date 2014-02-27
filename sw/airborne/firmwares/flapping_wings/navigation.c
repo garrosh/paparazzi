@@ -20,7 +20,7 @@
  */
 
 /**
- * @file firmwares/flapping_wings/navigation.c
+ * @file firmwares/rotorcraft/navigation.c
  *
  * Rotorcraft navigation functions.
  */
@@ -28,19 +28,19 @@
 
 #define NAV_C
 
-#include "firmwares/flapping_wings/navigation.h"
+#include "firmwares/rotorcraft/navigation.h"
 
 #include "pprz_debug.h"
 #include "subsystems/gps.h"
 #include "subsystems/ins.h"
 #include "state.h"
 
-#include "firmwares/flapping_wings/autopilot.h"
+#include "firmwares/rotorcraft/autopilot.h"
 #include "generated/modules.h"
 #include "generated/flight_plan.h"
 
 /* for default GUIDANCE_H_USE_REF */
-#include "firmwares/flapping_wings/guidance/guidance_h.h"
+#include "firmwares/rotorcraft/guidance/guidance_h.h"
 
 #include "math/pprz_algebra_int.h"
 

@@ -20,7 +20,7 @@
  */
 
 /**
- * @file firmwares/flapping_wings/autopilot_arming_throttle.h
+ * @file firmwares/rotorcraft/autopilot_arming_throttle.h
  *
  * Automatically arm the motors when applying throttle.
  *

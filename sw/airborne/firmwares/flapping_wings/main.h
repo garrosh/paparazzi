@@ -20,7 +20,7 @@
  */
 
 /**
- * @file firmwares/flapping_wings/main.h
+ * @file firmwares/rotorcraft/main.h
  *
  * Rotorcraft main loop.
  */

@@ -19,11 +19,11 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include "firmwares/flapping_wings/stabilization.h"
+#include "firmwares/rotorcraft/stabilization.h"
 #include "state.h"
 #include "subsystems/radio_control.h"
 
-#include "firmwares/flapping_wings/stabilization/stabilization_attitude_rc_setpoint.h"
+#include "firmwares/rotorcraft/stabilization/stabilization_attitude_rc_setpoint.h"
 #include "paparazzi.h"
 
 #include "generated/airframe.h"

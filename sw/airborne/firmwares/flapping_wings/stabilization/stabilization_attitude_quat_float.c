@@ -19,13 +19,13 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/** @file firmwares/flapping_wings/stabilization/stabilization_attitude_quat_float.c
+/** @file firmwares/rotorcraft/stabilization/stabilization_attitude_quat_float.c
  * @brief Quaternion attitude stabilization (floating point).
  */
 
-#include "firmwares/flapping_wings/stabilization.h"
-#include "firmwares/flapping_wings/stabilization/stabilization_attitude_rc_setpoint.h"
-#include "firmwares/flapping_wings/stabilization/stabilization_attitude_quat_transformations.h"
+#include "firmwares/rotorcraft/stabilization.h"
+#include "firmwares/rotorcraft/stabilization/stabilization_attitude_rc_setpoint.h"
+#include "firmwares/rotorcraft/stabilization/stabilization_attitude_quat_transformations.h"
 
 #include <stdio.h>
 #include "math/pprz_algebra_float.h"

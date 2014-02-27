@@ -20,7 +20,7 @@
  */
 
 /** @file stabilization_none.h
- *  Dummy stabilization for flapping_wingss.
+ *  Dummy stabilization for rotorcrafts.
  *
  *  Doesn't actually do any stabilization,
  *  just directly passes the RC commands along.

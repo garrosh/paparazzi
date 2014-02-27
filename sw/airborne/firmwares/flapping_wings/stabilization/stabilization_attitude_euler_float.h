@@ -29,8 +29,8 @@
 #define STABILIZATION_ATTITUDE_EULER_FLOAT_H
 
 #include "math/pprz_algebra_float.h"
-#include "firmwares/flapping_wings/stabilization/stabilization_attitude_common_float.h"
-#include "firmwares/flapping_wings/stabilization/stabilization_attitude_ref_euler_float.h"
+#include "firmwares/rotorcraft/stabilization/stabilization_attitude_common_float.h"
+#include "firmwares/rotorcraft/stabilization/stabilization_attitude_ref_euler_float.h"
 
 extern struct FloatAttitudeGains stabilization_gains;
 

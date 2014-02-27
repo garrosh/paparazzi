@@ -19,8 +19,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/** @file firmwares/flapping_wings/guidance/guidance_h.h
- *  Horizontal guidance for flapping_wingss.
+/** @file firmwares/rotorcraft/guidance/guidance_h.h
+ *  Horizontal guidance for rotorcrafts.
  *
  */
 
@@ -30,7 +30,7 @@
 
 #include "math/pprz_algebra_int.h"
 
-#include "firmwares/flapping_wings/guidance/guidance_h_ref.h"
+#include "firmwares/rotorcraft/guidance/guidance_h_ref.h"
 #include "generated/airframe.h"
 #include "std.h"
 

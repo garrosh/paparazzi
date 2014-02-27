@@ -22,10 +22,10 @@
 #
 
 CFG_SHARED=$(PAPARAZZI_SRC)/conf/firmwares/subsystems/shared
-CFG_FLAPPING_WINGS=$(PAPARAZZI_SRC)/conf/firmwares/subsystems/flapping_wings
+CFG_FLAPPING_WINGS=$(PAPARAZZI_SRC)/conf/firmwares/subsystems/rotorcraft
 
 SRC_BOARD=boards/$(BOARD)
-SRC_FIRMWARE=firmwares/flapping_wings
+SRC_FIRMWARE=firmwares/rotorcraft
 SRC_SUBSYSTEMS=subsystems
 
 SRC_ARCH=arch/$(ARCH)
@@ -88,9 +88,9 @@ endif
 #
 # Telemetry/Datalink
 #
-# include subsystems/flapping_wings/telemetry_transparent.makefile
+# include subsystems/rotorcraft/telemetry_transparent.makefile
 # or
-# include subsystems/flapping_wings/telemetry_xbee_api.makefile
+# include subsystems/rotorcraft/telemetry_xbee_api.makefile
 #
 ap.srcs += subsystems/settings.c
 ap.srcs += $(SRC_ARCH)/subsystems/settings_arch.c
@@ -113,29 +113,29 @@ ap.srcs += subsystems/actuators.c
 #
 # Radio control choice
 #
-# include subsystems/flapping_wings/radio_control_ppm.makefile
+# include subsystems/rotorcraft/radio_control_ppm.makefile
 # or
-# include subsystems/flapping_wings/radio_control_spektrum.makefile
+# include subsystems/rotorcraft/radio_control_spektrum.makefile
 #
 
 #
 # Actuator choice
 #
-# include subsystems/flapping_wings/actuators_mkk.makefile
+# include subsystems/rotorcraft/actuators_mkk.makefile
 # or
-# include subsystems/flapping_wings/actuators_asctec.makefile
+# include subsystems/rotorcraft/actuators_asctec.makefile
 # or
-# include subsystems/flapping_wings/actuators_asctec_v2.makefile
+# include subsystems/rotorcraft/actuators_asctec_v2.makefile
 #
 
 #
 # IMU choice
 #
-# include subsystems/flapping_wings/imu_b2v1.makefile
+# include subsystems/rotorcraft/imu_b2v1.makefile
 # or
-# include subsystems/flapping_wings/imu_b2v1_1.makefile
+# include subsystems/rotorcraft/imu_b2v1_1.makefile
 # or
-# include subsystems/flapping_wings/imu_crista.makefile
+# include subsystems/rotorcraft/imu_crista.makefile
 #
 
 #
@@ -173,9 +173,9 @@ endif
 #
 # GPS choice
 #
-# include subsystems/flapping_wings/gps_ubx.makefile
+# include subsystems/rotorcraft/gps_ubx.makefile
 # or
-# include subsystems/flapping_wings/gps_skytraq.makefile
+# include subsystems/rotorcraft/gps_skytraq.makefile
 # or
 # nothing
 #
@@ -184,9 +184,9 @@ endif
 #
 # AHRS choice
 #
-# include subsystems/flapping_wings/ahrs_cmpl.makefile
+# include subsystems/rotorcraft/ahrs_cmpl.makefile
 # or
-# include subsystems/flapping_wings/ahrs_lkf.makefile
+# include subsystems/rotorcraft/ahrs_lkf.makefile
 #
 
 ap.srcs += $(SRC_FIRMWARE)/autopilot.c
@@ -207,12 +207,12 @@ ap.srcs += $(SRC_FIRMWARE)/guidance/guidance_v_adapt.c
 #
 # INS choice
 #
-# include subsystems/flapping_wings/ins.makefile
+# include subsystems/rotorcraft/ins.makefile
 # or
-# include subsystems/flapping_wings/ins_extended.makefile
+# include subsystems/rotorcraft/ins_extended.makefile
 #
 # extra:
-# include subsystems/flapping_wings/ins_hff.makefile
+# include subsystems/rotorcraft/ins_hff.makefile
 #
 
 ap.srcs += $(SRC_FIRMWARE)/navigation.c

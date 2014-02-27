@@ -19,19 +19,19 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/** @file firmwares/flapping_wings/guidance/guidance_h.c
- *  Horizontal guidance for flapping_wingss.
+/** @file firmwares/rotorcraft/guidance/guidance_h.c
+ *  Horizontal guidance for rotorcrafts.
  *
  */
 
-#include "firmwares/flapping_wings/guidance/guidance_h.h"
+#include "firmwares/rotorcraft/guidance/guidance_h.h"
 
-#include "firmwares/flapping_wings/stabilization.h"
-#include "firmwares/flapping_wings/stabilization/stabilization_attitude_rc_setpoint.h"
-#include "firmwares/flapping_wings/navigation.h"
+#include "firmwares/rotorcraft/stabilization.h"
+#include "firmwares/rotorcraft/stabilization/stabilization_attitude_rc_setpoint.h"
+#include "firmwares/rotorcraft/navigation.h"
 
 /* for guidance_v_thrust_coeff */
-#include "firmwares/flapping_wings/guidance/guidance_v.h"
+#include "firmwares/rotorcraft/guidance/guidance_v.h"
 
 #include "state.h"
 

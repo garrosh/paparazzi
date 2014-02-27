@@ -20,14 +20,14 @@
  */
 
 /** @file stabilization_none.c
- *  Dummy stabilization for flapping_wingss.
+ *  Dummy stabilization for rotorcrafts.
  *
  *  Doesn't actually do any stabilization,
  *  just directly passes the RC commands along.
  */
 
-#include "firmwares/flapping_wings/stabilization.h"
-#include "firmwares/flapping_wings/stabilization/stabilization_none.h"
+#include "firmwares/rotorcraft/stabilization.h"
+#include "firmwares/rotorcraft/stabilization/stabilization_none.h"
 
 #include "subsystems/radio_control.h"
 #include "generated/airframe.h"

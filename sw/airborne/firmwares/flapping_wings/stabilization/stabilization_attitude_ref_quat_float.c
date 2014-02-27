@@ -20,7 +20,7 @@
  */
 
 /**
- * @file firmwares/flapping_wings/stabilization/stabilization_attitude_ref_quat_float.c
+ * @file firmwares/rotorcraft/stabilization/stabilization_attitude_ref_quat_float.c
  *
  * Rotorcraft attitude reference generation.
  * (quaternion float version)
@@ -29,8 +29,8 @@
 
 #include "generated/airframe.h"
 
-#include "firmwares/flapping_wings/stabilization/stabilization_attitude_ref_quat_float.h"
-#include "firmwares/flapping_wings/stabilization/stabilization_attitude_ref_saturate.h"
+#include "firmwares/rotorcraft/stabilization/stabilization_attitude_ref_quat_float.h"
+#include "firmwares/rotorcraft/stabilization/stabilization_attitude_ref_saturate.h"
 
 #define REF_ACCEL_MAX_P STABILIZATION_ATTITUDE_REF_MAX_PDOT
 #define REF_ACCEL_MAX_Q STABILIZATION_ATTITUDE_REF_MAX_QDOT

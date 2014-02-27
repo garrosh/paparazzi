@@ -20,7 +20,7 @@
  */
 
 /**
- * @file firmwares/flapping_wings/stabilization/stabilization_attitude_ref_quat_float.h
+ * @file firmwares/rotorcraft/stabilization/stabilization_attitude_ref_quat_float.h
  *
  * Rotorcraft attitude reference generation.
  * (quaternion float version)

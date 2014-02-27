@@ -20,7 +20,7 @@
  */
 
 /**
- * @file firmwares/flapping_wings/autopilot_rc_helpers.h
+ * @file firmwares/rotorcraft/autopilot_rc_helpers.h
  *
  * Some helper functions to check RC sticks.
  */

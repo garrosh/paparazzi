@@ -20,7 +20,7 @@
  */
 
 /**
- * @file firmwares/flapping_wings/navigation.h
+ * @file firmwares/rotorcraft/navigation.h
  *
  * Rotorcraft navigation functions.
  */

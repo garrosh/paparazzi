@@ -19,8 +19,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/** @file firmwares/flapping_wings/stabilization.h
- *  General stabilization interface for flapping_wingss.
+/** @file firmwares/rotorcraft/stabilization.h
+ *  General stabilization interface for rotorcrafts.
  */
 
 #ifndef STABILIZATION_H
@@ -30,9 +30,9 @@
 
 #include "generated/airframe.h"
 
-#include "firmwares/flapping_wings/stabilization/stabilization_none.h"
-#include "firmwares/flapping_wings/stabilization/stabilization_rate.h"
-#include "firmwares/flapping_wings/stabilization/stabilization_attitude.h"
+#include "firmwares/rotorcraft/stabilization/stabilization_none.h"
+#include "firmwares/rotorcraft/stabilization/stabilization_rate.h"
+#include "firmwares/rotorcraft/stabilization/stabilization_attitude.h"
 
 
 extern void stabilization_init(void);
