@@ -1,3 +1,426 @@
+Paparazzi 5.2.0_stable
+=======================
+
+Stable version release.
+
+General
+-------
+
+- ocaml/link: fix uint32 parsing
+  [#809] (https://github.com/paparazzi/paparazzi/pull/809)
+- modules: use VPATH to make it easier to load external modules
+  [#760] (https://github.com/paparazzi/paparazzi/pull/760)
+- ground_segment: try to update AGL even if GPS is lost
+  [#742] (https://github.com/paparazzi/paparazzi/issues/742)
+- ground_segment: different icons for the different applications of paparazzi
+  [#787] (https://github.com/paparazzi/paparazzi/pull/787)
+- generators: fix generated longitude in 1e7deg on 32bit systems
+  [#808] (https://github.com/paparazzi/paparazzi/issues/808)
+- lat/lon int in 1e7deg instead of 1e7rad
+  [#810] (https://github.com/paparazzi/paparazzi/pull/810)
+- GCS: fix inaccurate waypoint updates
+  [#762] (https://github.com/paparazzi/paparazzi/issues/762)
+- GCS: add exponentiation operator to papgets
+- logalizer: export lat/lon with 9 decimal places
+- GCS: display AP mode forward correctly
+  [#748] (https://github.com/paparazzi/paparazzi/pull/748)
+- GCS: also center aircraft on uppercase C and fix listed keys in help
+  [#803] (https://github.com/paparazzi/paparazzi/issues/803)
+- settings: add spin button widget for numeric input instead of sliders
+  [#795] (https://github.com/paparazzi/paparazzi/issues/795)
+- tools: flash via bmp: reset and detach from target after uploading
+  [#746] (https://github.com/paparazzi/paparazzi/issues/746)
+- tools: DFU flashing: allow 1 BIT SQUARED vendor
+  [#778] (https://github.com/paparazzi/paparazzi/pull/778)
+- tools: add tcp_aircraft_server
+  [#750] (https://github.com/paparazzi/paparazzi/pull/750)
+- tools: add tool to syncronize video on replay
+  [#770] (https://github.com/paparazzi/paparazzi/pull/770)
+  [#776] (https://github.com/paparazzi/paparazzi/pull/776)
+  [#789] (https://github.com/paparazzi/paparazzi/pull/789)
+- messages: rename class to msg_class
+  [#812] (https://github.com/paparazzi/paparazzi/pull/812)
+- messages: add GEO_MAG message to send magnetic field
+  [#735] (https://github.com/paparazzi/paparazzi/pull/735)
+- messages: add speed setpoint to GUIDANCE_H_REF_INT message
+  [#763] (https://github.com/paparazzi/paparazzi/issues/763)
+- NPS: block and setting messages only parsed for correct AC_ID
+  [#777] (https://github.com/paparazzi/paparazzi/pull/777)
+- NPS: fix warnings when compiling with clang
+  [#790] (https://github.com/paparazzi/paparazzi/pull/790)
+- gaia: command line options for environment simulator
+  [#799] (https://github.com/paparazzi/paparazzi/issues/799)
+- build: only set PAPARAZZI_SRC if not already externally set
+  [#800] (https://github.com/paparazzi/paparazzi/issues/800)
+
+Airborne
+--------
+
+- fixedwing: correct altitude setpoint during NavGlide
+  [#785] (https://github.com/paparazzi/paparazzi/pull/785)
+- flight plans: don't set nav_pitch to 0 at each stage init
+  [#727] (https://github.com/paparazzi/paparazzi/pull/727)
+- modules: gps_ubx_ucenter: fix version check for Ublox 7
+- modules: add HackHD digital camera control module
+- modules: add CSV file logger for ARDrone
+  [#788] (https://github.com/paparazzi/paparazzi/pull/788)
+- modules: geo_mag: fixedwing compatibility
+  [#806] (https://github.com/paparazzi/paparazzi/issues/806)
+- ardrone2: mag freeze fix
+  [#767] (https://github.com/paparazzi/paparazzi/pull/767)
+- boards: add support for navstik
+  [#744] (https://github.com/paparazzi/paparazzi/pull/744)
+- boards: fix PWM on lisa_l
+- boards: lisa_m_2.0: baro defaults to BARO_MS5611_SPI
+- peripherals: ms5611: check temp an pressure range
+  [#758] (https://github.com/paparazzi/paparazzi/issues/758)
+- imu: aspirin_2_spi: wait 1.5s before configuring mag
+  [#779] (https://github.com/paparazzi/paparazzi/pull/779)
+- imu: body_to_imu adjustable during runtime via settings
+  [#783] (https://github.com/paparazzi/paparazzi/pull/783)
+- ahrs: int_cmpl_quat: fix rate integration range/resolution
+  [#782] (https://github.com/paparazzi/paparazzi/pull/782)
+- ins: properly define INS_VFF_R_GPS
+  [#741] (https://github.com/paparazzi/paparazzi/issues/741)
+- ins: allow define of VFF_R_SONAR_OF_M
+  [#764] (https://github.com/paparazzi/paparazzi/issues/764)
+- electrical: min bat level check
+  [#745] (https://github.com/paparazzi/paparazzi/issues/745)
+- electrical: fix for negative currents
+  [#753] (https://github.com/paparazzi/paparazzi/issues/753)
+- electrical: 32bit for bat low and critical counters for longer delays
+  [#805] (https://github.com/paparazzi/paparazzi/issues/805)
+- messages: dist_home and dist_wp in meters for fixedwings and rotorcrafts
+  [#784] (https://github.com/paparazzi/paparazzi/pull/784)
+- superbitrf: save bind settings to flash (if USE_PERSISTENT_SETTINGS)
+  [#792] (https://github.com/paparazzi/paparazzi/issues/792)
+
+Rotorcraft Firmware
+-------------------
+
+- RC input: zero yaw command if throttle is zero
+  [#737] (https://github.com/paparazzi/paparazzi/pull/737)
+- prevent motor arming in kill mode
+  [#740] (https://github.com/paparazzi/paparazzi/pull/740)
+- change rotorcraft nav API to use points rather than wp id
+  [#749] (https://github.com/paparazzi/paparazzi/pull/749)
+- use roll/pitch RC deadbands in attitude mode
+  [#773] (https://github.com/paparazzi/paparazzi/pull/773)
+- route precision fix
+  [#775] (https://github.com/paparazzi/paparazzi/pull/775)
+- guidance_v: limit z_ref in update_ref_from_zd_sp
+  [#754] (https://github.com/paparazzi/paparazzi/pull/754)
+- mission module for rotorcrafts
+  [#759] (https://github.com/paparazzi/paparazzi/pull/759)
+- guidance_v: only limit throttle if RC ok
+  [#766] (https://github.com/paparazzi/paparazzi/pull/766)
+- navigation: fix waypoint initialization in ENU
+  [#791] (https://github.com/paparazzi/paparazzi/pull/791)
+
+STM32 architecture
+------------------
+
+- fix I2C bitrate on F4
+  [#729] (https://github.com/paparazzi/paparazzi/pull/729)
+- fix sys_time_usleep
+  [#739] (https://github.com/paparazzi/paparazzi/pull/739)
+- fix spektrum on F4
+  [#732] (https://github.com/paparazzi/paparazzi/pull/732)
+- timer frequency cleanup
+  [#734] (https://github.com/paparazzi/paparazzi/pull/734)
+- split spektrum uart rx and config pin for Apogee
+  [#733] (https://github.com/paparazzi/paparazzi/pull/733)
+- add suport for pwm input
+- fix reset for I2C3
+  [#751] (https://github.com/paparazzi/paparazzi/pull/751)
+- simplify actuators_pwm
+  [#757] (https://github.com/paparazzi/paparazzi/pull/757)
+- boards: add files for Lisa/M and Lisa/MX v2.1
+  [#813] ((https://github.com/paparazzi/paparazzi/pull/813)
+- spektrum: configure the bind pin to be pullup/pulldown
+  [#814] (https://github.com/paparazzi/paparazzi/pull/814)
+
+
+Paparazzi 5.1.1_testing
+=======================
+
+Second release candidate for v5.2 stable release.
+
+General
+-------
+
+- GCS: higher default maps zoom level
+  [#725] (https://github.com/paparazzi/paparazzi/pull/725)
+- Allow settings/modules/flightplans outside the conf dir
+  [#723] (https://github.com/paparazzi/paparazzi/pull/723)
+- optitrack: Give feedback about following drones and fix gps
+  [#718] (https://github.com/paparazzi/paparazzi/pull/718)
+- dfu-util: only attempt verify for version >= 0.7
+  [#697] (https://github.com/paparazzi/paparazzi/issues/697)
+- dfu-util: fix DFU_SIZE on OSX
+- add prototype for python based airframe file editor
+
+Airborne
+--------
+
+- Modules: rewrite humid_sht using gpio interface (supporting STM as well as LPC now)
+  [#721] (https://github.com/paparazzi/paparazzi/pull/721)
+- INS int: removed INS_SONAR_VARIANCE_THRESHOLD, INS_SONAR_MIN_RANGE defaults to 1mm
+- fix compilation of SuperbitRF telemetry subsystem
+- possibility to poweron gps and imu via gpio at init
+  [#706] (https://github.com/paparazzi/paparazzi/pull/706)
+- bmp085 peripheral: Fix calibration reading with errors
+
+Simulation
+----------
+
+- NPS: simulate sonar sensor
+  [#720] (https://github.com/paparazzi/paparazzi/pull/720)
+- JSBSim, NPS: fix roll input sign
+- NPS: fixedwing simulation improvements
+  - If NPS_JSBSIM_LAUNCHSPEED is defined, set it as initial launchspeed.
+  - Only launch when launch button is pressed in GCS instead of immediately at takeoff block.
+
+Rotorcraft firmware
+-------------------
+
+- add some functions to set heading via flight plan
+  [#724] (https://github.com/paparazzi/paparazzi/pull/724)
+- fix reference in hover with USE_SPEED_REF, set DEFAULT_CIRCLE_RADIUS to 5m
+  [#716] (https://github.com/paparazzi/paparazzi/issues/716)
+  [#717] (https://github.com/paparazzi/paparazzi/pull/717)
+- implement approaching_time for "go" flight plan primitve
+  [#715] (https://github.com/paparazzi/paparazzi/pull/715)
+
+Fixedwing firmware
+------------------
+
+- stabilization adaptive: loiter correction and reference generator update
+  [#711] (https://github.com/paparazzi/paparazzi/pull/711)
+- stabilization new/adaptive: USE_GYRO_PITCH_RATE defaults to TRUE
+- dual mcu: Workaround RADIO_CONTROL_NB_CHANNELS differs in driver and radio.h
+  [#700] (https://github.com/paparazzi/paparazzi/pull/700)
+
+
+Paparazzi 5.1.0_testing
+=======================
+
+First release candidate for next stable release.
+
+General
+-------
+
+- lots of cleanup
+- GCS: higher max zoom level
+  [#632] (https://github.com/paparazzi/paparazzi/issues/632)
+- GCS: different aircraft icons (added flying wing, quadrotor)
+- GCS: proper GPSd home icon resizing
+  [#601] (https://github.com/paparazzi/paparazzi/issues/601)
+- GUI for selecting the desired active list of airframes (select_conf.py)
+  [#536] (https://github.com/paparazzi/paparazzi/issues/536)
+- paparazzi center: flash mode selection via drop down menu
+  [#597] (https://github.com/paparazzi/paparazzi/pull/597)
+- add support for new telemetry types
+  [#589] (https://github.com/paparazzi/paparazzi/pull/589)
+- build aircraft firmware in var/aircrafts/'ac_name'
+  [#601] (https://github.com/paparazzi/paparazzi/issues/601)
+- parallel build of firmwares with J=AUTO
+  [#683] (https://github.com/paparazzi/paparazzi/pull/683)
+- add simple verify to flashing via dfu-util
+  [#673] (https://github.com/paparazzi/paparazzi/pull/673)
+- app_server: connection between the ground station and a GCS Android application
+  (https://github.com/paparazzi/PPRZonDroid)
+- GCS: adapt home (from GPSd) icon to zoom level
+  [#679] (https://github.com/paparazzi/paparazzi/issues/679)
+
+Simulation
+----------
+
+- simulate datalink loss
+  [#631] (https://github.com/paparazzi/paparazzi/issues/631)
+- FlightGear viz: daytime everywhere
+  [#555] (https://github.com/paparazzi/paparazzi/issues/555)
+
+Hardware support
+----------------
+
+- remove sys_plugs for STM32, finally dropping old toolchain support
+  [#688] (https://github.com/paparazzi/paparazzi/pull/688)
+- Support for all 3 ADCs of F4
+  [#551] (https://github.com/paparazzi/paparazzi/issues/551)
+- new peripheral drivers:
+  - ST LIS302DL accelerometer (SPI)
+  - ST L3GD20 gyro (SPI)
+  - ST LSM303DLHC 3D accelerometer and magnetometer (I2C)
+  - converted barometers MS5611, BMP085 to generic peripherals
+    [#515] (https://github.com/paparazzi/paparazzi/pull/515)
+- I2C watchdog for STM32
+  [#662] (https://github.com/paparazzi/paparazzi/pull/662)
+- Dual PWM servo driver
+  [#678] (https://github.com/paparazzi/paparazzi/pull/678)
+- SBus radio control driver (single and dual receivers)
+  [#485] (https://github.com/paparazzi/paparazzi/pull/485)
+  [#674] (https://github.com/paparazzi/paparazzi/pull/674)
+  [#693] (https://github.com/paparazzi/paparazzi/pull/693)
+
+Airborne
+--------
+
+- API function to periodically send telemetry messages: register_periodic_telemetry
+  [#472] (https://github.com/paparazzi/paparazzi/pull/472)
+- generic gpio interface
+  [#498] (https://github.com/paparazzi/paparazzi/issues/498)
+  [#651] (https://github.com/paparazzi/paparazzi/issues/651)
+- gps_ubx_ucenter module improvements
+  [#646] (https://github.com/paparazzi/paparazzi/issues/646)
+  [#653] (https://github.com/paparazzi/paparazzi/issues/653)
+- HOTT telemetry module added
+  [#591] (https://github.com/paparazzi/paparazzi/pull/591)
+- GPS subsystem to stream external position data to the vehicle over UDP
+  [#630] (https://github.com/paparazzi/paparazzi/pull/630)
+- INS reset/realign API updates
+  [#644] (https://github.com/paparazzi/paparazzi/pull/644)
+- INS alt_float: remove ALT_KALMAN_ENABLED
+  [#594] (https://github.com/paparazzi/paparazzi/issues/594)
+- IIR filter for horizontal position Kalman Filter
+  [#677] (https://github.com/paparazzi/paparazzi/pull/677)
+- barometer interface via ABI
+  [#525] (https://github.com/paparazzi/paparazzi/pull/525)
+  - baros always output pressure in Pascal
+  - standard atmosphere model is used to convert pressure to altitude
+  - INS_BARO_SENS is hence not needed anymore
+- sonar interface using ABI
+  [#654] (https://github.com/paparazzi/paparazzi/pull/654)
+- AHRS int_cmpl_quat frequency scaling
+  [#371] (https://github.com/paparazzi/paparazzi/pull/371)
+
+Rotorcraft firmware
+-------------------
+
+- AR Drone 2 updates
+  [#626] (https://github.com/paparazzi/paparazzi/issues/626)
+  [#598] (https://github.com/paparazzi/paparazzi/pull/598)
+- guidance improvements
+  [#539] (https://github.com/paparazzi/paparazzi/pull/539)
+  [#546] (https://github.com/paparazzi/paparazzi/pull/546)
+- horizontal guidance: dynamically adjustable max_speed
+  [#664] (https://github.com/paparazzi/paparazzi/pull/664)
+- adaptive thrust estimation limits
+  [#495] (https://github.com/paparazzi/paparazzi/issues/495)
+- improve in_flight detection heuristic
+  [#469] (https://github.com/paparazzi/paparazzi/pull/469)
+- stabilization quaternion: fix scale of angle in 2nd order model
+  [#664] (https://github.com/paparazzi/paparazzi/pull/663)
+- HITL using reference position to fake GPS
+  [#640] (https://github.com/paparazzi/paparazzi/pull/640)
+- add a HOME mode
+  [#562] (https://github.com/paparazzi/paparazzi/pull/562)
+- nav: split waypoint proximity check from time spend at waypoint
+  [#690] (https://github.com/paparazzi/paparazzi/pull/690)
+
+Fixedwing firmware
+------------------
+
+- alt_float: remove ALT_KALMAN_ENABLED
+  [#594] (https://github.com/paparazzi/paparazzi/issues/594)
+- extra navigation routines as modules
+  [#512] (https://github.com/paparazzi/paparazzi/pull/512)
+- NavSetAltitudeReferenceHere added
+
+
+Paparazzi 5.0.5_stable
+======================
+
+Maintenance release
+
+- fix field order in HFF_DBG message
+- fix altitude in some extra nav routines
+- fix create_module tool
+- fix RCLost macro
+- add GetAltRef() for flight plan compatibility with v5.2
+
+
+Paparazzi 5.0.4_stable
+======================
+
+Maintenance release
+
+- fix perl script compile_all_test_targets
+- add pcre lib to jsbsim, cleanup shell commands
+- fix InsideX for sectors (GetPosX and GetPosY in nav.h (FW) are in local coordinates)
+  [#602] (https://github.com/paparazzi/paparazzi/issues/602)
+- stm32: enable correct error interrupts for i2c2 and i2c3
+
+
+Paparazzi 5.0.3_stable
+======================
+
+Maintenance release
+
+- fix Paparazzi Center on Mac OS (detection of child processes exitting)
+  [#290] (https://github.com/paparazzi/paparazzi/issues/290)
+- state interface: fix stateCalcHorizontalSpeedNorm_i
+- fix/improve dependency generation for building firmware
+- abort with meaningful error if ARM toolchain is not found
+
+
+Paparazzi 5.0.2_stable
+======================
+
+Maintenance release
+
+- add launch and noground options to pprzsim-launch
+- fixedwing: fix initialzation of trim commands, including yaw
+- fixedwing: fixes to use ins_alt_dot from ins_alt_float (with USE_BAROMETER)
+  [#511] (https://github.com/paparazzi/paparazzi/pull/511)
+- state interface: fix local/global coordinate validity checks
+- state interface: fix local ned/enu to ecef conversion
+- lib/ocaml: update leap_seconds to 16 (last one was on June 30, 2012)
+
+
+Paparazzi 5.0.1_stable
+======================
+
+Maintenance release
+
+General
+-------
+
+- joystick hat support for input2ivy
+  [#460] (https://github.com/paparazzi/paparazzi/pull/460)
+- high speed logger: fix mag channels
+- math: fix ecef_of_[ned|enu]_i
+- fix google maps version download parsing
+
+Rotorcraft/Fixedwing firmwares
+------------------------------
+
+- rotorcraft: add MODE_STARTUP
+  [#467] (https://github.com/paparazzi/paparazzi/pull/467)
+- ARDrone2: GPS satellite informaton
+  [#474] (https://github.com/paparazzi/paparazzi/pull/474)
+- fixedwing: init state interface before sensors and ins
+- fixedwing: don't overwrite yaw command with trim
+
+Simulator
+---------
+
+- NPS: explicitly add pcre lib
+- NPS: make radio_control tpye datalink work
+- don't try to use ADC_CHANNEL_CURRENT in SITL
+
+Drivers and architecture specific
+---------------------------------
+
+- fixes for imu_drotek_10dof_v2
+- init spi_slave_hs for imu_chimu
+- mpu60x0_i2c: only copy ext data if i2c_bypass is false
+- aspirin_v2.2: unselect baro at startup
+- aspirin_2_spi: default AHRS_PROPAGATE_FREQUENCY is 512
+- STM32F4: fix ppm input timer frequency for TIM2
+- add i2c3 initialization
+
+
 Paparazzi 5.0.0_stable
 ======================
 
@@ -71,6 +494,24 @@ Rotorcraft firmware specific
 - Care Free Mode
 
 
+Paparazzi 4.2.2_stable
+======================
+
+Maintenance release
+
+- DFU upload matches Lia board by default as well
+- partial compatibilty with Aspirin2.2
+  [#369] (https://github.com/paparazzi/paparazzi/pull/369)
+- fix failsafe vertical setpoint in rotorcraft firmware
+- fix plotprofile building on Ubuntu 13.04
+- circle-count without rewinding when flying in opposite direction
+  [#441] (https://github.com/paparazzi/paparazzi/pull/441)
+- add yaw trim
+  [#444] (https://github.com/paparazzi/paparazzi/pull/444)
+- add XSens Mti-G 700 support
+  [#443] (https://github.com/paparazzi/paparazzi/pull/443)
+
+
 Paparazzi 4.2.1_stable
 ======================
 
@@ -98,6 +539,7 @@ Since last stable v4.0:
 - Bug fix for INS and AHRS filters
 - AP/FBW separation using spi or uart
 - Sensors fix and addition (GPS, current, baro)
+
 
 Paparazzi 4.1.1_testing
 =======================
@@ -128,6 +570,7 @@ Second release candidate for next stable release.
 - Digital cam module: release camera button on init
 - Fix second order term in propagation of x-position in HFF
 
+
 Paparazzi 4.1.0_testing
 =======================
 
@@ -145,6 +588,16 @@ First release candidate for next stable release.
   [#250] (https://github.com/paparazzi/paparazzi/pull/250)
 - Replace wget by OCaml Http_client from netclient lib to download files
   [#276] (https://github.com/paparazzi/paparazzi/pull/276)
+
+
+Paparazzi 4.0.4
+===============
+
+Maintenance release
+
+- fix google map version parsing for new maps site using https
+- minor fix for hff
+- use GPS_TRIGGERED_FUNCTION for ins_chimu_spi
 
 
 Paparazzi 4.0.3

@@ -121,7 +121,7 @@ static inline bool_t sys_time_check_and_ack_timer(tid_t id) {
  * @return current system time as float
  */
 static inline float get_sys_time_float(void) {
-  return (float)(sys_time.nb_sec + sys_time.nb_sec_rem * sys_time.resolution_cpu_ticks);
+  return (float)(sys_time.nb_sec + (float)(sys_time.nb_sec_rem) / sys_time.cpu_ticks_per_sec);
 }
 
 
@@ -194,5 +194,9 @@ static inline uint32_t nsec_of_cpu_ticks(uint32_t cpu_ticks) {
 /* architecture specific init implementation */
 extern void sys_time_arch_init(void);
 
+/* Generic timer macros */
+#define SysTimeTimerStart(_t) { _t = get_sys_time_usec(); }
+#define SysTimeTimer(_t) ( get_sys_time_usec() - (_t))
+#define SysTimeTimerStop(_t) { _t = ( get_sys_time_usec() - (_t)); }
 
 #endif /* SYS_TIME_H */

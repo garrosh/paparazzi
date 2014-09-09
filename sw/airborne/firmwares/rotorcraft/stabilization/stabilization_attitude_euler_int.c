@@ -19,14 +19,21 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include "firmwares/rotorcraft/stabilization.h"
-#include "state.h"
-#include "subsystems/radio_control.h"
-
-#include "firmwares/rotorcraft/stabilization/stabilization_attitude_rc_setpoint.h"
-#include "paparazzi.h"
+/**
+ * @file stabilization_attitude_euler_int.c
+ *
+ * Rotorcraft attitude stabilization in euler int version.
+ */
 
 #include "generated/airframe.h"
+
+#include "firmwares/rotorcraft/stabilization.h"
+#include "firmwares/rotorcraft/stabilization/stabilization_attitude_rc_setpoint.h"
+
+#include "std.h"
+#include "paparazzi.h"
+#include "math/pprz_algebra_int.h"
+#include "state.h"
 
 struct Int32AttitudeGains  stabilization_gains;
 
@@ -40,7 +47,7 @@ struct Int32AttitudeGains  stabilization_gains;
   (STABILIZATION_ATTITUDE_PHI_IGAIN < 0)   || \
   (STABILIZATION_ATTITUDE_THETA_IGAIN < 0) || \
   (STABILIZATION_ATTITUDE_PSI_IGAIN  < 0)
-#warning "ALL control gains are now positive!!!"
+#error "ALL control gains have to be positive!!!"
 #endif
 
 struct Int32Eulers stabilization_att_sum_err;
@@ -132,9 +139,8 @@ void stabilization_attitude_init(void) {
 #endif
 }
 
-
-void stabilization_attitude_read_rc(bool_t in_flight) {
-  stabilization_attitude_read_rc_setpoint_eulers(&stab_att_sp_euler, in_flight);
+void stabilization_attitude_read_rc(bool_t in_flight, bool_t in_carefree, bool_t coordinated_turn) {
+  stabilization_attitude_read_rc_setpoint_eulers(&stab_att_sp_euler, in_flight, in_carefree, coordinated_turn);
 }
 
 void stabilization_attitude_enter(void) {

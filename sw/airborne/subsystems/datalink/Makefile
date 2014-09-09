@@ -48,6 +48,7 @@ EXPORT_FILES = \
 	transport.h \
 	datalink.h \
 	$(PAPARAZZI_SRC)/sw/include/std.h \
+	$(PAPARAZZI_SRC)/sw/include/message_pragmas.h \
 	$(PAPARAZZI_HOME)/var/include/messages.h \
 	$(PAPARAZZI_HOME)/var/include/dl_protocol.h
 
@@ -55,7 +56,7 @@ MAKEFILE_EXPORT = pprz_datalink.mk
 TAR_EXPORT = pprz_datalink.tar
 
 all:
-	@cat README
+	@cat README.md
 
 export_lib:
 	@echo Exporting datalink lib to $(EXPORT_DIR)

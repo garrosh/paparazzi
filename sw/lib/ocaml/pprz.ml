@@ -76,9 +76,10 @@ let units_file = Env.paparazzi_src // "conf" // "units.xml"
 
 external float_of_bytes : string -> int -> float = "c_float_of_indexed_bytes"
 external double_of_bytes : string -> int -> float = "c_double_of_indexed_bytes"
-external int32_of_bytes : string -> int -> int32 = "c_int32_of_indexed_bytes"
 external int8_of_bytes : string -> int -> int = "c_int8_of_indexed_bytes"
 external int16_of_bytes : string -> int -> int = "c_int16_of_indexed_bytes"
+external int32_of_bytes : string -> int -> int32 = "c_int32_of_indexed_bytes"
+external uint32_of_bytes : string -> int -> int64 = "c_uint32_of_indexed_bytes"
 external int64_of_bytes : string -> int -> int64 = "c_int64_of_indexed_bytes"
 external sprint_float : string -> int -> float -> unit = "c_sprint_float"
 external sprint_double : string -> int -> float -> unit = "c_sprint_double"
@@ -141,7 +142,8 @@ let int_of_string = fun x ->
 let rec value = fun t v ->
   match t with
       Scalar ("uint8" | "uint16" | "int8" | "int16") -> Int (int_of_string v)
-    | Scalar ("uint32" | "int32") -> Int32 (Int32.of_string v)
+    | Scalar "int32" -> Int32 (Int32.of_string v)
+    | Scalar "uint32" -> Int64 (Int64.of_string v)
     | Scalar ("uint64" | "int64") -> Int64 (Int64.of_string v)
     | Scalar ("float" | "double") -> Float (float_of_string v)
     | Scalar "string" -> String v
@@ -160,7 +162,7 @@ let rec string_of_value = function
   | Int64 x -> Int64.to_string x
   | Char c -> String.make 1 c
   | String s -> s
-  | Array a -> String.concat separator (Array.to_list (Array.map string_of_value a))
+  | Array a -> "|"^(String.concat separator (Array.to_list (Array.map string_of_value a)))^"|"
 
 
 let magic = fun x -> (Obj.magic x:('a,'b,'c) Pervasives.format)
@@ -241,6 +243,17 @@ let alt_unit_coef_of_xml = fun ?auto xml ->
     in
     coef
 
+let key_modifiers_of_string = fun key ->
+  let key_split = Str.split (Str.regexp "\\+") key in
+  let keys = List.map (fun k ->
+    match k with
+    | "Ctrl" -> "<Control>"
+    | "Alt" -> "<Alt>"
+    | "Shift" -> "<Shift>"
+    | "Meta" -> "<Meta>"
+    | x -> x
+  ) key_split in
+  String.concat "" keys
 
 let pipe_regexp = Str.regexp "|"
 let field_of_xml = fun xml ->
@@ -288,12 +301,17 @@ let int_assoc = fun (a:string) vs ->
 let int32_assoc = fun (a:string) vs ->
   match assoc a vs with
       Int32 x -> x
-    | _ -> invalid_arg "Pprz.int_assoc"
+    | _ -> invalid_arg "Pprz.int32_assoc"
+
+let uint32_assoc = fun (a:string) vs ->
+  match assoc a vs with
+      Int64 x -> x
+    | _ -> invalid_arg "Pprz.uint32_assoc"
 
 let int64_assoc = fun (a:string) vs ->
   match assoc a vs with
     Int64 x -> x
-  | _ -> invalid_arg "Pprz.int_assoc"
+  | _ -> invalid_arg "Pprz.int64_assoc"
 
 let string_assoc = fun (a:string) (vs:values) -> string_of_value (assoc a vs)
 
@@ -340,7 +358,8 @@ let rec value_of_bin = fun buffer index _type ->
     | Scalar "int16" -> Int (int16_of_bytes buffer index), sizeof _type
     | Scalar "float" -> Float (float_of_bytes buffer index), sizeof _type
     | Scalar "double" -> Float (double_of_bytes buffer index), sizeof _type
-    | Scalar ("int32"  | "uint32") -> Int32 (int32_of_bytes buffer index), sizeof _type
+    | Scalar "int32" -> Int32 (int32_of_bytes buffer index), sizeof _type
+    | Scalar "uint32" -> Int64 (uint32_of_bytes buffer index), sizeof _type
     | Scalar ("int64"  | "uint64") -> Int64 (int64_of_bytes buffer index), sizeof _type
     | ArrayType t ->
       (** First get the number of values *)
@@ -590,7 +609,8 @@ module MessagesOfXml(Class:CLASS_Xml) = struct
   let messages_by_id, messages_by_name =
     try
       let select = fun x -> Xml.attrib x "name" = Class.name in
-      parse_class (ExtXml.child Class.xml ~select "class")
+      let xml_class = try ExtXml.child Class.xml ~select "msg_class" with Not_found -> ExtXml.child Class.xml ~select "class" in
+      parse_class xml_class
     with
         Not_found -> failwith (sprintf "Unknown message class: %s" Class.name)
   let messages = messages_by_id
@@ -650,8 +670,21 @@ module MessagesOfXml(Class:CLASS_Xml) = struct
 
 
   let space = Str.regexp "[ \t]+"
+  let array_sep = Str.regexp "|"
   let values_of_string = fun s ->
-    match Str.split space s with
+    (* split arguments and arrays *)
+    let array_split = Str.full_split array_sep s in
+    let rec loop = fun fields ->
+      match fields with
+      | [] -> []
+      | (Str.Delim "|")::((Str.Text l)::[Str.Delim "|"]) -> [l]
+      | (Str.Delim "|")::((Str.Text l)::((Str.Delim "|")::xs)) -> [l] @ (loop xs)
+      | [Str.Text x] -> Str.split space x
+      | (Str.Text x)::xs -> (Str.split space x) @ (loop xs)
+      | (Str.Delim _)::_ -> failwith "Pprz.values_of_string: incorrect array delimiter"
+    in
+    let msg_split = loop array_split in
+    match msg_split with
         msg_name::args ->
           begin
             try

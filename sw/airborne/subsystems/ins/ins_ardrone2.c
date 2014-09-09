@@ -46,8 +46,8 @@ struct InsArdrone2 ins_impl;
 void ins_init() {
 #if USE_INS_NAV_INIT
   struct LlaCoor_i llh_nav0; /* Height above the ellipsoid */
-  llh_nav0.lat = INT32_RAD_OF_DEG(NAV_LAT0);
-  llh_nav0.lon = INT32_RAD_OF_DEG(NAV_LON0);
+  llh_nav0.lat = NAV_LAT0;
+  llh_nav0.lon = NAV_LON0;
   /* NAV_ALT0 = ground alt above msl, NAV_MSL0 = geoid-height (msl) over ellipsoid */
   llh_nav0.alt = NAV_ALT0 + NAV_MSL0;
 
@@ -63,9 +63,6 @@ void ins_init() {
   ins_impl.ltp_initialized  = FALSE;
 #endif
 
-  ins.vf_realign = FALSE;
-  ins.hf_realign = FALSE;
-
   INT32_VECT3_ZERO(ins_impl.ltp_pos);
   INT32_VECT3_ZERO(ins_impl.ltp_speed);
   INT32_VECT3_ZERO(ins_impl.ltp_accel);
@@ -76,12 +73,21 @@ void ins_periodic( void ) {
     ins.status = INS_RUNNING;
 }
 
-void ins_realign_h(struct FloatVect2 pos __attribute__ ((unused)), struct FloatVect2 speed __attribute__ ((unused))) {
-
+void ins_reset_local_origin( void ) {
+  ins_impl.ltp_initialized = FALSE;
 }
 
-void ins_realign_v(float z __attribute__ ((unused))) {
-
+void ins_reset_altitude_ref( void ) {
+#if USE_GPS
+  struct LlaCoor_i lla = {
+    state.ned_origin_i.lla.lon,
+    state.ned_origin_i.lla.lat,
+    gps.lla_pos.alt
+  };
+  ltp_def_from_lla_i(&ins_impl.ltp_def, &lla),
+  ins_impl.ltp_def.hmsl = gps.hmsl;
+  stateSetLocalOrigin_i(&ins_impl.ltp_def);
+#endif
 }
 
 void ins_propagate() {
@@ -102,10 +108,6 @@ void ins_propagate() {
   ins_impl.ltp_pos.z = -(ahrs_impl.altitude * INT32_POS_OF_CM_NUM) / INT32_POS_OF_CM_DEN;
   stateSetPositionNed_i(&ins_impl.ltp_pos);
 #endif
-}
-
-void ins_update_baro() {
-
 }
 
 
@@ -137,8 +139,4 @@ void ins_update_gps(void) {
     stateSetPositionNed_i(&ins_impl.ltp_pos);
   }
 #endif /* USE_GPS */
-}
-
-void ins_update_sonar() {
-
 }

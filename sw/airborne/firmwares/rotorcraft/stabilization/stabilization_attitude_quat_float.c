@@ -23,15 +23,17 @@
  * @brief Quaternion attitude stabilization (floating point).
  */
 
+#include "generated/airframe.h"
+
 #include "firmwares/rotorcraft/stabilization.h"
 #include "firmwares/rotorcraft/stabilization/stabilization_attitude_rc_setpoint.h"
 #include "firmwares/rotorcraft/stabilization/stabilization_attitude_quat_transformations.h"
 
-#include <stdio.h>
+#include "std.h"
+#include "paparazzi.h"
 #include "math/pprz_algebra_float.h"
 #include "math/pprz_algebra_int.h"
 #include "state.h"
-#include "generated/airframe.h"
 
 struct FloatAttitudeGains stabilization_gains[STABILIZATION_ATTITUDE_GAIN_NB];
 
@@ -341,8 +343,8 @@ void stabilization_attitude_run(bool_t enable_integrator) {
   BoundAbs(stabilization_cmd[COMMAND_YAW], MAX_PPRZ);
 }
 
-void stabilization_attitude_read_rc(bool_t in_flight) {
+void stabilization_attitude_read_rc(bool_t in_flight, bool_t in_carefree, bool_t coordinated_turn) {
 
-  stabilization_attitude_read_rc_setpoint_quat_f(&stab_att_sp_quat, in_flight);
+  stabilization_attitude_read_rc_setpoint_quat_f(&stab_att_sp_quat, in_flight, in_carefree, coordinated_turn);
   //FLOAT_QUAT_WRAP_SHORTEST(stab_att_sp_quat);
 }

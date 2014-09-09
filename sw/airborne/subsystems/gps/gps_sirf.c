@@ -49,7 +49,7 @@ void gps_impl_init( void ) {
 
 void sirf_parse_char(uint8_t c) {
   switch(gps_sirf.read_state) {
-	case UNINIT:
+  case UNINIT:
       if(c == 0xA0) {
         gps_sirf.msg_len = 0;
         gps_sirf.msg_buf[gps_sirf.msg_len] = c;
@@ -57,7 +57,7 @@ void sirf_parse_char(uint8_t c) {
         gps_sirf.read_state = GOT_A0;
       }
       break;
-	case GOT_A0:
+  case GOT_A0:
       if(c == 0xA2) {
         gps_sirf.msg_buf[gps_sirf.msg_len] = c;
         gps_sirf.msg_len++;
@@ -66,13 +66,13 @@ void sirf_parse_char(uint8_t c) {
       else
         goto restart;
       break;
-	case GOT_A2:
+  case GOT_A2:
       gps_sirf.msg_buf[gps_sirf.msg_len] = c;
       gps_sirf.msg_len++;
       if(c == 0xB0)
         gps_sirf.read_state = GOT_B0;
       break;
-	case GOT_B0:
+  case GOT_B0:
       if(c == 0xB3) {
         gps_sirf.msg_buf[gps_sirf.msg_len] = c;
         gps_sirf.msg_len++;
@@ -104,15 +104,17 @@ void sirf_parse_41(void) {
   gps.nb_channels = p ->num_sat;
 
   /* read latitude, longitude and altitude from packet */
-  gps.lla_pos.lat = RadOfDeg(Invert4Bytes(p->latitude));
-  gps.lla_pos.lon = RadOfDeg(Invert4Bytes(p->longitude));
+  gps.lla_pos.lat = Invert4Bytes(p->latitude);
+  gps.lla_pos.lon = Invert4Bytes(p->longitude);
   gps.lla_pos.alt = Invert4Bytes(p->alt_ellipsoid) * 10;
 
 #if GPS_USE_LATLONG
   /* convert to utm */
+  struct LlaCoor_f lla_f;
+  LLA_FLOAT_OF_BFP(lla_f, gps.lla_pos);
   struct UtmCoor_f utm_f;
   utm_f.zone = nav_utm_zone0;
-  utm_of_lla_f(&utm_f, &lla_pos);
+  utm_of_lla_f(&utm_f, &lla_f);
 
   /* copy results of utm conversion */
   gps.utm_pos.east = utm_f.east*100;
@@ -159,7 +161,7 @@ void sirf_parse_2(void) {
     printf("GPS %i %i %i %i\n", ticks, (sys_time.nb_sec - start_time), ticks2, (sys_time.nb_sec - start_time2));
 #endif
   }
-  else if(sys_time.nb_sec - gps.last_fix_time > 10) {
+  else if(sys_time.nb_sec - gps.last_3dfix_time > 10) {
     start_time = sys_time.nb_sec;
     ticks = 0;
   }
@@ -179,10 +181,10 @@ void sirf_parse_msg(void) {
   //Check the message id and parse the message
   uint8_t message_id = gps_sirf.msg_buf[4];
   switch(message_id) {
-	case 0x29:
+  case 0x29:
       sirf_parse_41();
       break;
-	case 0x02:
+  case 0x02:
       sirf_parse_2();
       break;
   }

@@ -55,8 +55,8 @@
 #include "subsystems/air_data.h"
 
 #if USE_BARO_BOARD
-PRINT_CONFIG_MSG("USE_BARO_BOARD is TRUE: Reading onboard baro.")
 #include "subsystems/sensors/baro.h"
+PRINT_CONFIG_MSG_VALUE("USE_BARO_BOARD is TRUE, reading onboard baro: ", BARO_BOARD)
 #endif
 
 #include "subsystems/electrical.h"
@@ -157,12 +157,8 @@ STATIC_INLINE void main_init( void ) {
   baro_init();
 #endif
   imu_init();
-#if USE_IMU_FLOAT
-  imu_float_init();
-#endif
   ahrs_aligner_init();
   ahrs_init();
-
   ins_init();
 
 #if USE_GPS
@@ -237,12 +233,19 @@ STATIC_INLINE void telemetry_periodic(void) {
   periodic_telemetry_send_Main();
 }
 
+/** mode to enter when RC is lost while using a mode with RC input (not AP_MODE_NAV) */
+#ifndef RC_LOST_MODE
+#define RC_LOST_MODE AP_MODE_FAILSAFE
+#endif
+
 STATIC_INLINE void failsafe_check( void ) {
-  if (radio_control.status != RC_OK &&
+  if (radio_control.status == RC_REALLY_LOST &&
       autopilot_mode != AP_MODE_KILL &&
+      autopilot_mode != AP_MODE_HOME &&
+      autopilot_mode != AP_MODE_FAILSAFE &&
       autopilot_mode != AP_MODE_NAV)
   {
-    autopilot_set_mode(AP_MODE_FAILSAFE);
+    autopilot_set_mode(RC_LOST_MODE);
   }
 
 #if FAILSAFE_ON_BAT_CRITICAL
@@ -254,12 +257,19 @@ STATIC_INLINE void failsafe_check( void ) {
 #endif
 
 #if USE_GPS
+  gps_periodic_check();
   if (autopilot_mode == AP_MODE_NAV &&
       autopilot_motors_on &&
 #if NO_GPS_LOST_WITH_RC_VALID
       radio_control.status != RC_OK &&
 #endif
       GpsIsLost())
+  {
+    autopilot_set_mode(AP_MODE_FAILSAFE);
+  }
+
+  if (autopilot_mode == AP_MODE_HOME &&
+      autopilot_motors_on && GpsIsLost())
   {
     autopilot_set_mode(AP_MODE_FAILSAFE);
   }

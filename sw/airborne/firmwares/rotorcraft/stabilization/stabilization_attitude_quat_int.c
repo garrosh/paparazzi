@@ -23,15 +23,17 @@
  * Rotorcraft quaternion attitude stabilization
  */
 
+#include "generated/airframe.h"
+
 #include "firmwares/rotorcraft/stabilization.h"
 #include "firmwares/rotorcraft/stabilization/stabilization_attitude_rc_setpoint.h"
 #include "firmwares/rotorcraft/stabilization/stabilization_attitude_quat_transformations.h"
 
-#include <stdio.h>
+#include "std.h"
+#include "paparazzi.h"
 #include "math/pprz_algebra_float.h"
 #include "math/pprz_algebra_int.h"
 #include "state.h"
-#include "generated/airframe.h"
 
 struct Int32AttitudeGains stabilization_gains = {
   {STABILIZATION_ATTITUDE_PHI_PGAIN, STABILIZATION_ATTITUDE_THETA_PGAIN, STABILIZATION_ATTITUDE_PSI_PGAIN },
@@ -50,7 +52,7 @@ struct Int32AttitudeGains stabilization_gains = {
   (STABILIZATION_ATTITUDE_PHI_IGAIN < 0)   ||   \
   (STABILIZATION_ATTITUDE_THETA_IGAIN < 0) ||   \
   (STABILIZATION_ATTITUDE_PSI_IGAIN  < 0)
-#warning "ALL control gains are now positive!!!"
+#error "ALL control gains have to be positive!!!"
 #endif
 
 struct Int32Quat stabilization_att_sum_err_quat;
@@ -275,12 +277,12 @@ void stabilization_attitude_run(bool_t enable_integrator) {
   BoundAbs(stabilization_cmd[COMMAND_YAW], MAX_PPRZ);
 }
 
-void stabilization_attitude_read_rc(bool_t in_flight) {
+void stabilization_attitude_read_rc(bool_t in_flight, bool_t in_carefree, bool_t coordinated_turn) {
   struct FloatQuat q_sp;
 #if USE_EARTH_BOUND_RC_SETPOINT
-  stabilization_attitude_read_rc_setpoint_quat_earth_bound_f(&q_sp, in_flight);
+  stabilization_attitude_read_rc_setpoint_quat_earth_bound_f(&q_sp, in_flight, in_carefree, coordinated_turn);
 #else
-  stabilization_attitude_read_rc_setpoint_quat_f(&q_sp, in_flight);
+  stabilization_attitude_read_rc_setpoint_quat_f(&q_sp, in_flight, in_carefree, coordinated_turn);
 #endif
   QUAT_BFP_OF_REAL(stab_att_sp_quat, q_sp);
 }

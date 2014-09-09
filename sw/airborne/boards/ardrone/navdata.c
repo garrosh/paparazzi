@@ -40,21 +40,36 @@
 #include "std.h"
 #include "navdata.h"
 #include "subsystems/ins.h"
+#include "subsystems/abi.h"
+#include "mcu_periph/gpio.h"
 
 #define NAVDATA_PACKET_SIZE 60
 #define NAVDATA_START_BYTE 0x3a
+
+#define ARDRONE_GPIO_PORT         0x32524
+#define ARDRONE_GPIO_PIN_NAVDATA  177
 
 static inline bool_t acquire_baro_calibration(void);
 static void navdata_cropbuffer(int cropsize);
 
 navdata_port nav_port;
 static int nav_fd = 0;
-static int16_t previousUltrasoundHeight;
 measures_t navdata;
 
-#include "subsystems/sonar.h"
-uint16_t sonar_meas = 0;
+/** Sonar offset.
+ *  Offset value in ADC
+ *  equals to the ADC value so that height is zero
+ */
+#ifndef SONAR_OFFSET
+#define SONAR_OFFSET 880
+#endif
 
+/** Sonar scale.
+ *  Sensor sensitivity in m/adc (float)
+ */
+#ifndef SONAR_SCALE
+#define SONAR_SCALE 0.00047
+#endif
 
 // FIXME(ben): there must be a better home for these
 ssize_t full_write(int fd, const uint8_t *buf, size_t count)
@@ -67,7 +82,7 @@ ssize_t full_write(int fd, const uint8_t *buf, size_t count)
     if (n < 0)
     {
       if (errno == EAGAIN || errno == EWOULDBLOCK)
-	continue;
+        continue;
       return n;
     }
     written += n;
@@ -86,7 +101,7 @@ ssize_t full_read(int fd, uint8_t *buf, size_t count)
     if (n < 0)
     {
       if (errno == EAGAIN || errno == EWOULDBLOCK)
-	continue;
+        continue;
       return n;
     }
     readed += n;
@@ -190,7 +205,6 @@ bool_t navdata_init()
   navdata_imu_available = FALSE;
   navdata_baro_available = FALSE;
 
-  previousUltrasoundHeight = 0;
   nav_port.checksum_errors = 0;
   nav_port.lost_imu_frames = 0;
   nav_port.bytesRead = 0;
@@ -198,6 +212,10 @@ bool_t navdata_init()
   nav_port.packetsRead = 0;
   nav_port.isInitialized = TRUE;
   nav_port.last_packet_number = 0;
+
+  // set navboard gpio control
+  gpio_setup_output(ARDRONE_GPIO_PORT, ARDRONE_GPIO_PIN_NAVDATA);
+  gpio_set(ARDRONE_GPIO_PORT,ARDRONE_GPIO_PIN_NAVDATA);
 
 #if PERIODIC_TELEMETRY
   register_periodic_telemetry(DefaultPeriodic, "ARDRONE_NAVDATA", send_navdata);
@@ -268,6 +286,47 @@ void navdata_read()
   }
 }
 
+static void mag_freeze_check(void) {
+  // from daren.g.lee paparazzi-l 20140530
+  static int16_t LastMagValue = 0;
+  static int MagFreezeCounter = 0;
+
+  // printf("lm: %d, mx: %d, mfc: %d\n", LastMagValue, navdata.mx, MagFreezeCounter);
+
+  if (LastMagValue == navdata.mx) {
+    MagFreezeCounter++;
+    // Re-initialize the serial port here, in paparazzi this should be ~150 ms
+    // considering it updates at 200 Hz
+    if (MagFreezeCounter > 30) {
+      printf("Mag needs resetting, Values are frozen!!! %d , %d \n", LastMagValue, navdata.mx);
+      printf("Setting GPIO 177 to reset PIC Navigation Board \n");
+
+      // stop acquisition
+      uint8_t cmd=0x02;
+      navdata_write(&cmd, 1);
+
+      // do the navboard reset via GPIOs
+      gpio_clear(ARDRONE_GPIO_PORT, ARDRONE_GPIO_PIN_NAVDATA);
+      gpio_set(ARDRONE_GPIO_PORT, ARDRONE_GPIO_PIN_NAVDATA);
+
+      // wait 20ms to retrieve data
+      usleep(20000);
+
+      // restart acquisition
+      cmd = 0x01;
+      navdata_write(&cmd, 1);
+
+      MagFreezeCounter = 0; // reset counter back to zero
+    }
+  }
+  else {
+    // remember to reset if value _does_ change
+    MagFreezeCounter = 0;
+  }
+  // set last value
+  LastMagValue = navdata.mx;
+}
+
 static void baro_update_logic(void)
 {
   static int32_t lastpressval = 0;
@@ -294,7 +353,6 @@ static void baro_update_logic(void)
         // wait for temp again
         temp_or_press_was_updated_last = FALSE;
         sync_errors++;
-        navdata_baro_available = TRUE;
         printf("Baro-Logic-Error (expected updated temp, got press)\n");
       }
     }
@@ -316,13 +374,25 @@ static void baro_update_logic(void)
         printf("Baro-Logic-Error (expected updated press, got temp)\n");
 
       }
+      else {
+        // We now got valid pressure and temperature
+        navdata_baro_available = TRUE;
+      }
     }
-
-    navdata_baro_available = TRUE;
   }
 
-  lastpressval = navdata.pressure;
+  // Detected a pressure switch
+  if(lastpressval != 0 && lasttempval != 0 && ABS(lastpressval - navdata.pressure) > ABS(lasttempval - navdata.pressure)) {
+    navdata_baro_available = FALSE;
+  }
+
+  // Detected a temprature switch
+  if(lastpressval != 0 && lasttempval != 0 && ABS(lasttempval - navdata.temperature_pressure) > ABS(lastpressval - navdata.temperature_pressure)) {
+    navdata_baro_available = FALSE;
+  }
+
   lasttempval = navdata.temperature_pressure;
+  lastpressval = navdata.pressure;
 
   /*
    * It turns out that a lot of navdata boards have a problem (probably interrupt related)
@@ -391,6 +461,7 @@ static void baro_update_logic(void)
     lasttempval_nospike = navdata.temperature_pressure;
   }
 
+// printf("%d %d %d\r\n", navdata.temperature_pressure, navdata.pressure, spike_detected);
 //  printf(",%d,%d",spike_detected,spikes);
 }
 
@@ -454,16 +525,16 @@ void navdata_update()
 
 //        printf(",%d,%d,%d\n", navdata.pressure, navdata.temperature_pressure, (int)navdata_baro_available);
 
+        mag_freeze_check();
 
 #ifdef USE_SONAR
-        if (navdata.ultrasound < 10000)
+        // Check if there is a new sonar measurement and update the sonar
+        if (navdata.ultrasound >> 15)
         {
-            sonar_meas = navdata.ultrasound;
-            ins_update_sonar();
-
+          float sonar_meas = (float)((navdata.ultrasound & 0x7FFF) - SONAR_OFFSET) * SONAR_SCALE;
+          AbiSendMsgAGL(AGL_SONAR_ARDRONE2_ID, &sonar_meas);
         }
 #endif
-
 
         navdata_imu_available = TRUE;
         last_checksum_wrong = FALSE;
@@ -487,17 +558,7 @@ void navdata_update()
       }
     }
   }
-}
 
-int16_t navdata_height(void) {
-  if (navdata.ultrasound > 10000) {
-    return previousUltrasoundHeight;
-  }
-
-  int16_t ultrasoundHeight = 0;
-  ultrasoundHeight = (navdata.ultrasound - 880) / 26.553;
-  previousUltrasoundHeight = ultrasoundHeight;
-  return ultrasoundHeight;
 }
 
 static void navdata_cropbuffer(int cropsize)

@@ -62,7 +62,7 @@ struct SVinfo {
 /** data structure for GPS information */
 struct GpsState {
   struct EcefCoor_i ecef_pos;    ///< position in ECEF in cm
-  struct LlaCoor_i lla_pos;      ///< position in LLA (lat,lon: rad*1e7; alt: mm over ellipsoid)
+  struct LlaCoor_i lla_pos;      ///< position in LLA (lat,lon: deg*1e7; alt: mm over ellipsoid)
   struct UtmCoor_i utm_pos;      ///< position in UTM (north,east: cm; alt: mm over ellipsoid)
   int32_t hmsl;                  ///< height above mean sea level in mm
   struct EcefCoor_i ecef_vel;    ///< speed ECEF in cm/s
@@ -82,8 +82,10 @@ struct GpsState {
   uint8_t nb_channels;           ///< Number of scanned satellites
   struct SVinfo svinfos[GPS_NB_CHANNELS]; ///< holds information from the Space Vehicles (Satellites)
 
-  uint32_t last_fix_ticks;       ///< cpu time ticks at last valid fix
-  uint32_t last_fix_time;        ///< cpu time in sec at last valid fix
+  uint32_t last_3dfix_ticks;     ///< cpu time ticks at last valid 3D fix
+  uint32_t last_3dfix_time;      ///< cpu time in sec at last valid 3D fix
+  uint32_t last_msg_ticks;       ///< cpu time ticks at last received GPS message
+  uint32_t last_msg_time;        ///< cpu time in sec at last received GPS message
   uint16_t reset;                ///< hotstart, warmstart, coldstart
 };
 
@@ -104,21 +106,22 @@ extern void gps_init(void);
 extern void gps_impl_init(void);
 
 
-/* mark GPS as lost when no valid 3D fix was received for GPS_TIMEOUT secs */
+/** GPS timeout in seconds */
 #ifndef GPS_TIMEOUT
-#define GPS_TIMEOUT 5
+#define GPS_TIMEOUT 2
 #endif
 
-inline bool_t GpsIsLost(void);
-
-inline bool_t GpsIsLost(void) {
-  if (sys_time.nb_sec - gps.last_fix_time > GPS_TIMEOUT) {
-    gps.fix = GPS_FIX_NONE;
-    return TRUE;
+static inline bool_t GpsIsLost(void) {
+  if (gps.fix == GPS_FIX_3D) {
+    return FALSE;
   }
-  return FALSE;
+  return TRUE;
 }
 
+/** Periodic GPS check.
+ * Marks GPS as lost when no GPS message was received for GPS_TIMEOUT seconds
+ */
+extern void gps_periodic_check(void);
 
 /**
  * GPS Reset

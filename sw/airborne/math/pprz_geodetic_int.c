@@ -22,20 +22,19 @@
 #include "pprz_geodetic_int.h"
 #include "pprz_algebra_int.h"
 
-#define HIGH_RES_TRIG_FRAC  20
 
 void ltp_of_ecef_rmat_from_lla_i(struct Int32Mat33* ltp_of_ecef, struct LlaCoor_i* lla) {
 
 #if USE_DOUBLE_PRECISION_TRIG
-  int32_t sin_lat = rint(BFP_OF_REAL(sin(RAD_OF_EM7RAD((double)lla->lat)), HIGH_RES_TRIG_FRAC));
-  int32_t cos_lat = rint(BFP_OF_REAL(cos(RAD_OF_EM7RAD((double)lla->lat)), HIGH_RES_TRIG_FRAC));
-  int32_t sin_lon = rint(BFP_OF_REAL(sin(RAD_OF_EM7RAD((double)lla->lon)), HIGH_RES_TRIG_FRAC));
-  int32_t cos_lon = rint(BFP_OF_REAL(cos(RAD_OF_EM7RAD((double)lla->lon)), HIGH_RES_TRIG_FRAC));
+  int32_t sin_lat = rint(BFP_OF_REAL(sin(RAD_OF_EM7DEG((double)lla->lat)), HIGH_RES_TRIG_FRAC));
+  int32_t cos_lat = rint(BFP_OF_REAL(cos(RAD_OF_EM7DEG((double)lla->lat)), HIGH_RES_TRIG_FRAC));
+  int32_t sin_lon = rint(BFP_OF_REAL(sin(RAD_OF_EM7DEG((double)lla->lon)), HIGH_RES_TRIG_FRAC));
+  int32_t cos_lon = rint(BFP_OF_REAL(cos(RAD_OF_EM7DEG((double)lla->lon)), HIGH_RES_TRIG_FRAC));
 #else
-  int32_t sin_lat = rint(BFP_OF_REAL(sinf(RAD_OF_EM7RAD((float)lla->lat)), HIGH_RES_TRIG_FRAC));
-  int32_t cos_lat = rint(BFP_OF_REAL(cosf(RAD_OF_EM7RAD((float)lla->lat)), HIGH_RES_TRIG_FRAC));
-  int32_t sin_lon = rint(BFP_OF_REAL(sinf(RAD_OF_EM7RAD((float)lla->lon)), HIGH_RES_TRIG_FRAC));
-  int32_t cos_lon = rint(BFP_OF_REAL(cosf(RAD_OF_EM7RAD((float)lla->lon)), HIGH_RES_TRIG_FRAC));
+  int32_t sin_lat = rint(BFP_OF_REAL(sinf(RAD_OF_EM7DEG((float)lla->lat)), HIGH_RES_TRIG_FRAC));
+  int32_t cos_lat = rint(BFP_OF_REAL(cosf(RAD_OF_EM7DEG((float)lla->lat)), HIGH_RES_TRIG_FRAC));
+  int32_t sin_lon = rint(BFP_OF_REAL(sinf(RAD_OF_EM7DEG((float)lla->lon)), HIGH_RES_TRIG_FRAC));
+  int32_t cos_lon = rint(BFP_OF_REAL(cosf(RAD_OF_EM7DEG((float)lla->lon)), HIGH_RES_TRIG_FRAC));
 #endif
 
   ltp_of_ecef->m[0] = -sin_lon;
@@ -71,6 +70,12 @@ void ltp_def_from_lla_i(struct LtpDef_i* def, struct LlaCoor_i* lla) {
 
 }
 
+
+/** Convert a point from ECEF to local ENU.
+ * @param[out] enu  ENU point in cm
+ * @param[in]  def  local coordinate system definition
+ * @param[in]  ecef ECEF point in cm
+ */
 void enu_of_ecef_point_i(struct EnuCoor_i* enu, struct LtpDef_i* def, struct EcefCoor_i* ecef) {
 
   struct EcefCoor_i delta;
@@ -91,6 +96,11 @@ void enu_of_ecef_point_i(struct EnuCoor_i* enu, struct LtpDef_i* def, struct Ece
 }
 
 
+/** Convert a point from ECEF to local NED.
+ * @param[out] ned  NED point in cm
+ * @param[in]  def  local coordinate system definition
+ * @param[in]  ecef ECEF point in cm
+ */
 void ned_of_ecef_point_i(struct NedCoor_i* ned, struct LtpDef_i* def, struct EcefCoor_i* ecef) {
   struct EnuCoor_i enu;
   enu_of_ecef_point_i(&enu, def, ecef);
@@ -128,6 +138,12 @@ void ned_of_ecef_pos_i(struct NedCoor_i* ned, struct LtpDef_i* def, struct EcefC
   ENU_OF_TO_NED(*ned, enu);
 }
 
+
+/** Rotate a vector from ECEF to ENU.
+ * @param[out] enu  vector in ENU coordinate system
+ * @param[in]  def  local coordinate system definition
+ * @param[in]  ecef vector in ECEF coordinate system
+ */
 void enu_of_ecef_vect_i(struct EnuCoor_i* enu, struct LtpDef_i* def, struct EcefCoor_i* ecef) {
 
   const int64_t tmpx = (int64_t)def->ltp_of_ecef.m[0]*ecef->x +
@@ -146,6 +162,11 @@ void enu_of_ecef_vect_i(struct EnuCoor_i* enu, struct LtpDef_i* def, struct Ecef
 }
 
 
+/** Rotate a vector from ECEF to NED.
+ * @param[out] ned  vector in NED coordinate system
+ * @param[in]  def  local coordinate system definition
+ * @param[in]  ecef vector in ECEF coordinate system
+ */
 void ned_of_ecef_vect_i(struct NedCoor_i* ned, struct LtpDef_i* def, struct EcefCoor_i* ecef) {
   struct EnuCoor_i enu;
   enu_of_ecef_vect_i(&enu, def, ecef);
@@ -153,6 +174,11 @@ void ned_of_ecef_vect_i(struct NedCoor_i* ned, struct LtpDef_i* def, struct Ecef
 }
 
 
+/** Rotate a vector from ENU to ECEF.
+ * @param[out] ecef vector in ECEF coordinate system
+ * @param[in]  def  local coordinate system definition
+ * @param[in]  enu  vector in ENU coordinate system
+ */
 void ecef_of_enu_vect_i(struct EcefCoor_i* ecef, struct LtpDef_i* def, struct EnuCoor_i* enu) {
 
   const int64_t tmpx = (int64_t)def->ltp_of_ecef.m[0] * enu->x +
@@ -172,6 +198,12 @@ void ecef_of_enu_vect_i(struct EcefCoor_i* ecef, struct LtpDef_i* def, struct En
 
 }
 
+
+/** Rotate a vector from NED to ECEF.
+ * @param[out] ecef vector in ECEF coordinate system
+ * @param[in]  def  local coordinate system definition
+ * @param[in]  ned  vector in NED coordinate system
+ */
 void ecef_of_ned_vect_i(struct EcefCoor_i* ecef, struct LtpDef_i* def, struct NedCoor_i* ned) {
   struct EnuCoor_i enu;
   ENU_OF_TO_NED(enu, *ned);
@@ -275,8 +307,8 @@ void lla_of_ecef_i(struct LlaCoor_i* out, struct EcefCoor_i* in) {
   struct LlaCoor_d out_d;
   lla_of_ecef_d(&out_d, &in_d);
   /* convert the output to fixed point       */
-  out->lon = (int32_t)rint(EM7RAD_OF_RAD(out_d.lon));
-  out->lat = (int32_t)rint(EM7RAD_OF_RAD(out_d.lat));
+  out->lon = (int32_t)rint(EM7DEG_OF_RAD(out_d.lon));
+  out->lat = (int32_t)rint(EM7DEG_OF_RAD(out_d.lat));
   out->alt = (int32_t)MM_OF_M(out_d.alt);
 
 }
@@ -285,8 +317,8 @@ void ecef_of_lla_i(struct EcefCoor_i* out, struct LlaCoor_i* in) {
 
   /* convert our input to floating point */
   struct LlaCoor_d in_d;
-  in_d.lon = RAD_OF_EM7RAD((double)in->lon);
-  in_d.lat = RAD_OF_EM7RAD((double)in->lat);
+  in_d.lon = RAD_OF_EM7DEG((double)in->lon);
+  in_d.lat = RAD_OF_EM7DEG((double)in->lat);
   in_d.alt = M_OF_MM((double)in->alt);
   /* calls the floating point transformation */
   struct EcefCoor_d out_d;

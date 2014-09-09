@@ -1,16 +1,14 @@
 #
 # hb_1.1.makefile
 #
-# http://paparazzi.enac.fr/wiki/HB_v1
+# http://wiki.paparazziuav.org/wiki/HB_v1
 #
 ARCH=lpc21
 BOARD=hb
 BOARD_VERSION=1.1
 BOARD_CFG=\"boards/$(BOARD)_$(BOARD_VERSION).h\"
 
-ifndef FLASH_MODE
-FLASH_MODE = IAP
-endif
+FLASH_MODE ?= IAP
 
 #
 #

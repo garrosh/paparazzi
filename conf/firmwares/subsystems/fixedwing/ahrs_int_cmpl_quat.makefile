@@ -9,7 +9,7 @@
 USE_MAGNETOMETER ?= 0
 AHRS_ALIGNER_LED ?= none
 
-AHRS_CFLAGS  = -DUSE_AHRS -DAHRS_UPDATE_FW_ESTIMATOR
+AHRS_CFLAGS  = -DUSE_AHRS
 AHRS_CFLAGS += -DUSE_AHRS_ALIGNER -DAHRS_GRAVITY_UPDATE_COORDINATED_TURN
 
 ifeq (,$(findstring $(USE_MAGNETOMETER),0 FALSE))
@@ -27,17 +27,17 @@ AHRS_SRCS   += subsystems/ahrs.c
 AHRS_SRCS   += subsystems/ahrs/ahrs_int_cmpl_quat.c
 AHRS_SRCS   += subsystems/ahrs/ahrs_aligner.c
 
+
+ifdef AHRS_PROPAGATE_FREQUENCY
+AHRS_CFLAGS += -DAHRS_PROPAGATE_FREQUENCY=$(AHRS_PROPAGATE_FREQUENCY)
+endif
+
+ifdef AHRS_CORRECT_FREQUENCY
+AHRS_CFLAGS += -DAHRS_CORRECT_FREQUENCY=$(AHRS_CORRECT_FREQUENCY)
+endif
+
 ap.CFLAGS += $(AHRS_CFLAGS)
 ap.srcs += $(AHRS_SRCS)
-
-# for fixedwings this is already added in autopilot.makefile
-#ifdef AHRS_PROPAGATE_FREQUENCY
-#ap.CFLAGS += -DAHRS_PROPAGATE_FREQUENCY=$(AHRS_PROPAGATE_FREQUENCY)
-#endif
-#
-#ifdef AHRS_CORRECT_FREQUENCY
-#ap.CFLAGS += -DAHRS_CORRECT_FREQUENCY=$(AHRS_CORRECT_FREQUENCY)
-#endif
 
 #
 # NPS uses the real algorithm
@@ -49,7 +49,7 @@ nps.srcs += $(AHRS_SRCS)
 # Simple simulation of the AHRS result
 #
 ahrssim_CFLAGS  = -DAHRS_TYPE_H=\"subsystems/ahrs/ahrs_sim.h\"
-ahrssim_CFLAGS += -DUSE_AHRS -DAHRS_UPDATE_FW_ESTIMATOR
+ahrssim_CFLAGS += -DUSE_AHRS
 
 ahrssim_srcs    = $(SRC_SUBSYSTEMS)/ahrs.c
 ahrssim_srcs   += $(SRC_SUBSYSTEMS)/ahrs/ahrs_sim.c

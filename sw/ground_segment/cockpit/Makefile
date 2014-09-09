@@ -49,11 +49,11 @@ all : $(MAIN)
 
 opt : $(MAIN).opt
 
-$(MAIN) : $(CMO) $(XLIBPPRZCMA)
+$(MAIN) : $(CMO) $(LIBPPRZCMA) $(XLIBPPRZCMA)
 	@echo OL $@
 	$(Q)$(OCAMLC) $(OCAMLCFLAGS) $(INCLUDES) $(LIBS) $(LINKPKG) myGtkInit.cmo $(CMO) -o $@
 
-$(MAIN).opt : $(CMX) $(XLIBPPRZCMXA)
+$(MAIN).opt : $(CMX) $(LIBPPRZCMXA) $(XLIBPPRZCMXA)
 	@echo OOL $@
 	$(Q)$(OCAMLOPT) $(OCAMLCFLAGS) $(INCLUDES) $(LIBSX) -package pprz.xlib,$(LABLGTK2INIT) -linkpkg $(CMX) -o $@
 
@@ -97,8 +97,8 @@ clean:
 
 
 CC = gcc
-CFLAGS=-g -O2 -Wall `pkg-config gtk+-2.0 --cflags` -fPIC
-LDFLAGS=`pkg-config gtk+-2.0 --libs` -s -lglibivy
+CFLAGS=-g -O2 -Wall $(shell pkg-config gtk+-2.0 --cflags) -fPIC
+LDFLAGS=$(shell pkg-config gtk+-2.0 --libs) -s -lglibivy
 
 
 ant_track : ant_track.c
@@ -119,7 +119,8 @@ actuators : actuators.c
 #
 
 .depend: Makefile
-	$(OCAMLDEP) -I $(LIBPPRZDIR) *.ml* > .depend
+	@echo DEPEND $@
+	$(Q)$(OCAMLDEP) -I $(LIBPPRZDIR) *.ml* > .depend
 
 ifneq ($(MAKECMDGOALS),clean)
 -include .depend

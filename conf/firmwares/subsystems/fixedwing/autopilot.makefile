@@ -91,7 +91,6 @@ ifeq ($(ARCH), lpc21)
 endif
 
 ifeq ($(ARCH), stm32)
-  ns_srcs 		+= lisa/plug_sys.c
   ns_srcs       += $(SRC_ARCH)/mcu_periph/gpio_arch.c
 endif
 
@@ -165,14 +164,6 @@ ap_srcs += subsystems/air_data.c
 # BARO
 include $(CFG_SHARED)/baro_board.makefile
 
-# ahrs frequencies if configured
-ifdef AHRS_PROPAGATE_FREQUENCY
-ap_CFLAGS += -DAHRS_PROPAGATE_FREQUENCY=$(AHRS_PROPAGATE_FREQUENCY)
-endif
-ifdef AHRS_CORRECT_FREQUENCY
-ap_CFLAGS += -DAHRS_CORRECT_FREQUENCY=$(AHRS_CORRECT_FREQUENCY)
-endif
-
 
 ######################################################################
 ##
@@ -229,7 +220,7 @@ jsbsim.srcs 		+= $(SIMDIR)/sim_ac_jsbsim.c $(SIMDIR)/sim_ac_fw.c $(SIMDIR)/sim_a
 
 # external libraries
 jsbsim.CFLAGS 		+= -I/usr/include $(shell pkg-config glib-2.0 --cflags)
-jsbsim.LDFLAGS		+= $(shell pkg-config glib-2.0 --libs) -lglibivy -lm
+jsbsim.LDFLAGS		+= $(shell pkg-config glib-2.0 --libs) -lglibivy -lm $(shell pcre-config --libs)
 
 jsbsim.CFLAGS 		+= -DDOWNLINK -DPERIODIC_TELEMETRY -DDOWNLINK_TRANSPORT=IvyTransport
 jsbsim.srcs 		+= subsystems/datalink/downlink.c $(SRC_FIRMWARE)/datalink.c $(SRC_ARCH)/ivy_transport.c

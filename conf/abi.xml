@@ -2,7 +2,7 @@
 <!DOCTYPE protocol SYSTEM "messages.dtd">
 <protocol>
 
-  <class name="airborne">
+  <msg_class name="airborne">
 
     <message name="BARO_ABS" id="0">
       <field name="pressure" type="float" unit="Pa"/>
@@ -11,7 +11,12 @@
     <message name="BARO_DIFF" id="1">
       <field name="pressure" type="float" unit="Pa"/>
     </message>
-  </class>
+
+    <message name="AGL" id="2">
+      <field name="distance" type="float" unit="m"/>
+    </message>
+
+  </msg_class>
 
 
 </protocol>

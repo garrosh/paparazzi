@@ -26,7 +26,7 @@ nps.srcs    += $(fbw_srcs) $(ap_srcs)
 
 nps.CFLAGS  += -DSITL -DUSE_NPS
 nps.CFLAGS  += $(shell pkg-config glib-2.0 --cflags)
-nps.LDFLAGS += $(shell pkg-config glib-2.0 --libs) -lm -lglibivy -lpcre -lgsl -lgslcblas
+nps.LDFLAGS += $(shell pkg-config glib-2.0 --libs) -lm -lglibivy $(shell pcre-config --libs) -lgsl -lgslcblas
 nps.CFLAGS  += -I$(NPSDIR) -I$(SRC_FIRMWARE) -I$(SRC_BOARD) -I../simulator -I$(PAPARAZZI_HOME)/conf/simulator/nps
 nps.LDFLAGS += $(shell sdl-config --libs)
 
@@ -51,6 +51,7 @@ nps.srcs += $(NPSDIR)/nps_main.c                 \
        $(NPSDIR)/nps_sensor_accel.c              \
        $(NPSDIR)/nps_sensor_mag.c                \
        $(NPSDIR)/nps_sensor_baro.c               \
+       $(NPSDIR)/nps_sensor_sonar.c              \
        $(NPSDIR)/nps_sensor_gps.c                \
        $(NPSDIR)/nps_electrical.c                \
        $(NPSDIR)/nps_atmosphere.c                \
@@ -62,6 +63,7 @@ nps.srcs += $(NPSDIR)/nps_main.c                 \
        $(NPSDIR)/nps_ivy_fixedwing.c             \
        $(NPSDIR)/nps_flightgear.c                \
 
+nps.srcs += math/pprz_geodetic_wmm2010.c
 
 nps.CFLAGS += -DDOWNLINK -DPERIODIC_TELEMETRY -DDOWNLINK_TRANSPORT=IvyTransport
 nps.srcs   += subsystems/datalink/downlink.c $(SRC_FIRMWARE)/datalink.c $(SRC_ARCH)/ivy_transport.c

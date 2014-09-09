@@ -19,15 +19,21 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include "firmwares/rotorcraft/stabilization.h"
-#include "firmwares/rotorcraft/stabilization/stabilization_attitude_rc_setpoint.h"
-
-#include "math/pprz_algebra_float.h"
-#include "state.h"
-#include "subsystems/radio_control.h"
+/**
+ * @file stabilization_attitude_euler_float.c
+ *
+ * Rotorcraft attitude stabilization in euler float version.
+ */
 
 #include "generated/airframe.h"
 
+#include "firmwares/rotorcraft/stabilization.h"
+#include "firmwares/rotorcraft/stabilization/stabilization_attitude_rc_setpoint.h"
+
+#include "std.h"
+#include "paparazzi.h"
+#include "math/pprz_algebra_float.h"
+#include "state.h"
 
 struct FloatAttitudeGains stabilization_gains;
 struct FloatEulers stabilization_att_sum_err;
@@ -112,11 +118,9 @@ void stabilization_attitude_init(void) {
 #endif
 }
 
-
-void stabilization_attitude_read_rc(bool_t in_flight) {
-  stabilization_attitude_read_rc_setpoint_eulers_f(&stab_att_sp_euler, in_flight);
+void stabilization_attitude_read_rc(bool_t in_flight, bool_t in_carefree, bool_t coordinated_turn) {
+  stabilization_attitude_read_rc_setpoint_eulers_f(&stab_att_sp_euler, in_flight, in_carefree, coordinated_turn);
 }
-
 
 void stabilization_attitude_enter(void) {
 
