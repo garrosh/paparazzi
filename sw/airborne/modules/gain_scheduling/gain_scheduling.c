@@ -26,8 +26,8 @@
 #include "gain_scheduling.h"
 
 //Include for scheduling on transition_status
-#include "firmwares/Rotorcraft/guidance/guidance_h.h"
-#include "firmwares/Rotorcraft/stabilization.h"
+#include "firmwares/rotorcraft/guidance/guidance_h.h"
+#include "firmwares/rotorcraft/stabilization.h"
 
 // #include "state.h"
 #include "math/pprz_algebra_int.h"

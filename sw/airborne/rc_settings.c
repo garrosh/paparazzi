@@ -1,6 +1,4 @@
 /*
- * $Id$
- * Flight-time calibration facility
  *
  * Copyright (C) 2003-2005  Pascal Brisset, Antoine Drouin
  *
@@ -30,7 +28,6 @@
 #include "autopilot.h"
 #include "firmwares/fixedwing/nav.h"
 #include "subsystems/sensors/infrared.h"
-#include "estimator.h"
 #include "inter_mcu.h"
 #include "firmwares/fixedwing/stabilization/stabilization_attitude.h"
 
@@ -43,11 +40,8 @@ float slider_1_val, slider_2_val;
 #define ParamValFloat(param_init_val, param_travel, cur_pulse, init_pulse) \
 (param_init_val + ((float)(cur_pulse - init_pulse)) * param_travel / (float)MAX_PPRZ)
 
-<<<<<<< HEAD
 #define RcChannel(x) (fbw_state->channels[x])
 
-=======
->>>>>>> origin/master_auvsi2013
 /** Includes generated code from tuning_rc.xml */
 #include "generated/settings.h"
 

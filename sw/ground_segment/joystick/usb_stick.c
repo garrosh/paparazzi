@@ -1,6 +1,4 @@
 /*
- * $Id$
- *
  * joystick lib
  *
  * based on Force Feedback: Constant Force Stress Test
@@ -52,13 +50,8 @@
 #define dbgprintf(x ...)
 #endif
 
-
-#define MIN_BUTTON_CODE   KEY_RESERVED
-#define MAX_BUTTON_CODE   KEY_KPDOT+1
-/*
 #define MIN_BUTTON_CODE   BTN_JOYSTICK
 #define MAX_BUTTON_CODE   BTN_THUMBR+1
-*/
 #define MIN_ABS_CODE      ABS_X
 #define MAX_ABS_CODE      ABS_MAX+1
 
@@ -97,7 +90,7 @@ struct stick_code_param_ stick_init_param = {
 
 
 void led_test( void ) {
-  
+
   struct input_event ev; /* the event */
 
   int lednum;
@@ -155,7 +148,7 @@ int init_hid_device(char* device_name)
   }
 
   /* LED testing */
-  
+
 //  led_test( );
 
 
@@ -202,11 +195,7 @@ int init_hid_device(char* device_name)
         if (TEST_BIT(cnt, key_bits)) {
           button_code[stick_button_count++] = cnt;
           dbgprintf(stderr,"Available button: %d (0x%x)\n",cnt,cnt);
-
-        } else {
-		dbgprintf(stderr,"Button not found: %d (0x%x)\n",cnt,cnt);
-	}
-
+        }
         if (stick_button_count == BUTTON_COUNT) break;
       }
     } else {
@@ -239,10 +228,6 @@ int init_hid_device(char* device_name)
   }
 
   /* Store axis */
-
-#define NO_USE_AXIS
-#ifndef NO_USE_AXIS
-
   if (stick_init_param.axis_count > 0) {
     for (cnt = 0; cnt < MIN(stick_init_param.axis_count,AXIS_COUNT); cnt++) {
       if (!TEST_BIT(stick_init_param.axis_code[cnt], abs_bits)) {
@@ -293,7 +278,7 @@ int init_hid_device(char* device_name)
       // with joystick interface, all axes are signed 16 bit with full range
       axis_min[cnt]=-32768;
       axis_max[cnt]=32768;
-    }      
+    }
 
     if (axis_min[cnt]>=axis_max[cnt]) {
       dbgprintf(stderr,"ERROR: bad axis %d value range (%d,%d) [%s:%d]\n",
@@ -303,8 +288,6 @@ int init_hid_device(char* device_name)
     dbgprintf(stderr,"Axis %d : parameters = [%d,%d]\n",
         cnt,axis_min[cnt],axis_max[cnt]);
   }
-
-#endif
 
   //--------------------------------------------------
   // force feedback, TBD feature
@@ -368,7 +351,7 @@ int init_hid_device(char* device_name)
         strerror(errno),__FILE__,__LINE__);
     return(1);
   }
-#endif	
+#endif
 
   if (event_mode == STICK_MODE_EVENT ) {
     ioctl(stick_device_handle, EVIOCGNAME(sizeof(name)), name);
@@ -431,7 +414,7 @@ int stick_read( void ) {
         case JS_EVENT_AXIS:
           for (cnt = 0; cnt < stick_axis_count; cnt++) {
             if (jsevent.number == axis_code[cnt]) {
-              stick_axis_values[cnt] = (( (jsevent.value - axis_min[cnt]) * ABS_MAX_VALUE ) / (axis_max[cnt] - axis_min[cnt])) - ABS_MID_VALUE;    
+              stick_axis_values[cnt] = (( (jsevent.value - axis_min[cnt]) * ABS_MAX_VALUE ) / (axis_max[cnt] - axis_min[cnt])) - ABS_MID_VALUE;
               break;
             }
           }
@@ -484,7 +467,7 @@ int stick_init( char * device_name ) {
     fprintf(stderr,"ERROR: no suitable joystick found [%s:%d]\n",
         __FILE__,__LINE__);
     return(1);
-  }  
+  }
 
   return 0;
 }

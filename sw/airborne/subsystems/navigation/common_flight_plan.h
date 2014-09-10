@@ -21,7 +21,7 @@
 
 /**
  * @file subsystems/navigation/common_flight_plan.c
- * Common flight_plan functions shared between fixedwing and Rotorcraft.
+ * Common flight_plan functions shared between fixedwing and rotorcraft.
  */
 
 #ifndef COMMON_FLIGHT_PLAN_H
@@ -36,7 +36,7 @@ extern uint8_t nav_stage, nav_block;
 extern uint8_t last_block, last_stage;
 
 
-void nav_init_stage(void); /* needs to be implemented by fixedwing and Rotorcraft seperately */
+void nav_init_stage(void); /* needs to be implemented by fixedwing and rotorcraft seperately */
 
 void nav_init_block(void);
 void nav_goto_block(uint8_t block_id);

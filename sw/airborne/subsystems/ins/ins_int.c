@@ -22,7 +22,7 @@
 /**
  * @file subsystems/ins/ins_int.c
  *
- * INS for Rotorcrafts combining vertical and horizontal filters.
+ * INS for rotorcrafts combining vertical and horizontal filters.
  *
  */
 
@@ -70,7 +70,7 @@ abi_event sonar_ev;
 static void sonar_cb(uint8_t sender_id, const float *distance);
 
 #ifdef INS_SONAR_THROTTLE_THRESHOLD
-#include "firmwares/Rotorcraft/stabilization.h"
+#include "firmwares/rotorcraft/stabilization.h"
 #endif
 
 #ifndef INS_SONAR_OFFSET

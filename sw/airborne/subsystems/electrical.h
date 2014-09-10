@@ -1,46 +1,56 @@
+/*
+ * Copyright (C) 2010-2013 The Paparazzi Team
+ *
+ * This file is part of paparazzi.
+ *
+ * paparazzi is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2, or (at your option)
+ * any later version.
+ *
+ * paparazzi is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with paparazzi; see the file COPYING.  If not, write to
+ * the Free Software Foundation, 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
+/**
+ * @file subsystems/electrical.h
+ *
+ * Interface for electrical status: supply voltage, current, battery status, etc.
+ */
+
 #ifndef SUBSYSTEMS_ELECTRICAL_H
 #define SUBSYSTEMS_ELECTRICAL_H
 
 #include "std.h"
+#include "generated/airframe.h"
 
+/** low battery level in Volts (for 3S LiPo) */
 #ifndef LOW_BAT_LEVEL
-#ifdef BATTERY_CELL
-
-  #define CELL_MAXIMUM      4.2
-  #define CELL_NOMINAL      3.7
-  #define CELL_LOW          3.4
-  #define CELL_CRITIC       3.2
-  #define CELL_CATASTROPHIC 3.0
-
-  #define MAX_BAT_LEVEL           BATTERY_CELL*CELL_MAXIMUM
-  #define LOW_BAT_LEVEL           BATTERY_CELL*CELL_LOW
-  #define CRITIC_BAT_LEVEL        BATTERY_CELL*CELL_CRITIC
-  #define CATASTROPHIC_BAT_LEVEL  BATTERY_CELL*CELL_CATASTROPHIC
-#else
-  #ifndef CATASTROPHIC_BAT_LEVEL
-    #error "Add this line to your airframe <define name="BATTERY_CELL" value="X"/> where X is the number of cell of a LiPo"
-  #endif
+#define LOW_BAT_LEVEL 10.5
 #endif
 
-#ifdef JOHN_AP_2012_V1
- #define ADC_COEFF_M         0.0354067865
- #define ADC_COEFF_B         0.0376761571
- #define VoltageOfAdc(adc)   (ADC_COEFF_M*adc + ADC_COEFF_B)
+
+/** critical battery level in Volts (for 3S LiPo) */
+#ifndef CRITIC_BAT_LEVEL
+#define CRITIC_BAT_LEVEL 9.8
 #endif
 
-#ifdef JOHN_AP_2012_V2
- #define ADC_COEFF_M         0.0323745054
- #define ADC_COEFF_B         0.2191709665
- #define VoltageOfAdc(adc)   (ADC_COEFF_M*adc + ADC_COEFF_B)
-#endif
-#endif
 
 struct Electrical {
 
-  uint16_t vsupply; /* supply in decivolts */
-  uint16_t adc_battery;
-  int32_t current; /* current in milliamps */
-  int32_t consumed; /* consumption in mAh */
+  uint16_t vsupply;       ///< supply voltage in decivolts
+  int32_t  current;       ///< current in milliamps
+  int32_t  consumed;      ///< consumption in mAh
+  float    energy;        ///< consumed energy in mAh
+  bool_t   bat_low;       ///< battery low status
+  bool_t   bat_critical;  ///< battery critical status
 
 };
 

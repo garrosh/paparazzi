@@ -519,7 +519,7 @@ Maintenance release
 
 - fix elf PT_LOAD type in lpc21iap LPC USB download
 - fix electrical.current estimate in sim
-- fix LPC+xbee_api in Rotorcraft
+- fix LPC+xbee_api in rotorcraft
 - fix conversion of vsupply to decivolts if offset is used
 - more robust dfu flash script, only upload to Lisa/M
 
@@ -561,7 +561,7 @@ Second release candidate for next stable release.
 - Ahrs float_dcm uses magnetic heading while not inflight for better initial guess
   [#299] (https://github.com/paparazzi/paparazzi/pull/299)
 - Outback Challenge "Safety" Rules 1 and 2
-- Added WMM2010 Geo model used in ahrs int_cmpl_quat for Rotorcrafts
+- Added WMM2010 Geo model used in ahrs int_cmpl_quat for rotorcrafts
   [#288] (https://github.com/paparazzi/paparazzi/pull/288)
 - Fix missing gain definitions from airframe file in total energy control
 - Added stm32loader to sw/tools

@@ -104,7 +104,7 @@ void imu_periodic( void )
   // A factor 2 is applied to reduice the delay without overloading the i2c
   RunOnceEvery((PERIODIC_FREQUENCY/(2*3200>>(0xf-NAVGO_ACCEL_RATE))), adxl345_i2c_periodic(&imu_navgo.adxl));
 
-  // Read HMC58XX at 100Hz (main loop for Rotorcraft: 512Hz)
+  // Read HMC58XX at 100Hz (main loop for rotorcraft: 512Hz)
   RunOnceEvery(5, hmc58xx_periodic(&imu_navgo.hmc));
 
   //RunOnceEvery(20,imu_navgo_downlink_raw());

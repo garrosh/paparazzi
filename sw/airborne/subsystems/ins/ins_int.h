@@ -22,7 +22,7 @@
 /**
  * @file subsystems/ins/ins_int.h
  *
- * INS for Rotorcrafts combining vertical and horizontal filters.
+ * INS for rotorcrafts combining vertical and horizontal filters.
  *
  */
 

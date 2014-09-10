@@ -47,7 +47,7 @@ let icon_flyingwing_template = {
   width = 4
 }
 
-let icon_Rotorcraft_template = {
+let icon_rotorcraft_template = {
   lines = [
     [|  0.; -8.;  0.; 8.|];
     [| -8.;  0.;  8.; 0.|];
