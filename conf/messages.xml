@@ -1352,9 +1352,6 @@
      <field name="status"   type="uint8" values="OK|LOST|REALLY_LOST"/>
   </message>
 
-<<<<<<< HEAD
-  <!-- 161 is free -->
-=======
   <message name="VFF_EXTENDED" id="161">
       <field name="measure1"        type="float"/>
       <field name="measure2"        type="float"/>
@@ -1364,7 +1361,6 @@
       <field name="bias"           type="float"/>
       <field name="offset"           type="float"/>
   </message>
->>>>>>> upstream/master
 
   <message name="VFF" id="162">
       <field name="measure"        type="float"/>
@@ -1408,17 +1404,9 @@
       <field name="save_cnt"    type="int16"/>
   </message>
 
-<<<<<<< HEAD
-  <message name="BOOZ2_SONAR" id="167">
-    <field name="front" type="uint16" unit="adc"/>
-    <field name="back" type="uint16" unit="adc"/>
-    <field name="right" type="uint16" unit="adc"/>
-    <field name="left" type="uint16" unit="adc"/>
-=======
   <message name="INS_SONAR" id="167">
     <field name="distance" type="float" unit="m"/>
     <field name="var" type="float"/>
->>>>>>> upstream/master
   </message>
 
 
@@ -1784,10 +1772,6 @@
     <field name="rc_status"       type="uint8" values="OK|LOST|REALLY_LOST"/>
   </message>
 
-<<<<<<< HEAD
- <!--213 is free -->
- <!--214 is free -->
-=======
   <message name="TUNE_VERT" id="213">
     <field name="z_sp"      type="int32" alt_unit="m"    alt_unit_coef="0.0039063"/>
     <field name="est_z"     type="int32" alt_unit="m"    alt_unit_coef="0.0039063"/>
@@ -1816,7 +1800,6 @@
     <field name="wn"          type="float"/>
   </message>
 
->>>>>>> upstream/master
  <!--215 is free -->
  <!--216 is free -->
  <!--217 is free -->
@@ -1841,10 +1824,6 @@
  <!--222 is free -->
  <!--223 is free -->
  <!--224 is free -->
-<<<<<<< HEAD
- <!--225 is free -->
- <!--226 is free -->
-=======
 
   <message name="VIDEO_SYNC" id="225">
     <field name="id" type="uint8"/>
@@ -1855,7 +1834,6 @@
     <field name="mode" type="uint8"/>
     <field name="id" type="uint8"/>
   </message>
->>>>>>> upstream/master
 
   <message name="TIME" id="227">
     <field name="t" type="uint32"/>
@@ -1887,11 +1865,7 @@
     <field name="rc_status"    type="uint8" values="OK|LOST|REALLY_LOST"/>
     <field name="frame_rate"   type="uint8" unit="Hz"/>
     <field name="gps_status"   type="uint8" values="NO_FIX|NA|NA|3Dfix"/>
-<<<<<<< HEAD
-    <field name="ap_mode"      type="uint8" values="FAILSAFE|KILL|RATE_DIRECT|ATTITUDE_DIRECT|RATE_RC_CLIMB|ATTITUDE_RC_CLIMB|ATTITUDE_CLIMB|RATE_Z_HOLD|ATTITUDE_Z_HOLD|HOVER_DIRECT|HOVER_CLIMB|HOVER_Z_HOLD|NAV"/>
-=======
     <field name="ap_mode"      type="uint8" values="KILL|FAILSAFE|HOME|RATE_DIRECT|ATTITUDE_DIRECT|RATE_RC_CLIMB|ATTITUDE_RC_CLIMB|ATTITUDE_CLIMB|RATE_Z_HOLD|ATTITUDE_Z_HOLD|HOVER_DIRECT|HOVER_CLIMB|HOVER_Z_HOLD|NAV|RC_DIRECT|CARE_FREE|FORWARD"/>
->>>>>>> upstream/master
     <field name="ap_in_flight" type="uint8" values="ON_GROUND|IN_FLIGHT"/>
     <field name="ap_motors_on" type="uint8" values="MOTORS_OFF|MOTORS_ON"/>
     <field name="ap_h_mode"    type="uint8" values="KILL|RATE|ATTITUDE|HOVER|NAV"/>
@@ -1917,10 +1891,6 @@
     <field name="y" type="uint16"></field>
   </message>
 
-<<<<<<< HEAD
- <!--236 is free -->
- <!--237 is free -->
-=======
  <message name="SONAR" id="236">
     <field name="sonar_meas" type="uint16"/>
     <field name="sonar_distance" type="float" unit="m"/>
@@ -1929,7 +1899,6 @@
   <message name="PAYLOAD_FLOAT" id="237">
     <field name="values" type="float[]"/>
   </message>
->>>>>>> upstream/master
 
   <message name="NPS_POS_LLH" id="238">
     <field name="pprz_lat"   type="float" unit="rad" alt_unit="deg" alt_unit_coef="57.29578"/>
@@ -2192,8 +2161,6 @@
     <field name="resolve" type="uint8" values="NONE|LEVEL|CLIMB|DESCEND"/>
   </message>
 
-<<<<<<< HEAD
-=======
 
   <message name="MISSION_GOTO_WP" id="20" link="forwarded">
     <field name="ac_id" type="uint8"/>
@@ -2327,7 +2294,6 @@
   </message>
 
 
->>>>>>> upstream/master
  <message name="WINDTURBINE_STATUS" id="50" link="broadcasted">
    <field name="ac_id" type="uint8"/>
    <field name="tb_id" type="uint8"/>
@@ -2670,15 +2636,9 @@
 </msg_class>
 
 
-<<<<<<< HEAD
 
-
-<class name="alert">
-   <message name="BAT_LOW" id="1">
-=======
   <msg_class name="alert">
     <message name="BAT_LOW" id="1">
->>>>>>> upstream/master
       <field name="ac_id" type="string"/>
       <field name="level" type="string" values="CATASTROPHIC|CRITIC|WARNING"/>
       <field name="value" type="float"/>
@@ -2686,15 +2646,6 @@
    <message name="AIR_PROX" id="2">
       <field name="ac_id" type="string"/>
       <field name="level" type="string" values="CATASTROPHIC|CRITIC|WARNING"/>
-<<<<<<< HEAD
-  </message>
-</class>
-
-
-
-<class name="DIA"> <!-- data in audio -->
-   <message name="NAV_INFO" id="1">
-=======
     </message>
   </msg_class>
 
@@ -2702,7 +2653,6 @@
 
   <msg_class name="DIA"> <!-- data in audio -->
     <message name="NAV_INFO" id="1">
->>>>>>> upstream/master
       <field name="unix_time" type="float"/>
 
       <field name="lat"   type="float" unit="deg"/>
@@ -2714,13 +2664,8 @@
 
       <field name="cam_roll"  type="int16" unit="deg"/>
       <field name="cam_pitch" type="int16" unit="deg"/>
-<<<<<<< HEAD
-  </message>
-</class>
-=======
     </message>
   </msg_class>
->>>>>>> upstream/master
 
 
 
