@@ -130,6 +130,14 @@ PRINT_CONFIG_VAR(BARO_PERIODIC_FREQUENCY)
 
 #if USE_AHRS && USE_IMU
 
+#ifndef AHRS_PROPAGATE_FREQUENCY
+#define AHRS_PROPAGATE_FREQUENCY PERIODIC_FREQUENCY
+#endif
+PRINT_CONFIG_VAR(BARO_PERIODIC_FREQUENCY)
+#endif
+
+#if USE_AHRS && USE_IMU
+
 #ifdef AHRS_PROPAGATE_FREQUENCY
 #if (AHRS_PROPAGATE_FREQUENCY > PERIODIC_FREQUENCY)
 #warning "PERIODIC_FREQUENCY should be least equal or greater than AHRS_PROPAGATE_FREQUENCY"
@@ -598,8 +606,7 @@ void sensors_task( void ) {
 
   //FIXME: this is just a kludge
 #if USE_AHRS && defined SITL && !USE_NPS
-  // dt is not really used in ahrs_sim
-  ahrs_propagate(1./PERIODIC_FREQUENCY);
+  ahrs_propagate();
 #endif
 
 #if USE_GPS

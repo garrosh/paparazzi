@@ -251,6 +251,13 @@ static void alt_kalman(float z_meas, float dt) {
 #ifdef SITL
   R = 0.5;
   SIGMA2 = 0.1;
+#elif USE_BARO_BOARD
+#ifndef BARO_PERIODIC_FREQUENCY
+#define BARO_PERIODIC_FREQUENCY 50
+#endif
+  DT = (1./BARO_PERIODIC_FREQUENCY);
+  R = 0.5;
+  SIGMA2 = 0.1;
 #elif USE_BARO_MS5534A
   if (alt_baro_enabled) {
     R = baro_MS5534A_r;
