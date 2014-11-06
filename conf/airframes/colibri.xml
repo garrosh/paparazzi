@@ -32,12 +32,19 @@
 -->
 
 <airframe name="quadrotor_lisa_s">
-
-  <servos driver="Pwm">
+ <!--
+ <servos driver="Pwm">
     <servo name="ROLL_SERVO" no="0" min="1000" neutral="1500" max="2000"/>
     <servo name="LEFT_SERVO" no="1" min="1000" neutral="1500" max="2000"/>
     <servo name="RIGHT_SERVO" no="2" min="1000" neutral="1500" max="2000"/>
     <servo name="MOTOR" no="3" min="1000" neutral="1500" max="2000"/>
+  </servos>
+ -->
+  <servos driver="Pwm">
+    <servo name="ROLL_SERVO" no="3" min="1000" neutral="1500" max="2000"/>
+    <servo name="LEFT_SERVO" no="0" min="1000" neutral="1500" max="2000"/>
+    <servo name="RIGHT_SERVO" no="1" min="1000" neutral="1500" max="2000"/>
+    <servo name="MOTOR" no="2" min="1000" neutral="1500" max="2000"/>
   </servos>
 
   <commands>
@@ -56,11 +63,11 @@
   </command_laws-->
   
   <command_laws>
-    <let var="half_yaw" value="@YAW * 0.5"/>
-    <let var="half_pitch" value="@PITCH * 0.5"/>
+    <let var="halfyaw" value="@YAW * 0.5"/>
+    <let var="halfpitch" value="@PITCH * 0.5"/>
     <set servo="ROLL_SERVO" value="@ROLL"/>
-    <set servo="LEFT_SERVO" value="$half_pitch + $half_yaw"/>
-    <set servo="RIGHT_SERVO" value="$half_pitch - $half_yaw"/>
+    <set servo="LEFT_SERVO" value="$halfpitch + $halfyaw"/>
+    <set servo="RIGHT_SERVO" value="$halfpitch - $halfyaw"/>
     <set servo="MOTOR" value="@THRUST"/>
   </command_laws>
 
@@ -242,9 +249,9 @@
            If we went with the 500Hz that woul be the default we would be hearing a very annoying high pitched sound coming from the motors.
       -->
       <!-- Setting the PWM timer base frequency to 36MHz -->
-      <define name="PWM_BASE_FREQ" value="5000"/>
+      <!--define name="PWM_BASE_FREQ" value="5000"/-->
       <!-- Setting the PWM interval to 36KHz -->
-      <define name="SERVO_HZ" value="50"/>
+      <define name="SERVO_HZ" value="400"/>
       <define name="USE_SERVOS_1AND2"/>
     </subsystem>
 
