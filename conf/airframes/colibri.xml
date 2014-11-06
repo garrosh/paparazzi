@@ -34,10 +34,10 @@
 <airframe name="quadrotor_lisa_s">
 
   <servos driver="Pwm">
-    <servo name="ROLL_SERVO" no="0" min="0" neutral="50" max="1000"/>
-    <servo name="LEFT_SERVO" no="1" min="0" neutral="50" max="1000"/>
-    <servo name="RIGHT_SERVO" no="2" min="0" neutral="50" max="1000"/>
-    <servo name="MOTOR" no="3" min="0" neutral="50" max="1000"/>
+    <servo name="ROLL_SERVO" no="0" min="1000" neutral="1500" max="2000"/>
+    <servo name="LEFT_SERVO" no="1" min="1000" neutral="1500" max="2000"/>
+    <servo name="RIGHT_SERVO" no="2" min="1000" neutral="1500" max="2000"/>
+    <servo name="MOTOR" no="3" min="1000" neutral="1500" max="2000"/>
   </servos>
 
   <commands>
@@ -56,11 +56,12 @@
   </command_laws-->
   
   <command_laws>
-    <let var="half_roll" value="@ROLL * 0.5"/>
+    <let var="half_yaw" value="@YAW * 0.5"/>
     <let var="half_pitch" value="@PITCH * 0.5"/>
     <set servo="ROLL_SERVO" value="@ROLL"/>
-    <set servo="LEFT_SERVO" value="$half_pitch + $half_roll"/>
-    <set servo="RIGHT_SERVO" value="$half_pitch - $half_roll"/>
+    <set servo="LEFT_SERVO" value="$half_pitch + $half_yaw"/>
+    <set servo="RIGHT_SERVO" value="$half_pitch - $half_yaw"/>
+    <set servo="MOTOR" value="@THRUST"/>
   </command_laws>
 
   <section name="MIXING" prefix="MOTOR_MIXING_">
