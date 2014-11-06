@@ -34,10 +34,10 @@
 <airframe name="quadrotor_lisa_s">
 
   <servos driver="Pwm">
-    <servo name="NE" no="0" min="0" neutral="50" max="1000"/>
-    <servo name="SE" no="1" min="0" neutral="50" max="1000"/>
-    <servo name="SW" no="2" min="0" neutral="50" max="1000"/>
-    <servo name="NW" no="3" min="0" neutral="50" max="1000"/>
+    <servo name="ROLL_SERVO" no="0" min="0" neutral="50" max="1000"/>
+    <servo name="LEFT_SERVO" no="1" min="0" neutral="50" max="1000"/>
+    <servo name="RIGHT_SERVO" no="2" min="0" neutral="50" max="1000"/>
+    <servo name="MOTOR" no="3" min="0" neutral="50" max="1000"/>
   </servos>
 
   <commands>
@@ -47,12 +47,20 @@
     <axis name="THRUST" failsafe_value="0"/>
   </commands>
 
-  <command_laws>
+ <!--command_laws> Classical laws for a quadrator
     <call fun="motor_mixing_run(autopilot_motors_on,FALSE,values)"/>
     <set servo="NE" value="motor_mixing.commands[0]"/>
     <set servo="SE" value="motor_mixing.commands[1]"/>
     <set servo="SW" value="motor_mixing.commands[2]"/>
     <set servo="NW" value="motor_mixing.commands[3]"/>
+  </command_laws-->
+  
+  <command_laws>
+    <let var="half_roll" value="@ROLL * 0.5"/>
+    <let var="half_pitch" value="@PITCH * 0.5"/>
+    <set servo="ROLL_SERVO" value="@ROLL"/>
+    <set servo="LEFT_SERVO" value="$half_pitch + $half_roll"/>
+    <set servo="RIGHT_SERVO" value="$half_pitch - $half_roll"/>
   </command_laws>
 
   <section name="MIXING" prefix="MOTOR_MIXING_">
@@ -233,9 +241,9 @@
            If we went with the 500Hz that woul be the default we would be hearing a very annoying high pitched sound coming from the motors.
       -->
       <!-- Setting the PWM timer base frequency to 36MHz -->
-      <define name="PWM_BASE_FREQ" value="36000000"/>
+      <define name="PWM_BASE_FREQ" value="5000"/>
       <!-- Setting the PWM interval to 36KHz -->
-      <define name="SERVO_HZ" value="36000"/>
+      <define name="SERVO_HZ" value="50"/>
       <define name="USE_SERVOS_1AND2"/>
     </subsystem>
 
