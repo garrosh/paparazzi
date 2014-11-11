@@ -31,7 +31,7 @@
      settings="settings/rotorcraft_basic.xml settings/control/rotorcraft_guidance.xml settings/control/stabilization_att_int.xml settings/control/stabilization_rate.xml"
 -->
 
-<airframe name="quadrotor_lisa_s">
+<airframe name="colibri">
  <!--
  <servos driver="Pwm">
     <servo name="ROLL_SERVO" no="0" min="1000" neutral="1500" max="2000"/>
@@ -42,9 +42,9 @@
  -->
   <servos driver="Pwm">
     <servo name="ROLL_SERVO" no="0" min="1000" neutral="1500" max="2000"/>
-    <servo name="LEFT_SERVO" no="1" min="1000" neutral="1500" max="2000"/>
-    <servo name="RIGHT_SERVO" no="2" min="1000" neutral="1500" max="2000"/>
-    <servo name="MOTOR" no="3" min="1000" neutral="1500" max="2000"/>
+    <servo name="LEFT_SERVO" no="4" min="1000" neutral="1500" max="2000"/>
+    <servo name="RIGHT_SERVO" no="5" min="1000" neutral="1500" max="2000"/>
+    <servo name="MOTOR" no="1" min="1000" neutral="1500" max="2000"/>
   </servos>
 
   <commands>
@@ -251,8 +251,8 @@
       <!-- Setting the PWM timer base frequency to 36MHz -->
       <!--define name="PWM_BASE_FREQ" value="5000"/-->
       <!-- Setting the PWM interval to 36KHz -->
-      <!--define name="SERVO_HZ" value="400"/-->
-      <!--define name="USE_SERVOS_1AND2"/-->
+      <define name="SERVO_HZ" value="400"/>
+      <define name="USE_SERVOS_1AND2"/>
     </subsystem>
 
     <subsystem name="telemetry" type="superbitrf"/>
