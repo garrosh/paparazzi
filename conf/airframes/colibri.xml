@@ -77,10 +77,10 @@
     <define name="TRIM_YAW" value="0"/>
     <define name="NB_MOTOR" value="4"/>
     <define name="SCALE" value="256"/>
-    <define name="ROLL_COEF" value="{  -256, -256,  256,  256 }"/>
-    <define name="PITCH_COEF" value="{  256, -256, -256,  256 }"/>
-    <define name="YAW_COEF" value="{    256, -256,  256, -256 }"/>
-    <define name="THRUST_COEF" value="{ 256,  256,  256,  256 }"/>
+    <define name="ROLL_COEF" value="{  256, 0,  0,  0 }"/>
+    <define name="PITCH_COEF" value="{  0, 256, 256,  0 }"/>
+    <define name="YAW_COEF" value="{    0, -256,  256, 0 }"/>
+    <define name="THRUST_COEF" value="{ 0,  0,  0,  256 }"/>
   </section>
 
   <section name="IMU" prefix="IMU_">
@@ -215,7 +215,7 @@
  </section>
 
  <modules main_freq="512">
-   <load name="gps_ubx_ucenter.xml"/>
+   <!--load name="gps_ubx_ucenter.xml"/-->
    <load name="send_imu_mag_current.xml"/>
  </modules>
 
@@ -262,9 +262,13 @@
     <subsystem name="imu" type="lisa_s_v1.0">
       <define name="LISA_S_UPSIDE_DOWN"/> <!-- Upside down is a relative term. :) -->
     </subsystem>
-    <subsystem name="gps" type="ublox"/>
+    <!--subsystem name="gps" type="ublox"/-->
     <subsystem name="stabilization" type="int_quat"/>
-    <subsystem name="ahrs" type="int_cmpl_quat"/>
+    <subsystem name="ahrs" type="int_cmpl_quat">
+      <configure name="USE_GPS" value="FALSE"/>
+      <configure name="USE_MAGNETOMETER" value="TRUE"/>
+      <configure name="AHRS_USE_GPS_HEADING" value="FALSE"/>
+    </subsystem>
     <subsystem name="ins"/>
   </firmware>
 </airframe>
