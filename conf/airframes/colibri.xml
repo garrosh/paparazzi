@@ -44,7 +44,7 @@
     <servo name="ROLL_SERVO" no="0" min="1000" neutral="1500" max="2000"/>
     <servo name="LEFT_SERVO" no="4" min="1000" neutral="1500" max="2000"/>
     <servo name="RIGHT_SERVO" no="5" min="1000" neutral="1500" max="2000"/>
-    <servo name="MOTOR" no="1" min="1000" neutral="1500" max="2000"/>
+    <servo name="MOTOR" no="1" min="1000" neutral="1050" max="2000"/>
   </servos>
 
   <commands>
@@ -189,9 +189,9 @@
   </section>
 
  <section name="GUIDANCE_V" prefix="GUIDANCE_V_">
-   <define name="HOVER_KP" value="276"/>
-   <define name="HOVER_KD" value="455"/>
-   <define name="HOVER_KI" value="100"/>
+   <define name="HOVER_KP" value="262144"/>
+   <define name="HOVER_KD" value="0"/>
+   <define name="HOVER_KI" value="0"/>
    <define name="GUIDANCE_V_NOMINAL_HOVER_THROTTLE" value="0.5"/>
   </section>
 
